@@ -23,17 +23,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Node 24 přináší npm 11 — tedy stejnou hlavní verzi, jakou vznikl
-      # package-lock.json. Pod npm 10 (Node 22) `npm ci` na tomhle locku selhal.
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: npm
 
-      - name: Verze nástrojů
-        run: node -v && npm -v
-
-      - run: npm ci
+      # npm install (ne ci) — doplní nativní balíčky pro platformu CI (Linux),
+      # které lockfile vytvořený na Windows nemusí obsahovat (rolldown, oxlint).
+      # S `npm ci` tady nasazení padalo.
+      - run: npm install --no-audit --no-fund
 
       - run: npm run lint
 
