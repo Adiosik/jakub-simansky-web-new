@@ -38,11 +38,10 @@ jobs:
       # `npm run build` pouští i tsc, takže chyba typů shodí nasazení
       - run: npm run build
 
-      # enablement: true zapne Pages samo, když ještě nejsou zapnuté
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
+      # Pozn.: Pages se musí jednou zapnout ručně v Settings → Pages →
+      # Source: GitHub Actions. Automatické zapnutí přes actions/configure-pages
+      # s `enablement: true` tady selhalo — GITHUB_TOKEN na založení Pages
+      # nemá právo („Resource not accessible by integration").
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
