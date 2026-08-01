@@ -1,0 +1,55 @@
+name: Deploy na GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # umožní spustit nasazení ručně z záložky Actions
+  workflow_dispatch:
+
+# oprávnění, která potřebuje actions/deploy-pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# běží vždy jen jedno nasazení; rozdělaná se nechají doběhnout
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      # `npm run build` pouští i tsc, takže chyba typů shodí nasazení
+      - run: npm run build
+
+      # enablement: true zapne Pages samo, když ještě nejsou zapnuté
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

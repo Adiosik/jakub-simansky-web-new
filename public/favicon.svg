@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <mask id="soundhole">
+      <rect width="32" height="32" fill="#fff"/>
+      <circle cx="16" cy="19.4" r="2.1" fill="#000"/>
+    </mask>
+  </defs>
+  <g fill="#1C1814">
+    <!-- hlava -->
+    <rect x="14" y="1.6" width="4" height="3.1" rx="0.6"/>
+    <!-- krk -->
+    <rect x="14.9" y="4" width="2.2" height="10"/>
+  </g>
+  <g fill="#1C1814" mask="url(#soundhole)">
+    <!-- tělo: ramena, pas, spodní bok -->
+    <path d="M16 13
+             C19 13 21.5 14.5 21.5 17.5
+             C21.5 19.5 20 20 20 21.5
+             C20 23.5 23 24.5 23 26.5
+             C23 29 19.5 30.2 16 30.2
+             C12.5 30.2 9 29 9 26.5
+             C9 24.5 12 23.5 12 21.5
+             C12 20 10.5 19.5 10.5 17.5
+             C10.5 14.5 13 13 16 13 Z"/>
+  </g>
+  <!-- kobylka -->
+  <rect x="13.7" y="23.2" width="4.6" height="1.3" rx="0.4" fill="#1C1814"/>
+</svg>
