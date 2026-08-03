@@ -10,6 +10,7 @@ export const csCZ: Translation = {
     sounds: "hudba",
     records: "desky",
     listen: "poslech",
+    bands: "kapely",
     concerts: "koncerty",
     contact: "kontakt",
     menu: "menu",
@@ -80,6 +81,11 @@ export const csCZ: Translation = {
       title: "reference",
       intro: "co o deskách a koncertech říkají ostatní.",
       source: "číst celé",
+    },
+    bands: {
+      title: "kapely",
+      intro: "kde hraju vedle sólové dráhy.",
+      listen: "poslechnout",
     },
   },
 };

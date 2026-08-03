@@ -3,12 +3,13 @@ export type Translation = {
     tagline: string;
     location: string;
   };
-  /** Navigace v hlavičce — `sounds` má rozbalovací podmenu (records/listen). */
+  /** Navigace v hlavičce — `sounds` má rozbalovací podmenu (records/listen/bands). */
   nav: {
     about: string;
     sounds: string;
     records: string;
     listen: string;
+    bands: string;
     concerts: string;
     contact: string;
     menu: string;
@@ -85,6 +86,12 @@ export type Translation = {
       intro: string;
       /** Popisek odkazu na zdroj citace */
       source: string;
+    };
+    bands: {
+      title: string;
+      intro: string;
+      /** Popisek odkazu na kapelu */
+      listen: string;
     };
   };
 };

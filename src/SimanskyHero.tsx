@@ -17,6 +17,7 @@ import Section from "./components/Section";
 import Player from "./components/Player";
 import Landscape from "./components/Landscape";
 import Records from "./components/Records";
+import Bands from "./components/Bands";
 import References from "./components/References";
 import Shows from "./components/Shows";
 import About from "./components/About";
@@ -109,7 +110,9 @@ export default function SimanskyHero() {
         </Section>
 
         <Records texts={texts} lang={lang} player={player} />
-        {/* ohlasy hned za deskami — sociální důkaz u toho, co potvrzuje */}
+        {/* kapely hned za sólovou diskografií — patří k sobě tematicky */}
+        <Bands texts={texts} lang={lang} />
+        {/* ohlasy pak jako sociální důkaz k tomu, co je nad nimi */}
         <References texts={texts} lang={lang} />
         <Shows texts={texts} lang={lang} />
         <About texts={texts} />

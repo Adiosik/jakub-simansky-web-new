@@ -10,6 +10,7 @@ export const enUS: Translation = {
     sounds: "music",
     records: "records",
     listen: "listen",
+    bands: "bands",
     concerts: "shows",
     contact: "contact",
     menu: "menu",
@@ -80,6 +81,11 @@ export const enUS: Translation = {
       title: "praise",
       intro: "what other people say about the records and the shows.",
       source: "read the full piece",
+    },
+    bands: {
+      title: "bands",
+      intro: "where i play alongside the solo work.",
+      listen: "listen",
     },
   },
 };
