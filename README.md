@@ -45,6 +45,12 @@ pomocnou funkci `asset()` ze `src/asset.ts`, jinak se pod podcestou nenajdou.
 - `src/index.css` — design tokeny (barvy), reset a CSS animace
 - `public/` — obrázky (`covers/`, `photos/`)
 
+## Licence
+Kód je pod MIT (viz [LICENSE](LICENSE)). **Obsah pod ni nespadá** — hudba, texty,
+fotky, obaly desek a citované ohlasy zůstávají autorům a nesmí se bez svolení
+použít. Písma jsou hostovaná u nás (ne z Google Fonts, kvůli GDPR) a mají vlastní
+licenci SIL OFL 1.1, viz [src/assets/fonts/OFL.txt](src/assets/fonts/OFL.txt).
+
 ## Než web půjde ven
 - `src/data/references.ts` — **ohlasy jsou zatím vymyšlená výplň** kvůli
   rozvržení, podepsaná `Jméno Příjmení` / `Název klubu`. Nahradit skutečnými

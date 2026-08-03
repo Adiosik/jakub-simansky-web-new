@@ -1,0 +1,52 @@
+MIT License
+
+Copyright (c) 2026 Daniel Šimanský
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+================================================================================
+ROZSAH LICENCE — ČESKY / SCOPE OF THIS LICENSE
+================================================================================
+
+Licence MIT výše se vztahuje POUZE NA ZDROJOVÝ KÓD tohoto webu (soubory v src/,
+konfigurace, sestavovací skripty).
+
+NEVZTAHUJE SE na obsah webu, který zůstává chráněný autorským právem svých
+autorů a nesmí se bez jejich svolení užít:
+
+  * hudba, nahrávky a názvy skladeb — Jakub Šimanský
+  * texty o autorovi a popisy desek — Jakub Šimanský
+  * fotografie — příslušní fotografové
+  * obaly desek — jejich výtvarníci (obal What Do You Mean By That
+    vytvořil Jaroslav Exner)
+  * citované ohlasy a recenze — jejich autoři
+
+Písma ve složce src/assets/fonts mají vlastní licenci SIL Open Font License 1.1,
+viz src/assets/fonts/OFL.txt.
+
+--------------------------------------------------------------------------------
+
+The MIT license above applies ONLY TO THE SOURCE CODE of this website. It does
+NOT apply to the site content — music, recordings, track titles, biography and
+record texts, photographs, cover artwork and quoted reviews remain the property
+of their respective authors and may not be used without their permission.
+
+Fonts in src/assets/fonts are covered by the SIL Open Font License 1.1, see
+src/assets/fonts/OFL.txt.
