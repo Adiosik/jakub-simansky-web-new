@@ -58,6 +58,8 @@ export const right: SxProps<Theme> = {
   justifySelf: "end",
   display: "flex",
   alignItems: "center",
+  // na mobilu odsadí cz/en od hamburgeru, ať se omylem netrefíš vedle
+  gap: { xs: "1rem", md: 0 },
 };
 
 /** Položka navigace (i ta s podmenu) — podtržení vyjíždí zleva. */
@@ -146,19 +148,19 @@ export const dropItem: SxProps<Theme> = {
   "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "2px" },
 };
 
-/** Hamburger — jen na mobilu. */
+/** Hamburger — jen na mobilu. 44 px je doporučené minimum pro dotyk. */
 export const burger: SxProps<Theme> = {
   display: { xs: "inline-flex", md: "none" },
   flexDirection: "column",
   justifyContent: "center",
-  gap: "5px",
-  width: 34,
-  height: 34,
+  gap: "6px",
+  width: 44,
+  height: 44,
   p: 0,
   background: "none",
   border: "none",
   cursor: "pointer",
-  "& span": { display: "block", height: "1.5px", width: "20px", background: "var(--inkoust)", mx: "auto" },
+  "& span": { display: "block", height: "2px", width: "26px", background: "var(--inkoust)", mx: "auto" },
   "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "2px" },
 };
 
@@ -190,24 +192,24 @@ export const sheetItem: SxProps<Theme> = {
   "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "4px" },
 };
 
-export const sheetSub: SxProps<Theme> = {
-  fontFamily: "var(--font-mono)",
-  fontSize: "0.86rem",
-  letterSpacing: "0.06em",
-  color: "var(--inkoust-45)",
-  textDecoration: "none",
-  p: "0.1rem 0.6rem",
-  "&:hover": { color: "var(--obili)" },
-  "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "4px" },
-};
-
+/**
+ * Křížek zavírající mobilní menu. Rozměrem i polohou sedí přesně na hamburger
+ * pod ním (44 px, odsazení = odsazení hlavičky), takže po otevření menu zůstane
+ * palec na stejném místě.
+ */
 export const sheetClose: SxProps<Theme> = {
   position: "absolute",
-  top: "1rem",
+  top: "var(--hlavicka-pad)",
   right: "clamp(1.1rem,4vw,3rem)",
+  width: 44,
+  height: 44,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  p: 0,
   fontFamily: "var(--font-mono)",
-  fontSize: "0.72rem",
-  letterSpacing: "0.18em",
+  fontSize: "1.35rem",
+  lineHeight: 1,
   color: "var(--inkoust-70)",
   background: "none",
   border: "none",

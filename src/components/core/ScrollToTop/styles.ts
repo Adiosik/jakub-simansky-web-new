@@ -6,8 +6,9 @@ export const button = (visible: boolean, lift: number): SxProps<Theme> => ({
   // základ dole + dynamické zvednutí nad zápatí, jakmile je zápatí ve viewportu
   bottom: `calc(1.3rem + ${lift}px)`,
   zIndex: 55,
-  width: 40,
-  height: 40,
+  // na mobilu větší, ať se na něj dá pohodlně trefit palcem
+  width: { xs: 50, sm: 40 },
+  height: { xs: 50, sm: 40 },
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -22,5 +23,5 @@ export const button = (visible: boolean, lift: number): SxProps<Theme> => ({
   transition: "opacity .25s ease, transform .25s ease, bottom .2s ease, border-color .15s ease, color .15s ease",
   "&:hover": { borderColor: "var(--obili)", color: "var(--obili)" },
   "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "3px" },
-  "& svg": { width: 15, height: 15, display: "block" },
+  "& svg": { width: { xs: 19, sm: 15 }, height: { xs: 19, sm: 15 }, display: "block" },
 });

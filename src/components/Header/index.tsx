@@ -117,7 +117,9 @@ export default function Header({ texts, lang, onLang }: Props) {
           onClick={() => setSheetOpen(false)} aria-label={texts.nav.closeMenu}>✕</Box>
         <Box component="a" href={`#${ID.about}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.about}</Box>
         <Box component="a" href={`#${ID.records}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.records}</Box>
-        <Box component="a" href={`#${ID.listen}`} sx={styles.sheetSub} onClick={() => setSheetOpen(false)}>/{texts.nav.listen}/</Box>
+        {/* v překryvu se nic nerozbaluje, takže i „poslech" je běžná položka
+            (lomítka jsou notace desktopového podmenu) */}
+        <Box component="a" href={`#${ID.listen}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.listen}</Box>
         <Box component="a" href={`#${ID.references}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.sections.references.title}</Box>
         <Box component="a" href={`#${ID.concerts}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.concerts}</Box>
         <Box component="a" href={`#${ID.contact}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.contact}</Box>

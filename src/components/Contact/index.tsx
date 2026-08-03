@@ -47,7 +47,8 @@ const socials: SxProps<Theme> = {
   // mezera se na užších displejích stáhne, ať se všechny čtyři sítě vejdou
   // na jeden řádek a soundcloud nepřeteče dolů
   gap: { xs: "1.2rem 1.4rem", sm: "1.4rem 2.2rem" },
-  mt: "clamp(2.4rem,6vw,3.6rem)",
+  // odstup od štítku „sledujte" dává `mb` toho štítku, stejně jako u bookingu
+  mt: 0,
 };
 
 export default function Contact({ texts }: { texts: Translation }) {
@@ -61,7 +62,7 @@ export default function Contact({ texts }: { texts: Translation }) {
           ariaLabel={texts.footer.copyAria} />
       </Box>
 
-      <Box sx={{ ...label, mt: "clamp(2.4rem,6vw,3.6rem)", mb: 0 }}>{t.followLabel}</Box>
+      <Box sx={{ ...label, mt: "clamp(2.4rem,6vw,3.6rem)" }}>{t.followLabel}</Box>
       <Box sx={socials}>
         {SOCIALS.map((s) => <SocialLink key={s.name} social={s} variant="contact" />)}
       </Box>

@@ -76,13 +76,17 @@ export default function SimanskyHero() {
           io.unobserve(e.target);
         });
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.05 },
+      // Kladný spodní okraj rozšiřuje sledovanou oblast pod spodní hranu okna,
+      // takže se sekce začne odkrývat ještě než na ni dojedeš a v okamžiku,
+      // kdy ji uvidíš, už je náběh rozjetý. Záporná hodnota by ho naopak
+      // oddalovala, dokud prvek nevyjede kus nad spodní hranu.
+      { rootMargin: "0px 0px 4% 0px", threshold: 0 },
     );
 
     targets.forEach((el) => {
       // Co je při načtení už ve výřezu, odkryjeme rovnou. Bez toho může prvek
       // u samého konce stránky (zápatí) uváznout neviditelný — nikdy se totiž
-      // nedostane nad zmenšenou spodní hranu, protože už není kam odscrollovat.
+      // nedostane do sledované oblasti, protože už není kam odscrollovat.
       if (el.getBoundingClientRect().top < window.innerHeight) reveal(el);
       else io.observe(el);
     });
