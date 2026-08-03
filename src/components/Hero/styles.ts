@@ -1,6 +1,11 @@
 import type { SxProps, Theme } from "@mui/material/styles";
 
 export const hero: SxProps<Theme> = {
+  // width: 100 % je nutnost, ne kosmetika. Hero je flex položka v rodiči
+  // s `alignItems: center`, takže by se bez toho roztáhl podle nejširšího
+  // potomka (nadpisu) místo podle okna — jméno by se nezalomilo a na úzkých
+  // displejích by vytlačilo celou stránku do šířky.
+  width: "100%",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -9,22 +14,30 @@ export const hero: SxProps<Theme> = {
   pt: "clamp(3rem,9vh,7rem)",
 };
 
-/** Drobná prostrkaná linka nad jménem (obor + místo). */
+/**
+ * Drobná prostrkaná linka nad jménem (obor + místo).
+ *
+ * Na úzkých displejích je písmo i prostrkání menší a čárky po stranách kratší.
+ * Nejde o kosmetiku: kdyby se text zalomil na dva řádky, čárky by zůstaly
+ * svisle uprostřed vedle dvouřádkového bloku a vypadaly by odtržené. Takhle se
+ * text udrží na jednom řádku a čárky sedí těsně u něj.
+ */
 export const eyebrow: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
-  fontSize: "0.68rem",
-  letterSpacing: "0.24em",
+  fontSize: { xs: "0.58rem", sm: "0.68rem" },
+  letterSpacing: { xs: "0.1em", sm: "0.24em" },
   color: "var(--inkoust-45)",
   m: 0,
   display: "flex",
   alignItems: "center",
-  gap: "0.9rem",
+  gap: { xs: "0.5rem", sm: "0.9rem" },
   "&::before, &::after": {
     content: '""',
-    width: "clamp(18px,5vw,42px)",
+    width: { xs: "15px", sm: "clamp(18px,5vw,42px)" },
     height: "1px",
     background: "var(--linka-2)",
     display: "inline-block",
+    flex: "0 0 auto",
   },
 };
 
