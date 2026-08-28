@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 
 import { translations, type Lang } from "./language";
+import { nactiMotiv, pouzijMotiv, type Motiv } from "./theme-mode";
 import { ALBUMS } from "./data/albums";
 import Grain from "./components/Grain";
 import Header from "./components/Header";
@@ -51,6 +52,7 @@ const mainSx: SxProps<Theme> = {
 export default function SimanskyHero() {
   const [ready, setReady] = useState(false);
   const [lang, setLang] = useState<Lang>("csCZ");
+  const [motiv, setMotiv] = useState<Motiv>(() => nactiMotiv());
   // které album je nachystané v přehrávači; přepíná se šipkami i klikem v sekci Desky
   const [albumIdx, setAlbumIdx] = useState(0);
   const prevAlbum = () => setAlbumIdx((i) => (i + ALBUMS.length - 1) % ALBUMS.length);
@@ -60,6 +62,8 @@ export default function SimanskyHero() {
     const id = requestAnimationFrame(() => setReady(true));
     return () => cancelAnimationFrame(id);
   }, []);
+
+  useEffect(() => { pouzijMotiv(motiv); }, [motiv]);
 
   // Náběh sekcí při scrollu: jakmile se prvek dostane do viewportu, dostane
   // .is-visible a zůstane odkrytý (observer ho přestane sledovat).
@@ -102,7 +106,7 @@ export default function SimanskyHero() {
   return (
     <Box className={"sim-root" + (ready ? " is-ready" : "")} sx={rootSx}>
       <Grain />
-      <Header texts={texts} lang={lang} onLang={setLang} />
+      <Header texts={texts} lang={lang} onLang={setLang} motiv={motiv} onMotiv={setMotiv} />
 
       <Box component="main" sx={mainSx}>
         <Hero texts={texts} />

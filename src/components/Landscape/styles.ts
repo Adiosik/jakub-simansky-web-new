@@ -5,8 +5,8 @@ export const figure: SxProps<Theme> = {
   width: "100%",
   m: 0,
   "& svg": { width: "100%", height: "auto", display: "block" },
-  // soutisk dvou desek — násobení drží „tiskový" vzhled na světlém podkladu
-  "& .sim-plate": { mixBlendMode: "multiply" },
+  // soutisk dvou desek; režim míchání se mění podle motivu (viz --soutisk)
+  "& .sim-plate": { mixBlendMode: "var(--soutisk)" },
   "& .sim-river-band": { transition: "transform .12s ease-out" },
 };
 

@@ -5,8 +5,9 @@ export const wrap: SxProps<Theme> = {
   alignItems: "center",
   gap: "0.4rem",
   flex: "0 0 auto",
-  // odsazení navíc od poslední položky navigace, ať se cz/en nelepí na „kontakt"
-  ml: "1rem",
+  // odsazení od poslední položky navigace, ať se cz/en nelepí na „kontakt";
+  // na mobilu menší, tam se místem šetří
+  ml: { xs: "0.5rem", sm: "1rem" },
 };
 
 export const button = (on: boolean): SxProps<Theme> => ({

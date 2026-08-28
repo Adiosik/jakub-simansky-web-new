@@ -28,7 +28,7 @@ export const cover: SxProps<Theme> = {
   background: "var(--zaklad-2)",
   cursor: "pointer",
   // jemný stín pod obalem — nadlehčí desku nad podkladem, při najetí se prohloubí
-  boxShadow: "0 12px 26px -18px rgba(35,41,31,.55)",
+  boxShadow: "0 12px 26px -18px var(--stin)",
   transition: "box-shadow .35s ease, transform .35s ease",
   "& > *": {
     width: "100%",
@@ -39,7 +39,7 @@ export const cover: SxProps<Theme> = {
   },
   "&:hover, &:focus-visible": {
     transform: "translateY(-4px)",
-    boxShadow: "0 24px 44px -20px rgba(35,41,31,.6)",
+    boxShadow: "0 24px 44px -20px var(--stin)",
   },
   "&:hover > *": { transform: "scale(1.04)" },
   "&:hover .sim-cover-hint, &:focus-visible .sim-cover-hint": { opacity: 1, transform: "scale(1)" },
@@ -63,8 +63,10 @@ export const coverHint = (active: boolean): SxProps<Theme> => ({
   alignItems: "center",
   justifyContent: "center",
   pointerEvents: "none",
-  background: active ? "var(--obili)" : "rgba(35,41,31,.72)",
-  color: active ? "var(--inkoust)" : "var(--zaklad)",
+  // odznak drží tmavé kolečko se světlým glyfem v obou režimech — kdyby se
+  // barvy převracely s motivem, v tmavém by glyf splynul s pozadím
+  background: active ? "var(--obili)" : "var(--odznak-bg)",
+  color: active ? "#23291F" : "var(--odznak-fg)",
   backdropFilter: "blur(2px)",
   opacity: active ? 1 : 0,
   transform: active ? "scale(1)" : "scale(.86)",

@@ -15,9 +15,11 @@ export const csCZ: Translation = {
     contact: "kontakt",
     menu: "menu",
     closeMenu: "zavřít menu",
+    darkMode: "Přepnout na tmavý režim",
+    lightMode: "Přepnout na světlý režim",
   },
   hero: {
-    photoCredit: "foto — archiv jakuba šimanského",
+    photoCredit: "foto — archiv Jakuba Šimanského",
     photoAlt: "Jakub Šimanský s kytarou",
   },
   eyebrow: "akustická kytara",

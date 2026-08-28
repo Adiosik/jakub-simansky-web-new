@@ -15,6 +15,8 @@ export const enUS: Translation = {
     contact: "contact",
     menu: "menu",
     closeMenu: "close menu",
+    darkMode: "Switch to dark mode",
+    lightMode: "Switch to light mode",
   },
   hero: {
     photoCredit: "photo — jakub šimanský archive",

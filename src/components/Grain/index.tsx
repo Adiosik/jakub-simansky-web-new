@@ -1,6 +1,7 @@
 /**
- * Grain — jemný šum přes celou plochu (mix-blend multiply) pro „tiskový" nádech.
- * Drží se nízko: na pastelovém podkladu stačí náznak, jinak by zašpinil text.
+ * Grain — jemný šum přes celou plochu pro „tiskový" nádech.
+ * Drží se nízko: stačí náznak, jinak by zašpinil text. Režim míchání i sílu
+ * řídí proměnné, protože na tmavém podkladu se musí rozsvěcet, ne násobit.
  */
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
@@ -13,8 +14,8 @@ const sx: SxProps<Theme> = {
   height: "100%",
   pointerEvents: "none",
   zIndex: 50,
-  opacity: 0.12,
-  mixBlendMode: "multiply",
+  opacity: "var(--zrno-opacity)",
+  mixBlendMode: "var(--zrno-blend)",
 };
 
 export default function Grain() {

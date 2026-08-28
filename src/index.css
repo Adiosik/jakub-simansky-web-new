@@ -77,31 +77,47 @@
 html,body,#root{ margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
-html,body{ background:#E4E7DE; }
+html,body{ background:var(--zaklad); }
 body{ -webkit-font-smoothing:antialiased; }
 
 :root{
-  /* ── základ: pastelová šalvěj ──────────────────────────────────────────── */
+  /* ── SVĚTLÝ REŽIM (výchozí) — pastelová šalvěj ─────────────────────────── */
   --zaklad:#E4E7DE;     /* pozadí stránky */
   --zaklad-2:#D7DCD0;   /* nadzvednutá plocha (přehrávač, hover) */
   --zaklad-3:#CBD2C4;   /* jemné zvýraznění */
-  /* ── písmo: tmavý inkoust ─────────────────────────────────────────────── */
-  --inkoust:#23291F;
+  --inkoust:#23291F;    /* písmo */
   --inkoust-70:rgba(35,41,31,.72);
   --inkoust-45:rgba(35,41,31,.5);
-  /* ── akcent: obilí (okrová) + voda (tlumená tyrkysová) ────────────────── */
-  --obili:#A8843C;
+  --obili:#A8843C;      /* akcent */
   --voda:#5E8A82;
   --linka:rgba(35,41,31,.16);
   --linka-2:rgba(35,41,31,.32);
+  --bar:rgba(228,231,222,.82);   /* poloprůhledné pozadí hlavičky */
+  --sheet:rgba(228,231,222,.98); /* mobilní překryv menu */
+  --stin:rgba(35,41,31,.55);     /* stín pod obalem desky */
 
-  /* tokeny linorytu — používá je SVG krajina a generované obaly alb */
-  --papir:#E4E7DE;
-  --saze:#23291F;
+  /* tokeny linorytu — SVG krajina a generované obaly alb.
+     Barvy tiskových desek jsou schválně vlastní proměnné, ne sdílené s --obili:
+     akcent v rozhraní musí na tmavém podkladu svítit, zatímco deska se přes
+     `screen` rozsvěcí sama a musela by být naopak tlumená. */
+  --papir:#E4E7DE;         /* světlá místa výřezu (okna, vlnky) */
+  --saze:#23291F;          /* nejtmavší kresba (člun) */
+  --deska-teple:#A8843C;   /* teplá tisková deska + řeka */
+  --deska-studene:#4A7A72; /* studená tisková deska */
   --stroj:#4A7A72;
   --zelena:#3F7D49;
-  /* poloprůhledné pozadí hlavičky (obsah pod ní lehce prosvítá + blur) */
-  --bar:rgba(228,231,222,.82);
+  --obrys:#6E6020;         /* obrys řeky */
+
+  /* Odznak play na obalu desky. Záměrně se s motivem nepřevrací: tmavé kolečko
+     se světlým glyfem funguje na fotce obalu ve světlém i tmavém režimu. */
+  --odznak-bg:rgba(20,24,18,.72);
+  --odznak-fg:#E4E7DE;
+
+  /* Režim míchání soutisku. Na světlém podkladu barvy násobíme (tmavne),
+     na tmavém je musíme naopak rozsvěcet — jinak by kresba zčernala. */
+  --soutisk:multiply;
+  --zrno-blend:multiply;
+  --zrno-opacity:0.12;
 
   --font-display:'Space Grotesk','Helvetica Neue',Arial,sans-serif;
   --font-mono:'IBM Plex Mono',ui-monospace,monospace;
@@ -114,6 +130,43 @@ body{ -webkit-font-smoothing:antialiased; }
   --sloupec:1080px;
   --sloupec-uzky:64ch;
   --mezera:clamp(5rem,13vh,9.5rem);
+}
+
+/* ── TMAVÝ REŽIM ────────────────────────────────────────────────────────────
+   Není to prostá inverze: pozadí drží stejný zelenošedý nádech jako světlá
+   šalvěj, jen ztmavený, a okrová se rozsvítí, aby na tmavém podkladu držela
+   kontrast. Světlá místa linorytu (--papir) se stávají tmavými, protože
+   „papírem" je teď noc; nejtmavší kresba (--saze) se naopak rozsvítí.
+   ────────────────────────────────────────────────────────────────────────── */
+:root[data-theme="dark"]{
+  --zaklad:#191F1A;
+  --zaklad-2:#212820;
+  --zaklad-3:#2B332A;
+  --inkoust:#E4E7DE;
+  --inkoust-70:rgba(228,231,222,.72);
+  --inkoust-45:rgba(228,231,222,.48);
+  --obili:#D9B76C;
+  --voda:#7FB3AA;
+  --linka:rgba(228,231,222,.14);
+  --linka-2:rgba(228,231,222,.28);
+  --bar:rgba(25,31,26,.82);
+  --sheet:rgba(25,31,26,.98);
+  --stin:rgba(0,0,0,.6);
+
+  --papir:#191F1A;
+  /* člun zůstává tmavý i v noci — je to silueta, ne kresba na papíře */
+  --saze:#12160F;
+  /* desky jsou tlumené: přes `screen` se na tmavém podkladu samy rozsvítí,
+     se svítivou barvou by krajina zežloutla */
+  --deska-teple:#8A7238;
+  --deska-studene:#35605A;
+  --stroj:#3F6F68;
+  --zelena:#4E8C57;
+  --obrys:#5E4E24;
+
+  --soutisk:screen;
+  --zrno-blend:screen;
+  --zrno-opacity:0.05;
 }
 
 ::selection{ background:var(--obili); color:var(--zaklad); }

@@ -14,6 +14,9 @@ export type Translation = {
     contact: string;
     menu: string;
     closeMenu: string;
+    /** Popisky přepínače motivu (co udělá kliknutí) */
+    darkMode: string;
+    lightMode: string;
   };
   hero: {
     /** Drobný credit pod portrétem */

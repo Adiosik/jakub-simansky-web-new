@@ -2,7 +2,7 @@
  * DISKOGRAFIE
  * ───────────
  * Přidání nového alba = přidej objekt do pole ALBUMS níže.
- * Povinné je jen: title, year, label, tracks, sequence.
+ * Povinné je jen: title, year, label, tracks.
  *
  * Obal (logo alba):
  *   - nahraj obrázek do složky  public/covers/  (např. public/covers/jako-doma.jpg)
@@ -12,9 +12,8 @@
  * Skladby (tracks):
  *   - libovolně dlouhý seznam názvů, klidně přidávej řádky
  *
- * sequence:
- *   - frekvence tónů (Hz) pro ukázkový web-audio přehrávač (arpeggio)
- *   - není to reálná nahrávka, jen „znělka" daného alba
+ * Přehrávání (bandcampId):
+ *   - ID alba na Bandcampu; bez něj se u desky přehrávač nenabídne
  */
 
 import type { Lang } from "../language";
@@ -49,8 +48,6 @@ export type Album = {
    * Bez něj se u desky přehrávač nenabídne.
    */
   bandcampId?: string;
-  /** Frekvence tónů (Hz) pro ukázkové arpeggio přehrávače */
-  sequence: number[];
 };
 
 // Řazeno chronologicky od nejnovějšího — první v pořadí je výchozí pro přehrání.
@@ -77,7 +74,6 @@ export const ALBUMS: Album[] = [
     ],
     cover: "/covers/what-do-you-mean-by-that.png",
     bandcampId: "3074193416",
-    sequence: [87.31, 130.81, 174.61, 261.63, 220, 174.61, 130.81, 98],
   },
   {
     title: "Face to Face Against American Primitivism in Eastern Europe, vol. 2",
@@ -98,7 +94,6 @@ export const ALBUMS: Album[] = [
     ],
     cover: "/covers/face-to-face-vol2.png",
     bandcampId: "931041984",
-    sequence: [65.41, 130.81, 196, 261.63, 196, 155.56, 130.81, 98],
   },
   {
     title: "Face to Face Against American Primitivism in Eastern Europe, vol. 1",
@@ -123,6 +118,5 @@ export const ALBUMS: Album[] = [
     ],
     cover: "/covers/face-to-face-vol1.png",
     bandcampId: "767735595",
-    sequence: [73.42, 146.83, 220, 293.66, 220, 196, 146.83, 110],
   },
 ];

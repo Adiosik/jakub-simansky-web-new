@@ -7,9 +7,17 @@ import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import type { Translation, Lang } from "../../language";
 import LangToggle from "../core/LangToggle";
+import ThemeToggle from "../core/ThemeToggle";
+import type { Motiv } from "../../theme-mode";
 import * as styles from "./styles";
 
-type Props = { texts: Translation; lang: Lang; onLang: (lang: Lang) => void };
+type Props = {
+  texts: Translation;
+  lang: Lang;
+  onLang: (lang: Lang) => void;
+  motiv: Motiv;
+  onMotiv: (m: Motiv) => void;
+};
 
 /** Kotvy sekcí na stránce — musí sedět s `id` v SimanskyHero. */
 const ID = {
@@ -22,7 +30,7 @@ const ID = {
   contact: "kontakt",
 } as const;
 
-export default function Header({ texts, lang, onLang }: Props) {
+export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -107,6 +115,8 @@ export default function Header({ texts, lang, onLang }: Props) {
 
         <Box sx={styles.right}>
           <LangToggle lang={lang} onChange={onLang} />
+          <ThemeToggle motiv={motiv} onChange={onMotiv}
+            labelDark={texts.nav.darkMode} labelLight={texts.nav.lightMode} />
           <Box component="button" type="button" sx={styles.burger}
             aria-label={texts.nav.menu} aria-expanded={sheetOpen} onClick={() => setSheetOpen(true)}>
             <Box component="span" /><Box component="span" /><Box component="span" />

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 /**
  * River — žlutý (obilný) zvlněný říční/cestní pás přes krajinu, se soutiskovým
  * ghostem a probleskujícími bílými vlnkami (animace .sim-ripple).
@@ -19,9 +20,9 @@ export default function River() {
   return (
     <g>
       {/* studený soutiskový ghost (drží styl "dva tisky") */}
-      <path d={RIVER_PATH} fill="var(--stroj)" opacity="0.3" transform="translate(5,3)" style={{ mixBlendMode: "multiply" }} />
+      <path d={RIVER_PATH} fill="var(--deska-studene)" opacity="0.3" transform="translate(5,3)" style={{ mixBlendMode: "var(--soutisk)" as CSSProperties["mixBlendMode"] }} />
       {/* hlavní voda – žlutá (obilí) */}
-      <path d={RIVER_PATH} fill="var(--obili)" stroke="#6E6020" strokeWidth="2.2" />
+      <path d={RIVER_PATH} fill="var(--deska-teple)" stroke="var(--obrys)" strokeWidth="2.2" />
       {/* bílé vlnky – probleskují a vlní se */}
       {ripples.map((r, i) => (
         <path key={i} className="sim-ripple" style={{ animationDelay: r.del }} d={r.d}

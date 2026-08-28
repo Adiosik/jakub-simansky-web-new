@@ -36,8 +36,8 @@ export default function Landscape({ caption, alt }: { caption: string; alt: stri
     <Box component="figure" className="sim-print-wrap" sx={styles.figure} ref={figRef}
       onMouseMove={onMove} onMouseLeave={onLeave}>
       <svg viewBox="0 0 800 510" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={alt}>
-        <g className="sim-plate" style={{ color: "var(--obili)" }} transform={warmPlate}><LandscapePlate /></g>
-        <g className="sim-plate" style={{ color: "var(--stroj)" }} transform={coldPlate}><g className="sim-drift"><LandscapePlate /></g></g>
+        <g className="sim-plate" style={{ color: "var(--deska-teple)" }} transform={warmPlate}><LandscapePlate /></g>
+        <g className="sim-plate" style={{ color: "var(--deska-studene)" }} transform={coldPlate}><g className="sim-drift"><LandscapePlate /></g></g>
         <g className="sim-river-band" transform={riverShift}><River /></g>
       </svg>
       <Box component="figcaption" sx={styles.caption}>{caption}</Box>

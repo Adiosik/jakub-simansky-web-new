@@ -16,10 +16,18 @@ export const header = (scrolled: boolean): SxProps<Theme> => ({
   top: 0,
   zIndex: 60,
   display: "grid",
-  gridTemplateColumns: scrolled ? "1fr auto 0fr" : "1fr auto 1fr",
+  // minmax(0,1fr) u prvního sloupce je nutnost: prosté `1fr` si drží minimální
+  // šířku svého obsahu, takže nowrap jméno hlavičce bránilo zmenšit se pod
+  // ~450 px a na úzkých displejích přetékala. Třetí sloupec `auto`/`0fr`
+  // minimum naopak potřebuje, aby se ovládání vpravo nesmrsklo na nulu.
+  gridTemplateColumns: scrolled ? "minmax(0,1fr) auto 0fr" : "minmax(0,1fr) auto 1fr",
   alignItems: "center",
-  columnGap: "1.2rem",
-  p: "var(--hlavicka-pad) clamp(1.1rem,4vw,3rem)",
+  // na mobilu je prostřední sloupec (navigace) skrytý, takže velká mezera
+  // mezi sloupci jen ubírá místo jménu
+  columnGap: { xs: "0.5rem", md: "1.2rem" },
+  // vodorovné odsazení je na mobilu větší než u sekcí: hamburger má 44px
+  // dotykovou plochu, takže by se svými čárkami jinak lepil na okraj
+  p: { xs: "var(--hlavicka-pad) 1.5rem", sm: "var(--hlavicka-pad) clamp(1.1rem,4vw,3rem)" },
   background: scrolled ? "var(--bar)" : "transparent",
   backdropFilter: scrolled ? "blur(10px)" : "none",
   borderBottom: `1px solid ${scrolled ? "var(--linka)" : "transparent"}`,
@@ -31,8 +39,9 @@ export const brand = (scrolled: boolean): SxProps<Theme> => ({
   gridColumn: 1,
   justifySelf: "start",
   fontFamily: "var(--font-mono)",
-  fontSize: "0.72rem",
-  letterSpacing: "0.2em",
+  // na mobilu drobnější a míň prostrkané, aby se vešlo vedle ovládání
+  fontSize: { xs: "0.6rem", sm: "0.72rem" },
+  letterSpacing: { xs: "0.1em", sm: "0.2em" },
   color: "var(--inkoust)",
   textDecoration: "none",
   whiteSpace: "nowrap",
@@ -58,8 +67,9 @@ export const right: SxProps<Theme> = {
   justifySelf: "end",
   display: "flex",
   alignItems: "center",
-  // na mobilu odsadí cz/en od hamburgeru, ať se omylem netrefíš vedle
-  gap: { xs: "1rem", md: 0 },
+  // na mobilu jen tolik, aby se dalo trefit vedle — každý ušetřený pixel
+  // je místo navíc pro jméno v levém sloupci
+  gap: { xs: "0.45rem", md: 0 },
 };
 
 /** Položka navigace (i ta s podmenu) — podtržení vyjíždí zleva. */
@@ -174,7 +184,7 @@ export const sheet = (open: boolean): SxProps<Theme> => ({
   alignItems: "center",
   justifyContent: "center",
   gap: "0.9rem",
-  background: "rgba(228,231,222,.98)",
+  background: "var(--sheet)",
   backdropFilter: "blur(6px)",
   opacity: open ? 1 : 0,
   pointerEvents: open ? "auto" : "none",
