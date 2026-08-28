@@ -2,15 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-// Web běží na GitHub Pages v podcestě:
-//   https://adiosik.github.io/jakub-simansky-web-new/
-// `base` proto musí tu podcestu obsahovat, jinak by prohlížeč hledal assety
-// v kořeni domény. Ve vývoji (`npm run dev`) zůstává base "/".
-// `isPreview` je tu podstatné: `vite preview` běží s command === 'serve', takže
-// bez něj by náhled servíroval dist z kořene, zatímco v HTML jsou zapečené cesty
-// s podcestou — server by pak na assety vracel index.html a stránka by zůstala
-// prázdná. Náhled proto musí běžet na stejné podcestě jako produkce.
-export default defineConfig(({ command, isPreview }) => ({
-  base: command === 'build' || isPreview ? '/jakub-simansky-web-new/' : '/',
+// Web běží na vlastní doméně https://jakubsimansky.com/, tedy z kořene —
+// `base` proto zůstává "/" ve vývoji i v produkci. Doménu drží soubor
+// public/CNAME, který Vite kopíruje do buildu; bez něj by ji GitHub Pages
+// při nasazení přes vlastní workflow zapomněl.
+// (Dokud web běžel v podcestě /jakub-simansky-web-new/, muselo tu být `base`
+// nastavené na ni — v historii gitu to je.)
+export default defineConfig({
+  base: '/',
   plugins: [react()],
-}))
+})

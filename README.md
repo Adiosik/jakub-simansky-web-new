@@ -5,14 +5,14 @@ z Přerova do Brna). Jedna dlouhá stránka v pastelové paletě „písková š
 obří jméno, portrét, přehrávač, diskografie, ohlasy, koncerty a kontakt —
 dvojjazyčně (CZ/EN).
 
-**Živě:** https://adiosik.github.io/jakub-simansky-web-new/
+**Živě:** https://jakubsimansky.com/
 
 ## Co to umí
 - Jeden centrovaný sloupec, sekce se odkrývají při scrollu.
 - **Hlavička**, která se nahoře stránky drží stranou (navigace uprostřed, jméno
   schované) a po odscrollování plynule přejde do klasické podoby.
-- **Přehrávač** s přepínáním alb a skladeb (ukázkový web-audio zvuk, ne reálné
-  nahrávky — sekvence tónů jsou u alb v `sequence`).
+- **Přehrávač** — vložený přehrávač Bandcampu, přepínání alb šipkami. ID alb
+  jsou u desek v `albums.ts` jako `bandcampId`.
 - **Desky** — klik na obal přepne přehrávač na danou desku a odscrolluje k němu.
 - **Animovaná krajina** (SVG soutisk „dva tisky") s parallaxem na pohyb myši.
 - **CZ/EN** přepínač, kopírování e-mailu.
@@ -34,9 +34,15 @@ npm run preview  # náhled buildu
 
 ## Nasazení
 Nasazuje se samo přes GitHub Actions (`.github/workflows/deploy.yml`) při každém
-pushi do větve `main`. Web běží v podcestě, proto má `vite.config.ts` nastavené
-`base: '/jakub-simansky-web-new/'` — na soubory z `public/` se odkazuj přes
-pomocnou funkci `asset()` ze `src/asset.ts`, jinak se pod podcestou nenajdou.
+pushi do větve `main`. Web běží na vlastní doméně `jakubsimansky.com` z kořene,
+takže `base` ve `vite.config.ts` je `/`.
+
+Doménu drží **`public/CNAME`**. Ten soubor tam musí zůstat: při nasazení přes
+vlastní workflow si GitHub `CNAME` sám nevytvoří, a kdyby v buildu chyběl,
+vlastní doména by se po prvním nasazení odpojila.
+
+Na soubory z `public/` se odkazuj přes `asset()` ze `src/asset.ts` — drží je
+navázané na `BASE_URL`, takže přežijí i případný návrat do podcesty.
 
 ## Struktura
 - `src/components/*` — komponenty, každá má `index.tsx` + `styles.ts`
