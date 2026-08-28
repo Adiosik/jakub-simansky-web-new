@@ -30,16 +30,9 @@ export const enUS: Translation = {
   },
   player: {
     title: "listen",
-    intro: "a sample motif for each record — click a track.",
-    play: "Play",
-    stop: "Stop",
-    nowPlaying: "playing",
-    playLabel: "play",
+    intro: "full records straight from bandcamp.",
     prevAlbum: "Previous album",
     nextAlbum: "Next album",
-    prevTrack: "Previous track",
-    nextTrack: "Next track",
-    trackNow: "playing",
   },
   print: {
     title: "landscape",
@@ -63,8 +56,7 @@ export const enUS: Translation = {
     records: {
       title: "records",
       intro: "the solo discography over the years — fingerstyle guitar between tradition and personal experiments, from the earliest records to the latest.",
-      play: "play a sample",
-      playing: "playing",
+      play: "listen",
     },
     contact: {
       title: "contact",

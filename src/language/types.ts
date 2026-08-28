@@ -34,16 +34,8 @@ export type Translation = {
   player: {
     title: string;
     intro: string;
-    play: string;
-    stop: string;
-    nowPlaying: string;
-    playLabel: string;
     prevAlbum: string;
     nextAlbum: string;
-    prevTrack: string;
-    nextTrack: string;
-    /** Popisek u právě hrající skladby v hlavičce přehrávače */
-    trackNow: string;
   };
   print: {
     title: string;
@@ -68,7 +60,6 @@ export type Translation = {
       title: string;
       intro: string;
       play: string;
-      playing: string;
     };
     contact: {
       title: string;

@@ -43,6 +43,12 @@ export type Album = {
   cover?: string;
   /** Odkazy na poslech — nepovinné */
   links?: AlbumLinks;
+  /**
+   * ID alba na Bandcampu pro vložený přehrávač. Najdeš ho na stránce alba
+   * pod tlačítkem Share / Embed — v odkazu je `album=<číslo>`.
+   * Bez něj se u desky přehrávač nenabídne.
+   */
+  bandcampId?: string;
   /** Frekvence tónů (Hz) pro ukázkové arpeggio přehrávače */
   sequence: number[];
 };
@@ -70,6 +76,7 @@ export const ALBUMS: Album[] = [
       "Cocktail Menu",
     ],
     cover: "/covers/what-do-you-mean-by-that.png",
+    bandcampId: "3074193416",
     sequence: [87.31, 130.81, 174.61, 261.63, 220, 174.61, 130.81, 98],
   },
   {
@@ -90,6 +97,7 @@ export const ALBUMS: Album[] = [
       "K-Hole Forever",
     ],
     cover: "/covers/face-to-face-vol2.png",
+    bandcampId: "931041984",
     sequence: [65.41, 130.81, 196, 261.63, 196, 155.56, 130.81, 98],
   },
   {
@@ -114,6 +122,7 @@ export const ALBUMS: Album[] = [
       "In the Sacred Groves of Barbaricum",
     ],
     cover: "/covers/face-to-face-vol1.png",
+    bandcampId: "767735595",
     sequence: [73.42, 146.83, 220, 293.66, 220, 196, 146.83, 110],
   },
 ];

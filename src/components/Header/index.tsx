@@ -63,9 +63,10 @@ export default function Header({ texts, lang, onLang }: Props) {
     };
   }, [sheetOpen]);
 
+  // pořadí podmenu drží pořadí sekcí na stránce: poslech → desky → kapely
   const sub = [
-    { id: ID.records, label: texts.nav.records },
     { id: ID.listen, label: texts.nav.listen },
+    { id: ID.records, label: texts.nav.records },
     { id: ID.bands, label: texts.nav.bands },
   ];
 
@@ -118,10 +119,10 @@ export default function Header({ texts, lang, onLang }: Props) {
         <Box component="button" type="button" sx={styles.sheetClose}
           onClick={() => setSheetOpen(false)} aria-label={texts.nav.closeMenu}>✕</Box>
         <Box component="a" href={`#${ID.about}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.about}</Box>
-        <Box component="a" href={`#${ID.records}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.records}</Box>
         {/* v překryvu se nic nerozbaluje, takže i „poslech" je běžná položka
-            (lomítka jsou notace desktopového podmenu) */}
+            (lomítka jsou notace desktopového podmenu). Pořadí jako v podmenu. */}
         <Box component="a" href={`#${ID.listen}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.listen}</Box>
+        <Box component="a" href={`#${ID.records}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.records}</Box>
         <Box component="a" href={`#${ID.bands}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.bands}</Box>
         <Box component="a" href={`#${ID.references}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.sections.references.title}</Box>
         <Box component="a" href={`#${ID.concerts}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.concerts}</Box>

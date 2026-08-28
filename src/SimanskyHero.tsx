@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 
 import { translations, type Lang } from "./language";
-import { useArpeggioPlayer } from "./components/Player/useArpeggioPlayer";
+import { ALBUMS } from "./data/albums";
 import Grain from "./components/Grain";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -51,7 +51,10 @@ const mainSx: SxProps<Theme> = {
 export default function SimanskyHero() {
   const [ready, setReady] = useState(false);
   const [lang, setLang] = useState<Lang>("csCZ");
-  const player = useArpeggioPlayer();
+  // které album je nachystané v přehrávači; přepíná se šipkami i klikem v sekci Desky
+  const [albumIdx, setAlbumIdx] = useState(0);
+  const prevAlbum = () => setAlbumIdx((i) => (i + ALBUMS.length - 1) % ALBUMS.length);
+  const nextAlbum = () => setAlbumIdx((i) => (i + 1) % ALBUMS.length);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setReady(true));
@@ -97,7 +100,7 @@ export default function SimanskyHero() {
   const texts = translations[lang];
 
   return (
-    <Box className={"sim-root" + (ready ? " is-ready" : "") + (player.playing ? " playing" : "")} sx={rootSx}>
+    <Box className={"sim-root" + (ready ? " is-ready" : "")} sx={rootSx}>
       <Grain />
       <Header texts={texts} lang={lang} onLang={setLang} />
 
@@ -106,10 +109,10 @@ export default function SimanskyHero() {
         <Now texts={texts} />
 
         <Section id="poslech" title={texts.player.title} intro={texts.player.intro} wide>
-          <Player texts={texts} player={player} />
+          <Player texts={texts} albumIdx={albumIdx} onPrev={prevAlbum} onNext={nextAlbum} />
         </Section>
 
-        <Records texts={texts} lang={lang} player={player} />
+        <Records texts={texts} lang={lang} albumIdx={albumIdx} onSelect={setAlbumIdx} />
         {/* kapely hned za sólovou diskografií — patří k sobě tematicky */}
         <Bands texts={texts} lang={lang} />
         {/* ohlasy pak jako sociální důkaz k tomu, co je nad nimi */}

@@ -2,7 +2,7 @@
    GLOBÁLNÍ STYL
    - design tokeny (barvy) jako CSS proměnné
    - reset + font
-   - @keyframes a třídy pro SVG animace (krajina, struny) a reveal při scrollu
+   - @keyframes a třídy pro SVG animace krajiny a reveal při scrollu
    Pozn.: layout/chrome jednotlivých komponent je v jejich styles.ts (MUI sx).
 
    VZHLED: jeden centrovaný sloupec, obří jméno malými písmeny, hodně vzduchu
@@ -95,11 +95,7 @@ body{ -webkit-font-smoothing:antialiased; }
   --linka:rgba(35,41,31,.16);
   --linka-2:rgba(35,41,31,.32);
 
-  /* tokeny linorytu — používá je SVG krajina, obaly alb a play tlačítko */
-  /* ozvučný otvor kytary: tmavý střed play tlačítka + béžové struny a šipky —
-     sdílí je SoundholeButton a šipky pro přepínání skladeb, ať drží styl */
-  --otvor:#13100B;
-  --struna:#E0D6B8;
+  /* tokeny linorytu — používá je SVG krajina a generované obaly alb */
   --papir:#E4E7DE;
   --saze:#23291F;
   --stroj:#4A7A72;
@@ -142,7 +138,7 @@ a{ color:inherit; }
 .sim-print-wrap{ opacity:0; transform:scale(.985); transition:opacity 1.1s ease, transform 1.1s ease; }
 .sim-print-wrap.is-visible{ opacity:1; transform:none; }
 
-/* ── Animace SVG krajiny + struny v play tlačítku ───────────────────────── */
+/* ── Animace SVG krajiny ──────────────────────────────────────────────── */
 @media (prefers-reduced-motion: no-preference){
   .sim-drift{ animation:simDrift 17s ease-in-out infinite; }
   @keyframes simDrift{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(3px,2px)} }
@@ -160,18 +156,7 @@ a{ color:inherit; }
   .sim-caret{ animation:simBlink 1.1s steps(1) infinite; }
   @keyframes simBlink{ 0%,50%{opacity:1} 51%,100%{opacity:0} }
 }
-/* náběh šipek pro přeskakování skladeb (objeví se až se spuštěním přehrávání) */
-@keyframes simTrackNavIn{ from{opacity:0; transform:scale(.7)} to{opacity:1; transform:scale(1)} }
-@media (prefers-reduced-motion: reduce){
-  @keyframes simTrackNavIn{ from{opacity:1} to{opacity:1} }
-}
 @media (prefers-reduced-motion: reduce){
   .sim-anim,.sim-in,.sim-print-wrap{ opacity:1; transform:none; transition:none; }
 }
 
-/* ── Play tlačítko: přechod PLAY ⟶ rozechvělé struny (řízeno .sim-root.playing) ── */
-.sim-tri{ transition:opacity .3s ease, transform .42s cubic-bezier(.2,.8,.2,1); transform-origin:50% 50%; }
-.sim-root.playing .sim-tri{ opacity:0; transform:scale(.4); }
-.sim-strings{ opacity:0; transition:opacity .35s ease; }
-.sim-root.playing .sim-strings{ opacity:1; }
-.sim-playbtn:hover .sim-tri{ transform:scale(1.07); }

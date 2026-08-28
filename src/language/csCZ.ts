@@ -30,16 +30,9 @@ export const csCZ: Translation = {
   },
   player: {
     title: "poslech",
-    intro: "ukázková znělka každé desky — klikni na skladbu.",
-    play: "Přehrát",
-    stop: "Zastavit",
-    nowPlaying: "hraje",
-    playLabel: "přehrát",
+    intro: "celé desky přímo z bandcampu.",
     prevAlbum: "Předchozí album",
     nextAlbum: "Další album",
-    prevTrack: "Předchozí skladba",
-    nextTrack: "Další skladba",
-    trackNow: "hraje",
   },
   print: {
     title: "krajina",
@@ -63,8 +56,7 @@ export const csCZ: Translation = {
     records: {
       title: "desky",
       intro: "sólová diskografie napříč lety — fingerstyle mezi tradicí a vlastními experimenty, od prvních desek po to nejnovější.",
-      play: "přehrát ukázku",
-      playing: "hraje",
+      play: "poslechnout",
     },
     contact: {
       title: "kontakt",
