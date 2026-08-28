@@ -17,12 +17,10 @@ export const enUS: Translation = {
     closeMenu: "close menu",
   },
   hero: {
-    subtitle: "guitarist, fingerstyle",
     photoCredit: "photo — jakub šimanský archive",
     photoAlt: "Jakub Šimanský with a guitar",
   },
   eyebrow: "acoustic guitar",
-  lede: "A guitar that plays heart-first. Traditional fingerpicking bent into the fields of Haná and down to the river.",
   now: {
     title: "what's out",
     lead: "“what do you mean by that” is out — the third solo record, made in a rented Brno office I was also living in. self-released.",

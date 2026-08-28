@@ -17,12 +17,10 @@ export const csCZ: Translation = {
     closeMenu: "zavřít menu",
   },
   hero: {
-    subtitle: "kytarista, fingerstyle",
     photoCredit: "foto — archiv jakuba šimanského",
     photoAlt: "Jakub Šimanský s kytarou",
   },
   eyebrow: "akustická kytara",
-  lede: "Kytara, která hraje srdcem napřed. Tradiční prstová technika ohnutá do hanáckých polí a k řece.",
   now: {
     title: "aktuálně",
     lead: "„what do you mean by that“ je venku — třetí sólová deska, nahraná v pronajaté brněnské kanceláři, ve které jsem zároveň bydlel. vlastním nákladem.",

@@ -16,15 +16,12 @@ export type Translation = {
     closeMenu: string;
   };
   hero: {
-    /** Podtitul pod jménem — jednořádkové „kdo jsem" */
-    subtitle: string;
     /** Drobný credit pod portrétem */
     photoCredit: string;
     /** Alt text portrétu */
     photoAlt: string;
   };
   eyebrow: string;
-  lede: string;
   /** Sekce „aktuálně" — vyzdvižená novinka hned pod heroem */
   now: {
     title: string;

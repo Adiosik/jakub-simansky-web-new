@@ -1,6 +1,6 @@
 /**
- * Hero — centrovaný úvod: drobná linka nad jménem, obří jméno malými písmeny,
- * podtitul, krátký lede a pod tím velký portrét s drobným creditem.
+ * Hero — centrovaný úvod: drobná linka nad jménem, obří jméno malými písmeny
+ * a pod tím velký portrét s drobným creditem.
  */
 import Box from "@mui/material/Box";
 import type { Translation } from "../../language";
@@ -19,15 +19,7 @@ export default function Hero({ texts }: { texts: Translation }) {
         jakub šimanský
       </Box>
 
-      <Box component="p" className="sim-anim d2" sx={styles.subtitle}>
-        {texts.hero.subtitle}
-      </Box>
-
-      <Box component="p" className="sim-anim d3" sx={styles.lede}>
-        {texts.lede}
-      </Box>
-
-      <Box component="figure" className="sim-anim d4" sx={styles.figure}>
+      <Box component="figure" className="sim-anim d3" sx={styles.figure}>
         <img src={asset(PROFILE_PHOTO)} alt={texts.hero.photoAlt} />
         <Box component="figcaption" sx={styles.credit}>{texts.hero.photoCredit}</Box>
       </Box>

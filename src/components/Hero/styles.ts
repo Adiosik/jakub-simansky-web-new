@@ -53,25 +53,6 @@ export const name: SxProps<Theme> = {
   maxWidth: "16ch",
 };
 
-/** Podtitul „kdo jsem" — jediné místo v okrové. */
-export const subtitle: SxProps<Theme> = {
-  fontFamily: "var(--font-display)",
-  fontSize: "clamp(1rem,2.4vw,1.35rem)",
-  fontWeight: 400,
-  color: "var(--obili)",
-  m: "0.9rem 0 0",
-};
-
-export const lede: SxProps<Theme> = {
-  fontFamily: "var(--font-mono)",
-  fontSize: "0.86rem",
-  fontWeight: 300,
-  lineHeight: 1.8,
-  color: "var(--inkoust-70)",
-  maxWidth: "46ch",
-  m: "1.6rem 0 0",
-};
-
 /** Portrét — velký, centrovaný, bez rámečku; jen jemná vinětace do papíru. */
 export const figure: SxProps<Theme> = {
   m: "clamp(2.6rem,7vh,4.5rem) 0 0",
