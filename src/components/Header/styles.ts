@@ -185,7 +185,10 @@ export const sheet = (open: boolean): SxProps<Theme> => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  gap: "0.9rem",
+  gap: "0.5rem",
+  // rozbalená skupina může na nízkém displeji obsah protáhnout přes okno
+  overflowY: "auto",
+  py: "5rem",
   background: "var(--sheet)",
   backdropFilter: "blur(6px)",
   opacity: open ? 1 : 0,
@@ -193,12 +196,64 @@ export const sheet = (open: boolean): SxProps<Theme> => ({
   transition: "opacity .28s ease",
 });
 
+/**
+ * Rozbalovací položka v překryvu — vypadá jako odkaz, jen má šipku.
+ * Šipka je vpravo, takže by text vytlačila z osy a skupina by nelícovala
+ * s ostatními položkami. Vyrovnává to prázdné pole stejné šířky vlevo.
+ */
+export const sheetGroup: SxProps<Theme> = {
+  display: "flex",
+  alignItems: "center",
+  gap: "0.55rem",
+  background: "none",
+  border: "none",
+  cursor: "pointer",
+  fontFamily: "var(--font-display)",
+  fontSize: "2rem",
+  color: "var(--inkoust)",
+  p: "0.35rem 0.9rem",
+  transition: "color .18s ease",
+  "&::before": { content: '""', width: 14, flex: "0 0 auto" },
+  "& svg": { width: 14, height: 14 },
+  "&:hover": { color: "var(--obili)" },
+  "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "4px" },
+};
+
+/**
+ * Vysunuté podpoložky. Rozbaluje se přes `grid-template-rows: 0fr → 1fr`,
+ * protože výšku obsahu tu dopředu neznáme a `max-height` by se muselo hádat:
+ * moc malé ořízne, moc velké udělá po zavření prodlevu.
+ */
+export const sheetSub = (open: boolean): SxProps<Theme> => ({
+  display: "grid",
+  gridTemplateRows: open ? "1fr" : "0fr",
+  opacity: open ? 1 : 0,
+  transition: "grid-template-rows .28s ease, opacity .2s ease",
+  "& > div": { overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center" },
+});
+
+/**
+ * Podpoložka je o stupeň drobnější, aby bylo vidět, že patří pod skupinu —
+ * ale ne o moc, prstem se do ní musí dát trefit. Odsazení dělá z řádku terč
+ * vysoký zhruba 46 px, což je nad doporučenou hranicí pro dotyk.
+ */
+export const sheetSubItem: SxProps<Theme> = {
+  fontFamily: "var(--font-display)",
+  fontSize: "1.5rem",
+  color: "var(--inkoust-70)",
+  textDecoration: "none",
+  p: "0.55rem 0.9rem",
+  transition: "color .18s ease",
+  "&:hover": { color: "var(--obili)" },
+  "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "4px" },
+};
+
 export const sheetItem: SxProps<Theme> = {
   fontFamily: "var(--font-display)",
-  fontSize: "1.6rem",
+  fontSize: "2rem",
   color: "var(--inkoust)",
   textDecoration: "none",
-  p: "0.2rem 0.6rem",
+  p: "0.35rem 0.9rem",
   transition: "color .18s ease",
   "&:hover": { color: "var(--obili)" },
   "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "4px" },

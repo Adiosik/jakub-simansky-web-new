@@ -42,6 +42,8 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
   // které podmenu je otevřené (klíč), nebo nic
   const [drop, setDrop] = useState<string | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
+  // která skupina je rozbalená v mobilním překryvu (klíč), nebo nic
+  const [sheetDrop, setSheetDrop] = useState<string | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
 
   // Otevřený mobilní překryv nesmí nechat scrollovat stránku pod sebou.
   useEffect(() => {
-    if (!sheetOpen) return;
+    if (!sheetOpen) { setSheetDrop(null); return; }
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSheetOpen(false); };
@@ -118,6 +120,32 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
     );
   };
 
+  /** Skupina v mobilním překryvu — stejné dělení jako podmenu na desktopu. */
+  const SheetRozbal = ({ klic, label, polozky }: { klic: string; label: string; polozky: Polozka[] }) => {
+    const open = sheetDrop === klic;
+    return (
+      <>
+        <Box component="button" type="button" sx={styles.sheetGroup}
+          aria-expanded={open} onClick={() => setSheetDrop(open ? null : klic)}>
+          {label}
+          <Box component="svg" sx={styles.chevron(open)} viewBox="0 0 12 12" fill="none"
+            stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M2.5 4.5L6 8l3.5-3.5" />
+          </Box>
+        </Box>
+        <Box sx={styles.sheetSub(open)}>
+          <Box component="div">
+            {polozky.map((s) => (
+              <Box component="a" key={s.id} href={`#${s.id}`} sx={styles.sheetSubItem}
+                tabIndex={open ? undefined : -1}
+                onClick={() => setSheetOpen(false)}>{s.label}</Box>
+            ))}
+          </Box>
+        </Box>
+      </>
+    );
+  };
+
   return (
     <>
       <Box component="header" className="sim-anim d1" sx={styles.header(scrolled)}>
@@ -156,12 +184,8 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
           onClick={() => setSheetOpen(false)} aria-label={texts.nav.closeMenu}>✕</Box>
         <Box component="a" href={`#${ID.now}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.now.title}</Box>
         <Box component="a" href={`#${ID.about}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.about}</Box>
-        {/* v překryvu se nic nerozbaluje, takže položky z podmenu jsou tu
-            rovnocenné. Pořadí jako v podmenu. */}
-        {[...hudba, ...galerie].map((s) => (
-          <Box component="a" key={s.id} href={`#${s.id}`} sx={styles.sheetItem}
-            onClick={() => setSheetOpen(false)}>{s.label}</Box>
-        ))}
+        <SheetRozbal klic="hudba" label={texts.nav.sounds} polozky={hudba} />
+        <SheetRozbal klic="galerie" label={texts.nav.gallery} polozky={galerie} />
         <Box component="a" href={`#${ID.references}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.sections.references.title}</Box>
         <Box component="a" href={`#${ID.concerts}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.concerts}</Box>
         <Box component="a" href={`#${ID.contact}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.contact}</Box>
