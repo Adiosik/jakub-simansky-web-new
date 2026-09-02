@@ -31,7 +31,6 @@ export const enUS: Translation = {
     copy: "Copy",
     copied: "Copied",
     copyAria: "Copy e-mail to clipboard",
-    note: "from haná to the whole world",
     toTop: "Back to top",
   },
   sections: {
@@ -45,9 +44,7 @@ export const enUS: Translation = {
     },
     contact: {
       title: "contact",
-      intro: "booking a show, a collaboration, or just say hi.",
       bookingLabel: "booking & shows",
-      followLabel: "follow",
     },
     about: {
       title: "about",
@@ -62,7 +59,6 @@ export const enUS: Translation = {
     },
     lessons: {
       title: "lessons",
-      intro: "the guitar taught a different way.",
       body: "Alongside playing and touring, Jakub teaches. His lessons centre on an alternative approach to the guitar — open tunings, fingerpicking techniques and playing with fingerpicks. The same ground his own records are built on.",
       photoAlt: "Jakub Šimanský holding a banjo, two guitars leaning against the wall beside him",
     },
@@ -80,7 +76,6 @@ export const enUS: Translation = {
     },
     bands: {
       title: "bands",
-      intro: "where i play alongside the solo work.",
     },
   },
 };

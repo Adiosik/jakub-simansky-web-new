@@ -13,7 +13,7 @@ export default function Lessons({ texts }: { texts: Translation }) {
   const t = texts.sections.lessons;
 
   return (
-    <Section id="doucovani" title={t.title} intro={t.intro} wide>
+    <Section id="doucovani" title={t.title} wide tight>
       <Box component="img" src={asset(LESSONS_PHOTO)} alt={t.photoAlt}
         loading="lazy" sx={styles.photo} />
       <Box sx={styles.body}>{t.body}</Box>

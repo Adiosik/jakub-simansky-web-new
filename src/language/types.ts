@@ -36,7 +36,6 @@ export type Translation = {
     copy: string;
     copied: string;
     copyAria: string;
-    note: string;
     toTop: string;
   };
   sections: {
@@ -50,9 +49,7 @@ export type Translation = {
     };
     contact: {
       title: string;
-      intro: string;
       bookingLabel: string;
-      followLabel: string;
     };
     about: {
       title: string;
@@ -69,7 +66,6 @@ export type Translation = {
     };
     lessons: {
       title: string;
-      intro: string;
       body: string;
       /** Alt text fotky nad textem */
       photoAlt: string;
@@ -89,7 +85,6 @@ export type Translation = {
     };
     bands: {
       title: string;
-      intro: string;
     };
   };
 };

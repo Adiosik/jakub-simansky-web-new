@@ -44,8 +44,8 @@ const socials: SxProps<Theme> = {
   flexWrap: "wrap",
   alignItems: "center",
   justifyContent: "center",
-  // mezera se na užších displejích stáhne, ať se všechny čtyři sítě vejdou
-  // na jeden řádek a soundcloud nepřeteče dolů
+  // mezera se na užších displejích stáhne, ať se sítě vejdou na jeden řádek
+  // a poslední z nich nepřeteče dolů
   gap: { xs: "1.2rem 1.4rem", sm: "1.4rem 2.2rem" },
   // odstup od štítku „sledujte" dává `mb` toho štítku, stejně jako u bookingu
   mt: 0,
@@ -54,7 +54,7 @@ const socials: SxProps<Theme> = {
 export default function Contact({ texts }: { texts: Translation }) {
   const t = texts.sections.contact;
   return (
-    <Section id="kontakt" title={t.title} intro={t.intro} wide>
+    <Section id="kontakt" title={t.title} wide tight>
       <Box sx={label}>{t.bookingLabel}</Box>
       <Box sx={mailRow}>
         <Box component="a" href={`mailto:${EMAIL}`} sx={email}>{EMAIL}</Box>
@@ -62,8 +62,7 @@ export default function Contact({ texts }: { texts: Translation }) {
           ariaLabel={texts.footer.copyAria} />
       </Box>
 
-      <Box sx={{ ...label, mt: "clamp(2.4rem,6vw,3.6rem)" }}>{t.followLabel}</Box>
-      <Box sx={socials}>
+      <Box sx={{ ...socials, mt: "clamp(2.4rem,6vw,3.6rem)" }}>
         {SOCIALS.map((s) => <SocialLink key={s.name} social={s} variant="contact" />)}
       </Box>
     </Section>

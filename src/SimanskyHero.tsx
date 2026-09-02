@@ -121,7 +121,7 @@ export default function SimanskyHero() {
         <Contact texts={texts} />
       </Box>
 
-      <Footer texts={texts} />
+      <Footer />
       <ScrollToTop label={texts.footer.toTop} />
     </Box>
   );

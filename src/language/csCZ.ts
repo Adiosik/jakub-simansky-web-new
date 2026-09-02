@@ -31,7 +31,6 @@ export const csCZ: Translation = {
     copy: "Kopírovat",
     copied: "Zkopírováno",
     copyAria: "Kopírovat e-mail do schránky",
-    note: "z hané do celého světa",
     toTop: "Nahoru",
   },
   sections: {
@@ -45,9 +44,7 @@ export const csCZ: Translation = {
     },
     contact: {
       title: "kontakt",
-      intro: "domluva koncertů, spolupráce nebo jen pozdrav.",
       bookingLabel: "booking & koncerty",
-      followLabel: "sledujte",
     },
     about: {
       title: "o mně",
@@ -62,7 +59,6 @@ export const csCZ: Translation = {
     },
     lessons: {
       title: "doučování",
-      intro: "kytara jinak, než se učí ve škole.",
       body: "Vedle hraní a koncertování se Jakub věnuje i doučování. Učí hru na kytaru s důrazem na alternativní přístup k nástroji — otevřená ladění, techniky fingerpickingu a hru prstýnky. Tedy na to, z čeho vychází i jeho vlastní desky.",
       photoAlt: "Jakub Šimanský s banjem, vedle opřené dvě kytary",
     },
@@ -80,7 +76,6 @@ export const csCZ: Translation = {
     },
     bands: {
       title: "kapely",
-      intro: "kde hraju vedle sólové dráhy.",
     },
   },
 };

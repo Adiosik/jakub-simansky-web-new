@@ -23,8 +23,3 @@ export const footer: SxProps<Theme> = {
 
 export const name: SxProps<Theme> = { color: "var(--inkoust-70)" };
 
-/** Oddělovač mezi jménem a poznámkou — na úzkém displeji se schová. */
-export const sep: SxProps<Theme> = {
-  display: { xs: "none", sm: "inline" },
-  color: "var(--linka-2)",
-};

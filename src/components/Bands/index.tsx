@@ -17,7 +17,7 @@ export default function Bands({ texts, lang }: Props) {
   if (BANDS.length === 0) return null;
 
   return (
-    <Section id="kapely" title={t.title} intro={t.intro} wide>
+    <Section id="kapely" title={t.title} wide tight>
       <Box sx={styles.grid}>
         {BANDS.map((band) => (
           <Box key={band.name} sx={styles.item}>
