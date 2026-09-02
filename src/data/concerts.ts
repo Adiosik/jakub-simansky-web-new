@@ -14,6 +14,11 @@ export type Gig = {
   city: string;
   /** Místo konání (klub, sál…) */
   venue: string;
+  /**
+   * S kým Jakub hraje. Vynech u sólového vystoupení — štítek „sólo" se
+   * doplní sám, aby na první pohled bylo jasné, o který případ jde.
+   */
+  band?: string;
   /** Odkaz na vstupenky — nepovinné */
   ticketUrl?: string;
   /** Vyprodáno — nepovinné */
@@ -23,9 +28,4 @@ export type Gig = {
 /** Pořadí v poli je i pořadím na stránce — nikde se to neseřazuje podle data. */
 export const CONCERTS: Gig[] = [
   { date: "2026-09-30", city: "Praha", venue: "Cargo Gallery" },
-  { date: "2026-07-18", city: "Olomouc", venue: "Jazz Tibet Club" },
-  { date: "2026-08-09", city: "Brno", venue: "Kabinet múz" },
-  { date: "2026-09-05", city: "Přerov", venue: "Městský dům", soldOut: true },
-  { date: "2026-10-11", city: "Praha", venue: "Café v lese" },
-  { date: "2026-11-22", city: "Ostrava", venue: "Provoz Hlubina" },
 ];

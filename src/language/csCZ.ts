@@ -36,6 +36,7 @@ export const csCZ: Translation = {
   sections: {
     concerts: {
       title: "koncerty",
+      solo: "sólo",
       soldOut: "vyprodáno",
       empty: "zatím žádné vypsané termíny. sleduj sociální sítě.",
     },
@@ -59,7 +60,7 @@ export const csCZ: Translation = {
     },
     lessons: {
       title: "doučování",
-      body: "Vedle hraní a koncertování se Jakub věnuje i doučování. Učí hru na kytaru s důrazem na alternativní přístup k nástroji — otevřená ladění, techniky fingerpickingu a hru prstýnky. Tedy na to, z čeho vychází i jeho vlastní desky.",
+      body: "Rád bych touto cestou pomohl a nabídl možnost doučování hry na akustickou kytaru. Od úplných základů až po alternativní přístup, kde ze své zkušenosti mohu nabídnout třeba teorii „open tuning“ ladění, techniky finger-picking, slide techniky na [lap-steel] havajskou kytaru nebo dobro, techniky finger-picking, claw-hammer pro banjo atd.\n\nPro více informací pište kdykoliv.",
       photoAlt: "Jakub Šimanský s banjem, vedle opřené dvě kytary",
     },
     soon: "připravuji.",

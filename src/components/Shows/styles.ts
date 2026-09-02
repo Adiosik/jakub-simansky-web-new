@@ -29,6 +29,13 @@ export const place: SxProps<Theme> = {
   "& span": { color: "var(--inkoust-45)", fontSize: "0.86em" },
 };
 
+export const tags: SxProps<Theme> = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.4rem",
+  justifySelf: { xs: "center", sm: "end" },
+};
+
 export const tag: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
   fontSize: "0.58rem",
@@ -36,7 +43,7 @@ export const tag: SxProps<Theme> = {
   color: "var(--inkoust-45)",
   border: "1px solid var(--linka-2)",
   p: "0.18rem 0.45rem",
-  justifySelf: { xs: "center", sm: "end" },
+  whiteSpace: "nowrap",
 };
 
 export const empty: SxProps<Theme> = {

@@ -27,7 +27,12 @@ export default function Shows({ texts, lang }: Props) {
               <Box component="span" sx={styles.place}>
                 {gig.city} <Box component="span">— {gig.venue}</Box>
               </Box>
-              {gig.soldOut ? <Box component="span" sx={styles.tag}>{t.soldOut}</Box> : <span />}
+              {/* štítek má každý termín — buď kapelu, nebo „sólo“. Bez toho by
+                  u smíšeného programu nešlo poznat, o který případ jde. */}
+              <Box sx={styles.tags}>
+                <Box component="span" sx={styles.tag}>{gig.band ?? t.solo}</Box>
+                {gig.soldOut && <Box component="span" sx={styles.tag}>{t.soldOut}</Box>}
+              </Box>
             </Box>
           ))}
         </Box>

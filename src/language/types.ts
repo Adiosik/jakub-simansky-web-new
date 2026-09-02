@@ -41,6 +41,8 @@ export type Translation = {
   sections: {
     concerts: {
       title: string;
+      /** Štítek u termínu, kde Jakub hraje sám */
+      solo: string;
       soldOut: string;
       empty: string;
     };

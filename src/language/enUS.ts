@@ -36,6 +36,7 @@ export const enUS: Translation = {
   sections: {
     concerts: {
       title: "shows",
+      solo: "solo",
       soldOut: "sold out",
       empty: "no dates announced yet. follow on social media.",
     },
@@ -59,7 +60,7 @@ export const enUS: Translation = {
     },
     lessons: {
       title: "lessons",
-      body: "Alongside playing and touring, Jakub teaches. His lessons centre on an alternative approach to the guitar — open tunings, fingerpicking techniques and playing with fingerpicks. The same ground his own records are built on.",
+      body: "I'd like to pass some of this on and offer lessons in acoustic guitar. From the very basics through to a more alternative approach, where I can draw on my own experience — the theory behind open tunings, finger-picking techniques, slide technique on lap steel or dobro, finger-picking and claw-hammer for banjo, and so on.\n\nWrite any time for more information.",
       photoAlt: "Jakub Šimanský holding a banjo, two guitars leaning against the wall beside him",
     },
     soon: "coming soon.",
