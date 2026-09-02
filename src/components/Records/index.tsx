@@ -8,13 +8,16 @@
  */
 import Box from "@mui/material/Box";
 import type { Translation, Lang } from "../../language";
-import { ALBUMS } from "../../data/albums";
+import { ALBUMS, type Text } from "../../data/albums";
 import AlbumCover from "../Album/AlbumCover";
 import Embed from "../Album/Embed";
 import Section from "../Section";
 import * as styles from "./styles";
 
 type Props = { texts: Translation; lang: Lang };
+
+/** Vlastní jméno je řetězec, obecný údaj má obě jazykové verze. */
+const text = (t: Text, lang: Lang) => (typeof t === "string" ? t : t[lang]);
 
 export default function Records({ texts, lang }: Props) {
   const t = texts.sections.records;
@@ -29,7 +32,8 @@ export default function Records({ texts, lang }: Props) {
             <Box component="h3" sx={styles.title}>
               {album.artist ? album.artist + " — " : ""}{album.title}
             </Box>
-            <Box sx={styles.meta}>{album.year} · {album.label}</Box>
+            <Box sx={styles.meta}>{album.year} · {text(album.label, lang)}</Box>
+            {album.format && <Box sx={styles.format}>({text(album.format, lang)})</Box>}
             {album.description && <Box sx={styles.desc}>{album.description[lang]}</Box>}
             <Box sx={styles.tracks}>
               <Box sx={styles.tracksText}>{album.tracks.join(" · ")}</Box>

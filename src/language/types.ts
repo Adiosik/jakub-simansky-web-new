@@ -6,6 +6,10 @@ export type Translation = {
     records: string;
     bands: string;
     lessons: string;
+    gallery: string;
+    photos: string;
+    video: string;
+    art: string;
     concerts: string;
     contact: string;
     menu: string;
@@ -38,7 +42,6 @@ export type Translation = {
   sections: {
     concerts: {
       title: string;
-      intro: string;
       soldOut: string;
       empty: string;
     };
@@ -53,12 +56,10 @@ export type Translation = {
     };
     about: {
       title: string;
-      intro: string;
       body: string;
     };
     references: {
       title: string;
-      intro: string;
       /** Popisek odkazu na zdroj citace */
       source: string;
       /** Druhy ohlasů — značka u položky seznamu */
@@ -72,6 +73,19 @@ export type Translation = {
       body: string;
       /** Alt text fotky nad textem */
       photoAlt: string;
+    };
+    /** Text sekce, která je ohlášená, ale ještě nemá obsah */
+    soon: string;
+    photos: {
+      title: string;
+    };
+    video: {
+      title: string;
+      intro: string;
+    };
+    art: {
+      title: string;
+      intro: string;
     };
     bands: {
       title: string;

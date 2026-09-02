@@ -7,6 +7,10 @@ export const csCZ: Translation = {
     records: "alba",
     bands: "kapely",
     lessons: "doučování",
+    gallery: "galerie",
+    photos: "fotky",
+    video: "video",
+    art: "art",
     concerts: "koncerty",
     contact: "kontakt",
     menu: "menu",
@@ -33,7 +37,6 @@ export const csCZ: Translation = {
   sections: {
     concerts: {
       title: "koncerty",
-      intro: "kde mě letos potkáte naživo.",
       soldOut: "vyprodáno",
       empty: "zatím žádné vypsané termíny. sleduj sociální sítě.",
     },
@@ -48,12 +51,10 @@ export const csCZ: Translation = {
     },
     about: {
       title: "o mně",
-      intro: "kdo je a odkud jeho hudba vychází.",
       body: "Jakub Šimanský je český hudebník, který se na hudební scéně pohybuje již několik let. Jeho hudba je charakteristická svou experimentálností a nezávislým přístupem k akustickým nástrojům jako je steel kytara, lap steel (havajská) kytara nebo banjo. Šimanský má za sebou již tři dlouhohrající desky. První je Face to Face Against American Primitivism in Eastern Europe Vol. 1, která vyšla na labelu Stoned to Death Records v roce 2016. Deska byla dobře přijata doma i v zahraničí, především v subkultuře žánru „americký primitivismus“, ze kterého do jisté míry čerpal, avšak v hudbě je do značné míry patrný nejen vlastní přístup ke hře, pestrost v ladění a rytmice, ale také třeba smysl pro silné melodie, čímž navazuje i na tradici českého folku nebo východní hudby.\n\nPo třech letech, v roce 2019, rozběhl spolupráci s Full Moon Magazínem a jeho vydavatelskou platformou Full Moon Forum, ze které vzniklo návazné album Face to Face Against American Primitivism in Eastern Europe Vol. 2, kde Šimanský vychází stylem hry z první desky, v oblasti zvuku a postupů však začíná výrazněji experimentovat a hledat nové možnosti svých akustických nástrojů. A konečně jeho třetí a poslední deska, kterou si vydal sám minulý rok 2025 s názvem „What Do You Mean By That?“, je poskládaná z nepoužitého materiálu, který nashromáždil za posledních 10 let.\n\nDále je také členem aktivního kytarového dua Šimanský Niesner, se kterým intenzivně koncertuje doma i v zahraničí a se kterým vydal tři dlouhohrající desky u labelů Stoned To Death Records a Korobushka Records. Od letošního roku 2026 je také členem psychoakustického dronového tria Šimanský Vaľko Podracký, které letos vydává svou první desku s názvem K-drone na známém slovenském labelu Mappa Editions.",
     },
     references: {
       title: "reference",
-      intro: "co o deskách a koncertech říkají ostatní.",
       source: "číst celé",
       review: "recenze",
       interview: "rozhovor",
@@ -64,6 +65,18 @@ export const csCZ: Translation = {
       intro: "kytara jinak, než se učí ve škole.",
       body: "Vedle hraní a koncertování se Jakub věnuje i doučování. Učí hru na kytaru s důrazem na alternativní přístup k nástroji — otevřená ladění, techniky fingerpickingu a hru prstýnky. Tedy na to, z čeho vychází i jeho vlastní desky.",
       photoAlt: "Jakub Šimanský s banjem, vedle opřené dvě kytary",
+    },
+    soon: "připravuji.",
+    photos: {
+      title: "fotky",
+    },
+    video: {
+      title: "video",
+      intro: "záznamy a klipy.",
+    },
+    art: {
+      title: "art",
+      intro: "kresby, obaly a plakáty.",
     },
     bands: {
       title: "kapely",

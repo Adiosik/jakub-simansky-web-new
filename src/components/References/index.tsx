@@ -35,7 +35,7 @@ export default function References({ texts, lang }: Props) {
   const ostatni = REFERENCES.filter((r) => !r.quote);
 
   return (
-    <Section id="reference" title={t.title} intro={t.intro} wide>
+    <Section id="reference" title={t.title} wide tight>
       {citovane.length > 0 && (
         <Box sx={styles.grid(citovane.length)}>
           {citovane.map((r) => (
@@ -61,7 +61,7 @@ export default function References({ texts, lang }: Props) {
       )}
 
       {ostatni.length > 0 && (
-        <Box component="ul" sx={styles.press}>
+        <Box component="ul" sx={styles.press(citovane.length > 0)}>
           {ostatni.map((r) => (
             <Box component="li" key={r.url} sx={styles.pressItem}>
               <Box component="a" href={r.url} target="_blank" rel="noopener noreferrer"

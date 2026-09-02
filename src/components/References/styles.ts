@@ -1,16 +1,5 @@
 import type { SxProps, Theme } from "@mui/material/styles";
-
-/**
- * Míra hlavní citace. Drží se jí i soupis pod ní, aby celá sekce stála na
- * jedné šířce. `ch` se počítá z písma prvku, takže obojí musí mít stejné
- * písmo i stupeň — u soupisu to písmo neslouží k ničemu jinému než k tomu,
- * aby míra vyšla stejně; jednotlivé řádky si ho přenastavují samy.
- */
-const PISMO_CITACE = {
-  fontFamily: "var(--font-display)",
-  fontSize: "clamp(1.05rem,2.6vw,1.45rem)",
-};
-const SIRKA_CITACE = "44ch";
+import { MIRA_TABULKY } from "../Section/styles";
 
 /**
  * Citace vedle sebe, ale nikdy víc než tři sloupce. Počet sloupců se řídí
@@ -56,13 +45,13 @@ export const mark: SxProps<Theme> = {
 
 /** Osamocená citace nese sekci sama, tak dostane víc místa i velikosti. */
 export const quote = (sam: boolean): SxProps<Theme> => ({
-  fontFamily: PISMO_CITACE.fontFamily,
-  fontSize: sam ? PISMO_CITACE.fontSize : "clamp(0.95rem,1.9vw,1.08rem)",
+  fontFamily: "var(--font-display)",
+  fontSize: sam ? "clamp(1.05rem,2.6vw,1.45rem)" : "clamp(0.95rem,1.9vw,1.08rem)",
   fontWeight: 400,
   lineHeight: 1.65,
   color: "var(--inkoust)",
   m: 0,
-  maxWidth: sam ? SIRKA_CITACE : "34ch",
+  maxWidth: sam ? "44ch" : "34ch",
 });
 
 export const author: SxProps<Theme> = {
@@ -98,18 +87,15 @@ export const source: SxProps<Theme> = {
 
 
 /** Soupis článků — čte se jako rejstřík výstřižků, proto řádky, ne karty. */
-export const press: SxProps<Theme> = {
+export const press = (poCitaci: boolean): SxProps<Theme> => ({
   listStyle: "none",
-  // `body` sekce je blok, ne flex — bez `mx: auto` by se užší seznam zarazil
-  // doleva a rozešel se s vycentrovanou citací nad ním
-  m: "0 auto",
+  m: 0,
   p: 0,
-  // odstup, který dřív dělal štítek nad seznamem
-  mt: "clamp(2.8rem,7vw,4.4rem)",
-  width: "100%",
-  ...PISMO_CITACE,
-  maxWidth: SIRKA_CITACE,
-};
+  // odstup platí jen pod citací; když sekce začíná rovnou soupisem, mezeru
+  // pod nadpisem už dělá `body` v Section
+  mt: poCitaci ? "clamp(2.8rem,7vw,4.4rem)" : 0,
+  ...MIRA_TABULKY,
+});
 
 export const pressItem: SxProps<Theme> = {
   borderBottom: "1px solid var(--linka)",

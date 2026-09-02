@@ -42,11 +42,11 @@ export const REFERENCES: Reference[] = [
     orig: "EN",
     date: "2025-03-21",
     url: "https://noweidzieodmorza.com/16323-fantastic-4-march-21st/",
-    // originál je anglický, česká verze je překlad
-    quote: {
-      csCZ: "Zvuk jeho kytary má melancholickou příchuť, a přitom pevnost, lyričnost a transovou hloubku.",
-      enUS: "The sound of his guitar has a melancholic flavor but, at the same time, firmness, lyricism, and trance-like depth.",
-    },
+    // Ověřená citace, kterou tu Daniel zatím nechce vypsanou:
+    //   „Zvuk jeho kytary má melancholickou příchuť, a přitom pevnost,
+    //    lyričnost a transovou hloubku."
+    //   (originál: „The sound of his guitar has a melancholic flavor but, at
+    //    the same time, firmness, lyricism, and trance-like depth.")
   },
   {
     source: "Kapitál noviny",
@@ -92,20 +92,5 @@ export const REFERENCES: Reference[] = [
     kind: "review",
     orig: "EN",
     url: "https://rateyourmusic.com/artist/jakub-simansky",
-  },
-  {
-    source: "Full Moon",
-    title: "Nové sólové album Jakuba Šimanského",
-    kind: "media",
-    orig: "CZ",
-    date: "2025-03-23",
-    url: "https://www.fullmoonzine.cz/nove-solove-album-jakuba-simanskeho",
-  },
-  {
-    source: "Full Moon",
-    kind: "media",
-    orig: "CZ",
-    date: "2025-08-05",
-    url: "https://www.fullmoonzine.cz/clanky/jakub-simansky-zive",
   },
 ];

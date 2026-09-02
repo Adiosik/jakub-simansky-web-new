@@ -1,7 +1,8 @@
 /**
  * Header — lepkavá lišta: jméno vlevo, navigace malými písmeny uprostřed/vpravo
- * (položka „hudba" má rozbalovací podmenu), přepínač jazyka a motivu vpravo.
- * Na mobilu se navigace schová pod hamburger do překryvu přes celou obrazovku.
+ * (položky „hudba" a „galerie" mají rozbalovací podmenu), přepínač jazyka
+ * a motivu vpravo. Na mobilu se navigace schová pod hamburger do překryvu
+ * přes celou obrazovku.
  */
 import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
@@ -26,16 +27,22 @@ const ID = {
   records: "desky",
   bands: "kapely",
   lessons: "doucovani",
+  photos: "fotky",
+  video: "video",
+  art: "art",
   references: "reference",
   concerts: "koncerty",
   contact: "kontakt",
 } as const;
 
+type Polozka = { id: string; label: string };
+
 export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
   const [scrolled, setScrolled] = useState(false);
-  const [dropOpen, setDropOpen] = useState(false);
+  // které podmenu je otevřené (klíč), nebo nic
+  const [drop, setDrop] = useState<string | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const dropRef = useRef<HTMLDivElement | null>(null);
+  const navRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -44,20 +51,20 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Zavření podmenu klikem mimo a klávesou Esc.
+  // Zavření podmenu klikem mimo navigaci a klávesou Esc.
   useEffect(() => {
-    if (!dropOpen) return;
+    if (!drop) return;
     const onDown = (e: MouseEvent) => {
-      if (!dropRef.current?.contains(e.target as Node)) setDropOpen(false);
+      if (!navRef.current?.contains(e.target as Node)) setDrop(null);
     };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setDropOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setDrop(null); };
     document.addEventListener("mousedown", onDown);
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("mousedown", onDown);
       document.removeEventListener("keydown", onKey);
     };
-  }, [dropOpen]);
+  }, [drop]);
 
   // Otevřený mobilní překryv nesmí nechat scrollovat stránku pod sebou.
   useEffect(() => {
@@ -72,12 +79,44 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
     };
   }, [sheetOpen]);
 
-  // pořadí podmenu drží pořadí sekcí na stránce: alba → kapely → doučování
-  const sub = [
+  // pořadí podmenu drží pořadí sekcí na stránce
+  const hudba: Polozka[] = [
     { id: ID.records, label: texts.nav.records },
     { id: ID.bands, label: texts.nav.bands },
     { id: ID.lessons, label: texts.nav.lessons },
   ];
+
+  const galerie: Polozka[] = [
+    { id: ID.photos, label: texts.nav.photos },
+    { id: ID.video, label: texts.nav.video },
+    { id: ID.art, label: texts.nav.art },
+  ];
+
+  /** Položka navigace s rozbalovacím podmenu. */
+  const Rozbal = ({ klic, label, polozky }: { klic: string; label: string; polozky: Polozka[] }) => {
+    const open = drop === klic;
+    return (
+      <Box sx={styles.dropWrap} onMouseLeave={() => setDrop(null)}>
+        <Box component="button" type="button" sx={styles.item}
+          aria-expanded={open} aria-haspopup="true"
+          onClick={() => setDrop(open ? null : klic)} onMouseEnter={() => setDrop(klic)}>
+          {label}
+          <Box component="svg" sx={styles.chevron(open)} viewBox="0 0 12 12" fill="none"
+            stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M2.5 4.5L6 8l3.5-3.5" />
+          </Box>
+        </Box>
+        <Box sx={styles.drop(open)}>
+          <Box sx={styles.dropPanel(open)}>
+            {polozky.map((s) => (
+              <Box component="a" key={s.id} href={`#${s.id}`} sx={styles.dropItem}
+                onClick={() => setDrop(null)}>{s.label}</Box>
+            ))}
+          </Box>
+        </Box>
+      </Box>
+    );
+  };
 
   return (
     <>
@@ -87,30 +126,13 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
         <Box component="a" href="#top" sx={styles.brand(scrolled)}
           tabIndex={scrolled ? undefined : -1} aria-hidden={!scrolled}>šimanský</Box>
 
-        <Box component="nav" sx={styles.nav}>
+        <Box component="nav" sx={styles.nav} ref={navRef}>
           {/* aktuálně je první — je to nejčerstvější obsah a na stránce stojí hned pod heroem */}
           <Box component="a" href={`#${ID.now}`} sx={styles.item}>{texts.now.title}</Box>
           <Box component="a" href={`#${ID.about}`} sx={styles.item}>{texts.nav.about}</Box>
 
-          <Box ref={dropRef} sx={styles.dropWrap} onMouseLeave={() => setDropOpen(false)}>
-            <Box component="button" type="button" sx={styles.item}
-              aria-expanded={dropOpen} aria-haspopup="true"
-              onClick={() => setDropOpen((v) => !v)} onMouseEnter={() => setDropOpen(true)}>
-              {texts.nav.sounds}
-              <Box component="svg" sx={styles.chevron(dropOpen)} viewBox="0 0 12 12" fill="none"
-                stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M2.5 4.5L6 8l3.5-3.5" />
-              </Box>
-            </Box>
-            <Box sx={styles.drop(dropOpen)}>
-              <Box sx={styles.dropPanel(dropOpen)}>
-                {sub.map((s) => (
-                  <Box component="a" key={s.id} href={`#${s.id}`} sx={styles.dropItem}
-                    onClick={() => setDropOpen(false)}>/{s.label}/</Box>
-                ))}
-              </Box>
-            </Box>
-          </Box>
+          <Rozbal klic="hudba" label={texts.nav.sounds} polozky={hudba} />
+          <Rozbal klic="galerie" label={texts.nav.gallery} polozky={galerie} />
 
           <Box component="a" href={`#${ID.references}`} sx={styles.item}>{texts.sections.references.title}</Box>
           <Box component="a" href={`#${ID.concerts}`} sx={styles.item}>{texts.nav.concerts}</Box>
@@ -135,10 +157,11 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
         <Box component="a" href={`#${ID.now}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.now.title}</Box>
         <Box component="a" href={`#${ID.about}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.about}</Box>
         {/* v překryvu se nic nerozbaluje, takže položky z podmenu jsou tu
-            rovnocenné (lomítka jsou notace desktopu). Pořadí jako v podmenu. */}
-        <Box component="a" href={`#${ID.records}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.records}</Box>
-        <Box component="a" href={`#${ID.bands}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.bands}</Box>
-        <Box component="a" href={`#${ID.lessons}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.lessons}</Box>
+            rovnocenné. Pořadí jako v podmenu. */}
+        {[...hudba, ...galerie].map((s) => (
+          <Box component="a" key={s.id} href={`#${s.id}`} sx={styles.sheetItem}
+            onClick={() => setSheetOpen(false)}>{s.label}</Box>
+        ))}
         <Box component="a" href={`#${ID.references}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.sections.references.title}</Box>
         <Box component="a" href={`#${ID.concerts}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.concerts}</Box>
         <Box component="a" href={`#${ID.contact}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.contact}</Box>

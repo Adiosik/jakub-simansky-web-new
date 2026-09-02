@@ -1,6 +1,7 @@
 import type { SxProps, Theme } from "@mui/material/styles";
+import { MIRA_TABULKY } from "../Section/styles";
 
-export const list: SxProps<Theme> = { listStyle: "none", m: 0, p: 0, width: "100%" };
+export const list: SxProps<Theme> = { listStyle: "none", m: 0, p: 0, ...MIRA_TABULKY };
 
 /** Řádek koncertu — datum / místo / štítek, oddělené vlásovou linkou. */
 export const gig: SxProps<Theme> = {

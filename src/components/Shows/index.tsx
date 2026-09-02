@@ -16,7 +16,7 @@ export default function Shows({ texts, lang }: Props) {
     new Date(iso + "T00:00:00").toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <Section id="koncerty" title={t.title} intro={t.intro} wide>
+    <Section id="koncerty" title={t.title} wide tight>
       {CONCERTS.length === 0 ? (
         <Box component="p" sx={styles.empty}>{t.empty}</Box>
       ) : (

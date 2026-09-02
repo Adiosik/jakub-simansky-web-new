@@ -15,6 +15,7 @@ import Hero from "./components/Hero";
 import Now from "./components/Now";
 import Records from "./components/Records";
 import Bands from "./components/Bands";
+import Gallery from "./components/Gallery";
 import Lessons from "./components/Lessons";
 import References from "./components/References";
 import Shows from "./components/Shows";
@@ -110,6 +111,8 @@ export default function SimanskyHero() {
         <Bands texts={texts} lang={lang} />
         {/* doučování patří k hudbě, proto ještě před ohlasy */}
         <Lessons texts={texts} />
+        {/* galerie za hudbou — fotky, video a art jako tři sekce pod sebou */}
+        <Gallery texts={texts} lang={lang} />
         {/* ohlasy pak jako sociální důkaz k tomu, co je nad nimi */}
         <References texts={texts} lang={lang} />
         <Shows texts={texts} lang={lang} />

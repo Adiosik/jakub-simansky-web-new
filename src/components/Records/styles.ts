@@ -50,6 +50,15 @@ export const cover: SxProps<Theme> = {
   },
 };
 
+/** Nosič na vlastním řádku pod vydavatelem — údaj jiného druhu, ne pokračování. */
+export const format: SxProps<Theme> = {
+  fontFamily: "var(--font-mono)",
+  fontSize: "var(--text-drobne)",
+  letterSpacing: "0.16em",
+  color: "var(--inkoust-45)",
+  mt: "0.3rem",
+};
+
 export const title: SxProps<Theme> = {
   fontFamily: "var(--font-display)",
   fontSize: "clamp(1.1rem,2.6vw,1.5rem)",
