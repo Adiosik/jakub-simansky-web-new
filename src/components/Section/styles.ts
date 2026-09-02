@@ -15,7 +15,7 @@ export const section = (wide: boolean): SxProps<Theme> => ({
 });
 
 /**
- * Značka sekce — název v lomítkách („// desky //"). Lomítka jsou v okrové
+ * Značka sekce — název v lomítkách („/ desky /"). Lomítka jsou v okrové
  * a v mono fontu, samotný název ve fontu display. Náš protějšek klasického
  * dekorativního oddělovače sekcí.
  */
@@ -38,7 +38,7 @@ export const marker: SxProps<Theme> = {
 
 export const intro: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
-  fontSize: "0.8rem",
+  fontSize: "var(--text-drobne)",
   fontWeight: 300,
   lineHeight: 1.75,
   color: "var(--inkoust-70)",

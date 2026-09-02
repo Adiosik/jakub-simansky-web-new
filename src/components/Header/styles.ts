@@ -39,9 +39,11 @@ export const brand = (scrolled: boolean): SxProps<Theme> => ({
   gridColumn: 1,
   justifySelf: "start",
   fontFamily: "var(--font-mono)",
-  // na mobilu drobnější a míň prostrkané, aby se vešlo vedle ovládání
-  fontSize: { xs: "0.6rem", sm: "0.72rem" },
-  letterSpacing: { xs: "0.1em", sm: "0.2em" },
+  // Od chvíle, kdy tu stojí jen příjmení, se vedle ovládání vejde v pohodě —
+  // proto je na mobilu naopak větší než dřív, ne drobnější. Prostrkání drží
+  // krok, aby značka nebyla jen shluk písmen.
+  fontSize: { xs: "0.8rem", sm: "0.72rem" },
+  letterSpacing: { xs: "0.16em", sm: "0.2em" },
   color: "var(--inkoust)",
   textDecoration: "none",
   whiteSpace: "nowrap",

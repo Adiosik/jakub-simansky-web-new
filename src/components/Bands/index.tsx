@@ -5,6 +5,8 @@
 import Box from "@mui/material/Box";
 import type { Translation, Lang } from "../../language";
 import { BANDS } from "../../data/bands";
+import { sitZAdresy } from "../../data/socials";
+import SocialLink from "../core/Social";
 import Section from "../Section";
 import * as styles from "./styles";
 
@@ -22,13 +24,11 @@ export default function Bands({ texts, lang }: Props) {
             <Box component="h3" sx={styles.name}>{band.name}</Box>
             {band.members && <Box sx={styles.members}>{band.members.join(" · ")}</Box>}
             {band.description && <Box sx={styles.description}>{band.description[lang]}</Box>}
-            {band.url && (
-              <Box component="a" href={band.url} target="_blank" rel="noopener noreferrer" sx={styles.link}>
-                {t.listen}
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8"
-                  strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" />
-                </svg>
+            {band.links && (
+              <Box sx={styles.links}>
+                {band.links.map((url) => (
+                  <SocialLink key={url} social={sitZAdresy(url)} variant="contact" />
+                ))}
               </Box>
             )}
           </Box>

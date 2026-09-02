@@ -1,5 +1,20 @@
 import type { SxProps, Theme } from "@mui/material/styles";
 
+/**
+ * Jediná míra celé desky — drží ji obal, přehrávač, popis i seznam skladeb,
+ * takže blok lícuje shora dolů. Bandcamp se pod svých 700 px zmenšuje, takže
+ * se dá zarovnat taky.
+ *
+ * Pozor: `ch` se počítá z písma toho kterého prvku. Obal ani rámeček přehrávače
+ * žádný text nemají, proto jim `SIRKA` předepisuje i velikost písma — bez toho
+ * by stejné číslo vyšlo u každého jinak široké.
+ */
+const SIRKA_TEXT = "58ch";
+export const SIRKA: SxProps<Theme> = {
+  fontSize: "var(--text)",
+  width: `min(100%, ${SIRKA_TEXT})`,
+};
+
 /** Desky pod sebou, každá jako centrovaný blok — obal, název, popis. */
 export const list: SxProps<Theme> = {
   display: "flex",
@@ -16,17 +31,13 @@ export const item: SxProps<Theme> = {
   width: "100%",
 };
 
-/** Obal je zároveň tlačítko — chová se stejně jako „přehrát ukázku" pod popisem. */
+/** Obal alba — nad vlastním přehrávačem, už bez role tlačítka. */
 export const cover: SxProps<Theme> = {
-  position: "relative",
+  ...SIRKA,
   display: "block",
-  width: "min(100%, 460px)",
   aspectRatio: "1 / 1",
   overflow: "hidden",
-  p: 0,
-  border: "none",
   background: "var(--zaklad-2)",
-  cursor: "pointer",
   // jemný stín pod obalem — nadlehčí desku nad podkladem, při najetí se prohloubí
   boxShadow: "0 12px 26px -18px var(--stin)",
   transition: "box-shadow .35s ease, transform .35s ease",
@@ -37,42 +48,7 @@ export const cover: SxProps<Theme> = {
     display: "block",
     transition: "transform .5s cubic-bezier(.2,.8,.2,1)",
   },
-  "&:hover, &:focus-visible": {
-    transform: "translateY(-4px)",
-    boxShadow: "0 24px 44px -20px var(--stin)",
-  },
-  "&:hover > *": { transform: "scale(1.04)" },
-  "&:hover .sim-cover-hint, &:focus-visible .sim-cover-hint": { opacity: 1, transform: "scale(1)" },
-  // obrys jen při ovládání klávesnicí, ne jako trvalý stav hrajícího alba
-  "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "6px" },
 };
-
-/**
- * Odznak play/pauza v rohu obalu — naznačí, že se na desku dá kliknout, aniž by
- * překryl grafiku. V klidu je schovaný a vyjede při najetí myší nebo zaostření
- * klávesnicí; u právě hrajícího alba zůstává vidět, ať je jasné, odkud zvuk jde.
- */
-export const coverHint = (active: boolean): SxProps<Theme> => ({
-  position: "absolute",
-  right: "0.85rem",
-  bottom: "0.85rem",
-  width: 42,
-  height: 42,
-  borderRadius: "50%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  pointerEvents: "none",
-  // odznak drží tmavé kolečko se světlým glyfem v obou režimech — kdyby se
-  // barvy převracely s motivem, v tmavém by glyf splynul s pozadím
-  background: active ? "var(--obili)" : "var(--odznak-bg)",
-  color: active ? "#23291F" : "var(--odznak-fg)",
-  backdropFilter: "blur(2px)",
-  opacity: active ? 1 : 0,
-  transform: active ? "scale(1)" : "scale(.86)",
-  transition: "opacity .25s ease, transform .25s ease, background .25s ease",
-  "& svg": { width: 15, height: 15, display: "block" },
-});
 
 export const title: SxProps<Theme> = {
   fontFamily: "var(--font-display)",
@@ -86,27 +62,19 @@ export const title: SxProps<Theme> = {
 
 export const meta: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
-  fontSize: "0.66rem",
+  fontSize: "var(--text-drobne)",
   letterSpacing: "0.16em",
   color: "var(--inkoust-45)",
   mt: "0.55rem",
 };
 
-/**
- * Čtecí šířka popisu desky. Stejnou drží i rozdělovač nad seznamem skladeb.
- * Pozor: `ch` se počítá z písma toho kterého prvku, takže oba musí mít stejnou
- * velikost písma (VELIKOST_POPISU), jinak stejné číslo vyjde jinak široké.
- */
-const VELIKOST_POPISU = "0.78rem";
-const SIRKA_POPISU = "58ch";
-
 export const desc: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
-  fontSize: VELIKOST_POPISU,
+  fontSize: "var(--text)",
   fontWeight: 300,
   lineHeight: 1.85,
   color: "var(--inkoust-70)",
-  maxWidth: SIRKA_POPISU,
+  maxWidth: SIRKA_TEXT,
   mt: "1.3rem",
   whiteSpace: "pre-line",
   textAlign: "left",
@@ -117,9 +85,7 @@ export const desc: SxProps<Theme> = {
  * délku textu skladeb a byla by nápadně kratší než popis nad ní.
  */
 export const tracks: SxProps<Theme> = {
-  // shodná velikost písma jako `desc` — jen tak vyjde `ch` stejně široké
-  fontSize: VELIKOST_POPISU,
-  width: `min(100%, ${SIRKA_POPISU})`,
+  ...SIRKA,
   mt: "1.3rem",
   pt: "1.1rem",
   borderTop: "1px solid var(--linka)",
@@ -127,25 +93,9 @@ export const tracks: SxProps<Theme> = {
 
 export const tracksText: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
-  fontSize: "0.7rem",
+  fontSize: "var(--text-drobne)",
   lineHeight: 1.9,
   color: "var(--inkoust-45)",
   mx: "auto",
 };
 
-/** Tlačítko „přehrát ukázku" — text s podtržením, ne rámeček. */
-export const play = (active: boolean): SxProps<Theme> => ({
-  mt: "1.4rem",
-  fontFamily: "var(--font-mono)",
-  fontSize: "0.72rem",
-  letterSpacing: "0.14em",
-  color: active ? "var(--obili)" : "var(--inkoust)",
-  background: "none",
-  border: "none",
-  cursor: "pointer",
-  p: "0 0 0.3rem",
-  borderBottom: `1px solid ${active ? "var(--obili)" : "var(--linka-2)"}`,
-  transition: "color .2s ease, border-color .2s ease",
-  "&:hover": { color: "var(--obili)", borderBottomColor: "var(--obili)" },
-  "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "4px" },
-});

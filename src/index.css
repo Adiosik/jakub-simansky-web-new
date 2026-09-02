@@ -2,12 +2,13 @@
    GLOBÁLNÍ STYL
    - design tokeny (barvy) jako CSS proměnné
    - reset + font
-   - @keyframes a třídy pro SVG animace krajiny a reveal při scrollu
+   - @keyframes a třídy pro animace a reveal při scrollu
    Pozn.: layout/chrome jednotlivých komponent je v jejich styles.ts (MUI sx).
 
    VZHLED: jeden centrovaný sloupec, obří jméno malými písmeny, hodně vzduchu
-   mezi sekcemi, žádné rámečky ani stíny — jen vlásové linky. Paleta „písková
-   šalvěj": pastelově šalvějové pozadí, tmavý inkoust, okrový akcent z obilí.
+   mezi sekcemi, žádné rámečky ani stíny — jen vlásové linky. Paleta je pudrově
+   růžová: narůžovělé pozadí, teplý tmavý inkoust, okrový akcent z obilí
+   a tlumená tyrkysová jako doprovod.
    ────────────────────────────────────────────────────────────────────────── */
 /* ──────────────────────────────────────────────────────────────────────────
    PÍSMA — hostovaná u nás, ne z Google Fonts
@@ -81,43 +82,66 @@ html,body{ background:var(--zaklad); }
 body{ -webkit-font-smoothing:antialiased; }
 
 :root{
-  /* ── SVĚTLÝ REŽIM (výchozí) — pastelová šalvěj ─────────────────────────── */
-  --zaklad:#E4E7DE;     /* pozadí stránky */
-  --zaklad-2:#D7DCD0;   /* nadzvednutá plocha (přehrávač, hover) */
-  --zaklad-3:#CBD2C4;   /* jemné zvýraznění */
-  --inkoust:#23291F;    /* písmo */
-  --inkoust-70:rgba(35,41,31,.72);
-  --inkoust-45:rgba(35,41,31,.5);
-  --obili:#A8843C;      /* akcent */
-  --voda:#5E8A82;
-  --linka:rgba(35,41,31,.16);
-  --linka-2:rgba(35,41,31,.32);
-  --bar:rgba(228,231,222,.82);   /* poloprůhledné pozadí hlavičky */
-  --sheet:rgba(228,231,222,.98); /* mobilní překryv menu */
-  --stin:rgba(35,41,31,.55);     /* stín pod obalem desky */
+  /* ── SVĚTLÝ REŽIM (výchozí) — pudrová růžová ───────────────────────────── */
+  /* Pozadí je záměrně tatáž růžová, jakou má písmo v tmavém režimu
+     (--inkoust v [data-theme="dark"]). Oba motivy tak stojí na jedné barvě,
+     jen si prohodí role: co je tam písmo, je tady plocha. */
+  --zaklad:#FBA8CB;     /* pozadí stránky */
+  --zaklad-2:#F794BE;   /* nadzvednutá plocha (přehrávač, hover) */
+  --zaklad-3:#F07FB0;   /* jemné zvýraznění */
+  /* písmo — tmavé s hnědým nádechem, ne švestkovým */
+  --inkoust:#2A2320;
+  /* .75 = 4.7:1 na růžové, tedy AA pro běžný text; .72 dávalo 4.45 a těsně
+     nedosáhlo. Drobné popisky (.62) mají 3.5:1 — AA na malý text nesplňují,
+     ale odstup od základního textu drží hierarchii. */
+  --inkoust-70:rgba(42,35,32,.75);
+  --inkoust-45:rgba(42,35,32,.62);
+  --obili:#78334A;      /* akcent — na sytě růžovém pozadí musí být tmavý,
+                           aby držel kontrast 4,9 (světlejší propadne pod 4,5) */
+  --voda:#6B8C84;
+  --linka:rgba(42,35,32,.16);
+  --linka-2:rgba(42,35,32,.32);
+  --bar:rgba(251,168,203,.82);   /* poloprůhledné pozadí hlavičky */
+  --sheet:rgba(251,168,203,.98); /* mobilní překryv menu */
+  --stin:rgba(42,35,32,.55);     /* stín pod obalem desky */
 
-  /* tokeny linorytu — SVG krajina a generované obaly alb.
+  /* tokeny linorytu — generované obaly alb (viz Album/AlbumCover).
      Barvy tiskových desek jsou schválně vlastní proměnné, ne sdílené s --obili:
      akcent v rozhraní musí na tmavém podkladu svítit, zatímco deska se přes
      `screen` rozsvěcí sama a musela by být naopak tlumená. */
-  --papir:#E4E7DE;         /* světlá místa výřezu (okna, vlnky) */
-  --saze:#23291F;          /* nejtmavší kresba (člun) */
-  --deska-teple:#A8843C;   /* teplá tisková deska + řeka */
+  --deska-teple:#A8843C;   /* teplá tisková deska */
   --deska-studene:#4A7A72; /* studená tisková deska */
-  --stroj:#4A7A72;
-  --zelena:#3F7D49;
-  --obrys:#6E6020;         /* obrys řeky */
 
-  /* Odznak play na obalu desky. Záměrně se s motivem nepřevrací: tmavé kolečko
-     se světlým glyfem funguje na fotce obalu ve světlém i tmavém režimu. */
-  --odznak-bg:rgba(20,24,18,.72);
-  --odznak-fg:#E4E7DE;
+  /* Barvy kresby v hero. Tiskne se dvakrát a desky se rozcházejí podle myši
+     i samy od sebe — odtud ten soutisk. Hlavní deska si bere barvu písma
+     a druhá akcent, takže kresba drží s typografií i po změně palety. */
+  --kresba:var(--inkoust);
+  --kresba-2:var(--obili);
 
   /* Režim míchání soutisku. Na světlém podkladu barvy násobíme (tmavne),
      na tmavém je musíme naopak rozsvěcet — jinak by kresba zčernala. */
   --soutisk:multiply;
   --zrno-blend:multiply;
   --zrno-opacity:0.12;
+
+  /* Odstíny jednotlivých písmen v nadpisu „šimanský". Nerovnoměrné schválně —
+     v linorytu se sytost mezi otisky liší a nadpis to připomíná. Všechny drží
+     kontrast nad 4,0, tedy nad hranicí 3,0 pro velký text. */
+  --pismeno-1:#2A2320;
+  --pismeno-2:#6B2E46;
+  --pismeno-3:#3D1F29;
+  --pismeno-4:#8A3E51;
+  --pismeno-5:#4A2532;
+  --pismeno-6:#78334A;
+  --pismeno-7:#32262B;
+  --pismeno-8:#5A2A3C;
+
+  /* Velikosti čtecího textu. Mono písmo působí na stejné velikosti drobněji
+     než bezpatkové, proto je běžný text výš, než by se u sans-serifu čekalo.
+     Drží se na jednom místě schválně — dokud si každá sekce určovala vlastní
+     číslo, rozjely se do 0.78 / 0.80 / 0.82 rem bez jakéhokoli záměru. */
+  --text:clamp(0.88rem, 0.8rem + 0.4vw, 0.96rem);
+  --text-drobne:clamp(0.72rem, 0.68rem + 0.2vw, 0.8rem);
 
   --font-display:'Space Grotesk','Helvetica Neue',Arial,sans-serif;
   --font-mono:'IBM Plex Mono',ui-monospace,monospace;
@@ -133,36 +157,49 @@ body{ -webkit-font-smoothing:antialiased; }
 }
 
 /* ── TMAVÝ REŽIM ────────────────────────────────────────────────────────────
-   Není to prostá inverze: pozadí drží stejný zelenošedý nádech jako světlá
-   šalvěj, jen ztmavený, a okrová se rozsvítí, aby na tmavém podkladu držela
-   kontrast. Světlá místa linorytu (--papir) se stávají tmavými, protože
-   „papírem" je teď noc; nejtmavší kresba (--saze) se naopak rozsvítí.
+   Není to prostá inverze: pozadí drží stejný narůžovělý nádech jako světlá
+   paleta, jen ztmavený, a okrová se rozsvítí, aby na tmavém podkladu držela
+   kontrast. Tiskové desky obalů se naopak tlumí — přes `screen` se na tmavém
+   podkladu rozsvítí samy.
    ────────────────────────────────────────────────────────────────────────── */
 :root[data-theme="dark"]{
-  --zaklad:#191F1A;
-  --zaklad-2:#212820;
-  --zaklad-3:#2B332A;
-  --inkoust:#E4E7DE;
-  --inkoust-70:rgba(228,231,222,.72);
-  --inkoust-45:rgba(228,231,222,.48);
-  --obili:#D9B76C;
-  --voda:#7FB3AA;
-  --linka:rgba(228,231,222,.14);
-  --linka-2:rgba(228,231,222,.28);
-  --bar:rgba(25,31,26,.82);
-  --sheet:rgba(25,31,26,.98);
+  /* Pozn.: schválená a funkční je i tlumenější varianta #321826 / #3E1F2F /
+     #4B2739 — kdyby tahle byla časem moc sytá, vrať se k ní. */
+  --zaklad:#3A162B;
+  --zaklad-2:#481C36;
+  --zaklad-3:#562340;
+  --inkoust:#FBA8CB;
+  --inkoust-70:rgba(251,168,203,.72);
+  --inkoust-45:rgba(251,168,203,.6);
+  --obili:#E5A3B0;   /* světlá starorůžová, kontrast 8,2 na tmavé */
+  --voda:#8FB3AC;
+  --linka:rgba(251,168,203,.14);
+  --linka-2:rgba(251,168,203,.28);
+  --bar:rgba(58,22,43,.82);
+  --sheet:rgba(58,22,43,.98);
   --stin:rgba(0,0,0,.6);
 
-  --papir:#191F1A;
-  /* člun zůstává tmavý i v noci — je to silueta, ne kresba na papíře */
-  --saze:#12160F;
   /* desky jsou tlumené: přes `screen` se na tmavém podkladu samy rozsvítí,
-     se svítivou barvou by krajina zežloutla */
+     se svítivou barvou by obal zežloutl */
   --deska-teple:#8A7238;
   --deska-studene:#35605A;
-  --stroj:#3F6F68;
-  --zelena:#4E8C57;
-  --obrys:#5E4E24;
+
+  /* Odstíny písmen pro tmavý režim. Rozptyl je tu schválně větší než ve
+     světlém (kontrast 3,4 až 11,8): na tmavém podkladu se blízké tóny slévají,
+     takže jemné rozdíly, které ve světlém fungují, by tady zanikly. */
+  --pismeno-1:#FFC9E0;
+  --pismeno-2:#C06F91;
+  --pismeno-3:#FBA8CB;
+  --pismeno-4:#A85E7E;
+  --pismeno-5:#F09FC0;
+  --pismeno-6:#B86A8A;
+  --pismeno-7:#FFD3E6;
+  --pismeno-8:#D886A6;
+
+  /* V tmavém režimu kresba barvu písma nepřebírá — světlá růžová níže sedla
+     líp než odstín textu, tak zůstává vypsaná napevno. */
+  --kresba:#F09FC0;
+  --kresba-2:#B8557A;
 
   --soutisk:screen;
   --zrno-blend:screen;
@@ -188,28 +225,46 @@ a{ color:inherit; }
 .sim-in{ opacity:0; transform:translateY(42px); transition:opacity .9s ease, transform .95s cubic-bezier(.2,.8,.2,1); }
 .sim-in.is-visible{ opacity:1; transform:none; }
 
-.sim-print-wrap{ opacity:0; transform:scale(.985); transition:opacity 1.1s ease, transform 1.1s ease; }
-.sim-print-wrap.is-visible{ opacity:1; transform:none; }
 
-/* ── Animace SVG krajiny ──────────────────────────────────────────────── */
+/* ── Animace ──────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: no-preference){
-  .sim-drift{ animation:simDrift 17s ease-in-out infinite; }
-  @keyframes simDrift{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(3px,2px)} }
-  .sim-smoke{ animation:simSmoke 9s ease-in-out infinite; transform-origin:bottom; }
-  @keyframes simSmoke{ 0%,100%{opacity:.5; transform:translateY(0) scaleY(1)} 50%{opacity:.85; transform:translateY(-4px) scaleY(1.06)} }
-  .sim-ripple{ animation:simRipple 3.8s ease-in-out infinite; }
-  @keyframes simRipple{ 0%,100%{opacity:.12; transform:translateX(0)} 50%{opacity:.8; transform:translateX(4px)} }
-  .sim-birds{ animation:simBirds 34s linear infinite; }
-  @keyframes simBirds{ 0%{transform:translateX(-320px)} 100%{transform:translateX(880px)} }
-  /* člun vyjede až po chvíli (po ptácích); backwards = během zpoždění je schovaný vlevo */
-  .sim-boat{ animation:simBoat 30s linear 5s infinite backwards; }
-  @keyframes simBoat{ 0%{transform:translateX(-60px)} 100%{transform:translateX(880px)} }
-  .sim-boat-bob{ animation:simBoatBob 3.2s ease-in-out infinite; transform-origin:center; }
-  @keyframes simBoatBob{ 0%,100%{transform:rotate(-0.6deg)} 50%{transform:rotate(0.6deg)} }
+  /* Soutisk hlavy v hero. Dvě polohy v jedné animaci:
+     — klidová část (0–88 %) desky nepustí k sobě úplně, jen jimi zlehka
+       pohupuje o pár pixelů, aby v obraze pořád něco žilo;
+     — pak přijde krátký záškub (posledních ~8 %, kolem čtvrt vteřiny), kdy
+       se rozjedou o ±25 px a hned zase slezou k sobě.
+     Obojí musí být v jedněch klíčových snímcích: dvě samostatné animace by
+     si obě sáhly na `transform` a ta druhá by tu první jen přebila.
+     Doby jsou nesoudělné (17 : 23), takže se ani pohupování, ani záškuby
+     nikdy nesejdou do stejné fáze a nevznikne z toho pravidelný tik.
+     Je to pohyb na první obrazovce, proto celý blok visí
+     v prefers-reduced-motion: no-preference. */
+  .sim-soutisk-a{ animation:simSoutiskA 1.7s ease-in-out infinite; }
+  @keyframes simSoutiskA{
+    0%{transform:translate(0,0)}
+    20%{transform:translate(-2px,1px)}
+    45%{transform:translate(1px,-1px)}
+    70%{transform:translate(-1px,2px)}
+    88%{transform:translate(0,0)}
+    92%{transform:translate(-14px,5px)}
+    96%{transform:translate(6px,-11px)}
+    100%{transform:translate(0,0)}
+  }
+  .sim-soutisk-b{ animation:simSoutiskB 2.3s ease-in-out infinite; }
+  @keyframes simSoutiskB{
+    0%{transform:translate(0,0)}
+    25%{transform:translate(2px,-1px)}
+    50%{transform:translate(-1px,2px)}
+    75%{transform:translate(1px,1px)}
+    89%{transform:translate(0,0)}
+    93%{transform:translate(11px,14px)}
+    97%{transform:translate(-11px,5px)}
+    100%{transform:translate(0,0)}
+  }
   .sim-caret{ animation:simBlink 1.1s steps(1) infinite; }
   @keyframes simBlink{ 0%,50%{opacity:1} 51%,100%{opacity:0} }
 }
 @media (prefers-reduced-motion: reduce){
-  .sim-anim,.sim-in,.sim-print-wrap{ opacity:1; transform:none; transition:none; }
+  .sim-anim,.sim-in{ opacity:1; transform:none; transition:none; }
 }
 

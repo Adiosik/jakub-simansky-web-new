@@ -8,20 +8,21 @@ import Section from "../Section";
 
 const body: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
-  fontSize: "0.82rem",
+  fontSize: "var(--text)",
   fontWeight: 300,
   lineHeight: 1.95,
   color: "var(--inkoust-70)",
   textAlign: "left",
   whiteSpace: "pre-line",
-  maxWidth: "60ch",
+  // stejná šířka jako sekce koncertů nad tím — text tedy lícuje s tabulkou
+  width: "100%",
   mx: "auto",
 };
 
 export default function About({ texts }: { texts: Translation }) {
   const t = texts.sections.about;
   return (
-    <Section id="o-mne" title={t.title} intro={t.intro}>
+    <Section id="o-mne" title={t.title} intro={t.intro} wide>
       <Box sx={body}>{t.body}</Box>
     </Section>
   );

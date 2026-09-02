@@ -11,10 +11,10 @@ export const theme = createTheme({
   },
   shape: { borderRadius: 0 },
   palette: {
-    background: { default: "#E4E7DE", paper: "#D7DCD0" },
-    primary: { main: "#A8843C" },   // --obili
-    secondary: { main: "#5E8A82" }, // --voda
-    text: { primary: "#23291F", secondary: "rgba(35,41,31,.72)" },
+    background: { default: "#FBA8CB", paper: "#F794BE" },
+    primary: { main: "#78334A" },   // --obili
+    secondary: { main: "#6B8C84" }, // --voda
+    text: { primary: "#2A2320", secondary: "rgba(42,35,32,.72)" },
   },
   components: {
     MuiButtonBase: { defaultProps: { disableRipple: true } },

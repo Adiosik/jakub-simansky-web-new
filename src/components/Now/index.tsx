@@ -1,36 +1,27 @@
 /**
- * Now — sekce „aktuálně": nejnovější deska (první v ALBUMS) jako vyzdvižená
- * novinka hned pod heroem — obal, krátký text a odkaz na poslech.
+ * Now — sekce „aktuálně": vyzdvižená novinka hned pod heroem.
+ *
+ * Nečte z ALBUMS schválně. Deska, kterou ohlašuje, ještě nevyšla — nemá seznam
+ * skladeb ani ID na Bandcampu, takže by v diskografii i v přehrávači dělala
+ * prázdné místo. Až vyjde, přesune se do ALBUMS a tahle sekce ohlásí další.
  */
 import Box from "@mui/material/Box";
 import type { Translation } from "../../language";
-import { ALBUMS } from "../../data/albums";
-import { SOCIALS } from "../../data/socials";
-import AlbumCover from "../Player/AlbumCover";
+import { NOW_COVER } from "../../data/site";
+import { asset } from "../../asset";
 import Section from "../Section";
 import * as styles from "./styles";
 
-const BANDCAMP = SOCIALS.find((s) => s.name === "Bandcamp")?.url;
-
 export default function Now({ texts }: { texts: Translation }) {
-  const album = ALBUMS[0];
-  const href = album.links?.bandcamp ?? BANDCAMP;
+  const t = texts.now;
 
   return (
-    <Section id="aktualne" title={texts.now.title}>
+    <Section id="aktualne" title={t.title}>
       <Box sx={styles.wrap}>
-        <Box sx={styles.cover}><AlbumCover album={album} index={0} /></Box>
-        <Box component="p" sx={styles.lead}>{texts.now.lead}</Box>
-        <Box sx={styles.meta}>{album.year} · {album.label}</Box>
-        {href && (
-          <Box component="a" href={href} target="_blank" rel="noopener noreferrer" sx={styles.cta}>
-            {texts.now.cta}
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8"
-              strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" />
-            </svg>
-          </Box>
-        )}
+        <Box component="img" sx={styles.cover} src={asset(NOW_COVER)} alt={t.lead} />
+        <Box component="p" sx={styles.lead}>{t.lead}</Box>
+        <Box component="p" sx={styles.body}>{t.body}</Box>
+        <Box sx={styles.meta}>{t.meta}</Box>
       </Box>
     </Section>
   );

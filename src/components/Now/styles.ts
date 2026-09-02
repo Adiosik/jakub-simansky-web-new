@@ -1,5 +1,12 @@
 import type { SxProps, Theme } from "@mui/material/styles";
 
+/**
+ * Čtecí šířka oznámení — drží ji text i obal nad ním, aby lícovaly.
+ * Pozor: `ch` se počítá z písma toho kterého prvku, a obrázek žádný text nemá,
+ * proto mu ji `cover` předepisuje taky. Jinak by stejné číslo vyšlo jinak.
+ */
+const SIRKA = "58ch";
+
 export const wrap: SxProps<Theme> = {
   display: "flex",
   flexDirection: "column",
@@ -19,18 +26,31 @@ export const lead: SxProps<Theme> = {
   "& em": { fontStyle: "normal", color: "var(--obili)" },
 };
 
-/** Obal novinky — čtverec, bez rámečku, jen jemné podložení. */
+/** Obal novinky — čtverec v šířce textu, bez rámečku, jen jemné podložení. */
 export const cover: SxProps<Theme> = {
-  width: "min(100%, 400px)",
+  fontSize: "var(--text)",
+  width: `min(100%, ${SIRKA})`,
   aspectRatio: "1 / 1",
-  overflow: "hidden",
+  objectFit: "cover",
+  display: "block",
   background: "var(--zaklad-2)",
-  "& > *": { width: "100%", height: "100%", objectFit: "cover", display: "block" },
+};
+
+/** Vlastní text oznámení — čtecí šířka, ne titulková. */
+export const body: SxProps<Theme> = {
+  fontFamily: "var(--font-mono)",
+  fontSize: "var(--text)",
+  fontWeight: 300,
+  lineHeight: 1.85,
+  color: "var(--inkoust-70)",
+  maxWidth: SIRKA,
+  textAlign: "left",
+  m: 0,
 };
 
 export const meta: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
-  fontSize: "0.68rem",
+  fontSize: "var(--text-drobne)",
   letterSpacing: "0.16em",
   color: "var(--inkoust-45)",
 };
@@ -38,7 +58,7 @@ export const meta: SxProps<Theme> = {
 /** Odkaz „poslechnout" — podtržení, které se při hoveru přepne na okrovou. */
 export const cta: SxProps<Theme> = {
   fontFamily: "var(--font-mono)",
-  fontSize: "0.78rem",
+  fontSize: "var(--text-drobne)",
   letterSpacing: "0.1em",
   color: "var(--inkoust)",
   textDecoration: "none",

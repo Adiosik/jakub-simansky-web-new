@@ -1,6 +1,6 @@
 /**
  * Header — lepkavá lišta: jméno vlevo, navigace malými písmeny uprostřed/vpravo
- * (položka „zvuk" má rozbalovací podmenu), přepínač jazyka úplně vpravo.
+ * (položka „hudba" má rozbalovací podmenu), přepínač jazyka a motivu vpravo.
  * Na mobilu se navigace schová pod hamburger do překryvu přes celou obrazovku.
  */
 import { useEffect, useRef, useState } from "react";
@@ -21,10 +21,11 @@ type Props = {
 
 /** Kotvy sekcí na stránce — musí sedět s `id` v SimanskyHero. */
 const ID = {
+  now: "aktualne",
   about: "o-mne",
   records: "desky",
-  listen: "poslech",
   bands: "kapely",
+  lessons: "doucovani",
   references: "reference",
   concerts: "koncerty",
   contact: "kontakt",
@@ -71,21 +72,24 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
     };
   }, [sheetOpen]);
 
-  // pořadí podmenu drží pořadí sekcí na stránce: poslech → desky → kapely
+  // pořadí podmenu drží pořadí sekcí na stránce: alba → kapely → doučování
   const sub = [
-    { id: ID.listen, label: texts.nav.listen },
     { id: ID.records, label: texts.nav.records },
     { id: ID.bands, label: texts.nav.bands },
+    { id: ID.lessons, label: texts.nav.lessons },
   ];
 
   return (
     <>
       <Box component="header" className="sim-anim d1" sx={styles.header(scrolled)}>
-        {/* nahoře schované — jméno je hned pod tím v hero, nemá smysl ho zdvojovat */}
+        {/* nahoře schované — jméno je hned pod tím v hero, nemá smysl ho zdvojovat.
+            Stejně jako hero nese jen příjmení. */}
         <Box component="a" href="#top" sx={styles.brand(scrolled)}
-          tabIndex={scrolled ? undefined : -1} aria-hidden={!scrolled}>jakub šimanský</Box>
+          tabIndex={scrolled ? undefined : -1} aria-hidden={!scrolled}>šimanský</Box>
 
         <Box component="nav" sx={styles.nav}>
+          {/* aktuálně je první — je to nejčerstvější obsah a na stránce stojí hned pod heroem */}
+          <Box component="a" href={`#${ID.now}`} sx={styles.item}>{texts.now.title}</Box>
           <Box component="a" href={`#${ID.about}`} sx={styles.item}>{texts.nav.about}</Box>
 
           <Box ref={dropRef} sx={styles.dropWrap} onMouseLeave={() => setDropOpen(false)}>
@@ -128,12 +132,13 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
       <Box sx={styles.sheet(sheetOpen)} aria-hidden={!sheetOpen}>
         <Box component="button" type="button" sx={styles.sheetClose}
           onClick={() => setSheetOpen(false)} aria-label={texts.nav.closeMenu}>✕</Box>
+        <Box component="a" href={`#${ID.now}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.now.title}</Box>
         <Box component="a" href={`#${ID.about}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.about}</Box>
-        {/* v překryvu se nic nerozbaluje, takže i „poslech" je běžná položka
-            (lomítka jsou notace desktopového podmenu). Pořadí jako v podmenu. */}
-        <Box component="a" href={`#${ID.listen}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.listen}</Box>
+        {/* v překryvu se nic nerozbaluje, takže položky z podmenu jsou tu
+            rovnocenné (lomítka jsou notace desktopu). Pořadí jako v podmenu. */}
         <Box component="a" href={`#${ID.records}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.records}</Box>
         <Box component="a" href={`#${ID.bands}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.bands}</Box>
+        <Box component="a" href={`#${ID.lessons}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.lessons}</Box>
         <Box component="a" href={`#${ID.references}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.sections.references.title}</Box>
         <Box component="a" href={`#${ID.concerts}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.concerts}</Box>
         <Box component="a" href={`#${ID.contact}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.nav.contact}</Box>

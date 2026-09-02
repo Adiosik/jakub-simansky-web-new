@@ -1,15 +1,11 @@
 export type Translation = {
-  head: {
-    tagline: string;
-    location: string;
-  };
   /** Navigace v hlavičce — `sounds` má rozbalovací podmenu (records/listen/bands). */
   nav: {
     about: string;
     sounds: string;
     records: string;
-    listen: string;
     bands: string;
+    lessons: string;
     concerts: string;
     contact: string;
     menu: string;
@@ -19,28 +15,18 @@ export type Translation = {
     lightMode: string;
   };
   hero: {
-    /** Drobný credit pod portrétem */
-    photoCredit: string;
     /** Alt text portrétu */
     photoAlt: string;
   };
-  eyebrow: string;
   /** Sekce „aktuálně" — vyzdvižená novinka hned pod heroem */
   now: {
     title: string;
+    /** První věta, vysázená větším písmem */
     lead: string;
-    cta: string;
-  };
-  player: {
-    title: string;
-    intro: string;
-    prevAlbum: string;
-    nextAlbum: string;
-  };
-  print: {
-    title: string;
-    caption: string;
-    alt: string;
+    /** Zbytek oznámení */
+    body: string;
+    /** Datum vydání a nosiče */
+    meta: string;
   };
   footer: {
     copy: string;
@@ -58,8 +44,6 @@ export type Translation = {
     };
     records: {
       title: string;
-      intro: string;
-      play: string;
     };
     contact: {
       title: string;
@@ -77,12 +61,21 @@ export type Translation = {
       intro: string;
       /** Popisek odkazu na zdroj citace */
       source: string;
+      /** Druhy ohlasů — značka u položky seznamu */
+      review: string;
+      interview: string;
+      media: string;
+    };
+    lessons: {
+      title: string;
+      intro: string;
+      body: string;
+      /** Alt text fotky nad textem */
+      photoAlt: string;
     };
     bands: {
       title: string;
       intro: string;
-      /** Popisek odkazu na kapelu */
-      listen: string;
     };
   };
 };

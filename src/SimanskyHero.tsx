@@ -9,16 +9,13 @@ import type { SxProps, Theme } from "@mui/material/styles";
 
 import { translations, type Lang } from "./language";
 import { nactiMotiv, pouzijMotiv, type Motiv } from "./theme-mode";
-import { ALBUMS } from "./data/albums";
 import Grain from "./components/Grain";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Now from "./components/Now";
-import Section from "./components/Section";
-import Player from "./components/Player";
-import Landscape from "./components/Landscape";
 import Records from "./components/Records";
 import Bands from "./components/Bands";
+import Lessons from "./components/Lessons";
 import References from "./components/References";
 import Shows from "./components/Shows";
 import About from "./components/About";
@@ -53,10 +50,6 @@ export default function SimanskyHero() {
   const [ready, setReady] = useState(false);
   const [lang, setLang] = useState<Lang>("csCZ");
   const [motiv, setMotiv] = useState<Motiv>(() => nactiMotiv());
-  // které album je nachystané v přehrávači; přepíná se šipkami i klikem v sekci Desky
-  const [albumIdx, setAlbumIdx] = useState(0);
-  const prevAlbum = () => setAlbumIdx((i) => (i + ALBUMS.length - 1) % ALBUMS.length);
-  const nextAlbum = () => setAlbumIdx((i) => (i + 1) % ALBUMS.length);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setReady(true));
@@ -68,7 +61,7 @@ export default function SimanskyHero() {
   // Náběh sekcí při scrollu: jakmile se prvek dostane do viewportu, dostane
   // .is-visible a zůstane odkrytý (observer ho přestane sledovat).
   useEffect(() => {
-    const targets = document.querySelectorAll<HTMLElement>(".sim-in, .sim-print-wrap");
+    const targets = document.querySelectorAll<HTMLElement>(".sim-in");
     const reveal = (el: Element) => el.classList.add("is-visible");
 
     if (!("IntersectionObserver" in window)) {
@@ -112,21 +105,15 @@ export default function SimanskyHero() {
         <Hero texts={texts} />
         <Now texts={texts} />
 
-        <Section id="poslech" title={texts.player.title} intro={texts.player.intro} wide>
-          <Player texts={texts} albumIdx={albumIdx} onPrev={prevAlbum} onNext={nextAlbum} />
-        </Section>
-
-        <Records texts={texts} lang={lang} albumIdx={albumIdx} onSelect={setAlbumIdx} />
+        <Records texts={texts} lang={lang} />
         {/* kapely hned za sólovou diskografií — patří k sobě tematicky */}
         <Bands texts={texts} lang={lang} />
+        {/* doučování patří k hudbě, proto ještě před ohlasy */}
+        <Lessons texts={texts} />
         {/* ohlasy pak jako sociální důkaz k tomu, co je nad nimi */}
         <References texts={texts} lang={lang} />
         <Shows texts={texts} lang={lang} />
         <About texts={texts} />
-
-        <Section id="krajina" title={texts.print.title} wide>
-          <Landscape caption={texts.print.caption} alt={texts.print.alt} />
-        </Section>
 
         <Contact texts={texts} />
       </Box>

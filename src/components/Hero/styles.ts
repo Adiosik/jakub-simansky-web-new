@@ -12,68 +12,84 @@ export const hero: SxProps<Theme> = {
   textAlign: "center",
   px: "clamp(1.1rem,4vw,3rem)",
   pt: "clamp(3rem,9vh,7rem)",
+  /**
+   * Hero vyplní okno až na výšku hlavičky, aby při prvním načtení nevykukovala
+   * shora další sekce. `svh` je záměr: na mobilu se počítá k menší, ustálené
+   * výšce okna, takže se nic nerozbije, až se při odrolování schová lišta
+   * prohlížeče. Odečtená hodnota je výška hlavičky — svislé odsazení
+   * (--hlavicka-pad, dvakrát) plus 28px přepínače motivu, což je v ní ten
+   * nejvyšší prvek.
+   *
+   * Odečtených 9vh navíc: nadpis další sekce leží o --mezera (13vh, dole
+   * omezeno na 5rem) pod heroem, takže se s nimi trefí jen pár desítek pixelů
+   * pod okraj okna — při načtení není vidět, ale stačí na něj krátce sjet.
+   * Ta nerovnost 9vh < --mezera platí v celém rozsahu, ve kterém se mezera
+   * pohybuje, takže sekce nevykoukne ani na velmi nízkém nebo vysokém okně.
+   */
+  minHeight: "calc(100svh - 2 * var(--hlavicka-pad) - 28px - 9vh)",
+  // volné místo, které minHeight přidá, se rozdělí nad i pod obsah — na vysokém
+  // okně by jinak celé zbylo dole a kresba by visela u horního okraje
+  justifyContent: "center",
 };
 
 /**
- * Drobná prostrkaná linka nad jménem (obor + místo).
- *
- * Na úzkých displejích je písmo i prostrkání menší a čárky po stranách kratší.
- * Nejde o kosmetiku: kdyby se text zalomil na dva řádky, čárky by zůstaly
- * svisle uprostřed vedle dvouřádkového bloku a vypadaly by odtržené. Takhle se
- * text udrží na jednom řádku a čárky sedí těsně u něj.
+ * Příjmení — obří, malými písmeny. Od chvíle, kdy stojí v hero samo bez
+ * křestního jména a bez linky nad sebou, snese výrazně větší stupeň.
  */
-export const eyebrow: SxProps<Theme> = {
-  fontFamily: "var(--font-mono)",
-  fontSize: { xs: "0.58rem", sm: "0.68rem" },
-  letterSpacing: { xs: "0.1em", sm: "0.24em" },
-  color: "var(--inkoust-45)",
-  m: 0,
-  display: "flex",
-  alignItems: "center",
-  gap: { xs: "0.5rem", sm: "0.9rem" },
-  "&::before, &::after": {
-    content: '""',
-    width: { xs: "15px", sm: "clamp(18px,5vw,42px)" },
-    height: "1px",
-    background: "var(--linka-2)",
-    display: "inline-block",
-    flex: "0 0 auto",
-  },
-};
-
-/** Jméno — obří, malými písmeny, na dva řádky až od určité šířky. */
 export const name: SxProps<Theme> = {
   fontFamily: "var(--font-display)",
   fontWeight: 500,
-  fontSize: "clamp(2.9rem,10vw,6.2rem)",
+  fontSize: "clamp(3.4rem,14vw,8.5rem)",
   lineHeight: 1.02,
   letterSpacing: "-0.02em",
   textTransform: "lowercase",
-  m: "clamp(1rem,3vw,1.8rem) 0 0",
+  m: 0,
   maxWidth: "16ch",
 };
 
-/** Portrét — velký, centrovaný, bez rámečku; jen jemná vinětace do papíru. */
+/**
+ * Kresba pod jménem — celá, bez ořezu; pozadí má průhledné.
+ * Uvnitř leží dvě barevné desky přes sebe, proto `position: relative`
+ * a pevný poměr stran: desky jsou odsazené na všechny strany a bez něj
+ * by obal neměl podle čeho určit výšku.
+ */
 export const figure: SxProps<Theme> = {
-  m: "clamp(2.6rem,7vh,4.5rem) 0 0",
+  m: "clamp(2.2rem,6vh,3.6rem) 0 0",
   width: "100%",
-  maxWidth: 720,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  "& img": {
-    width: "100%",
-    height: "auto",
-    display: "block",
-    filter: "saturate(.88) contrast(1.02)",
+  maxWidth: 620,
+  position: "relative",
+  aspectRatio: "1536 / 1024",
+  /**
+   * Kresba se vybarvuje maskou, ne obrázkem: soubor je černá linka na
+   * průhledném pozadí, a černou nejde filtrem spolehlivě převést na libovolný
+   * odstín (nemá co otáčet — chybí jí barevný tón). Maska použije tvar linky
+   * a barvu vezme z podkladu, takže se dá nastavit přesně — a hlavně jde
+   * použít dvakrát v jiné barvě, což je celý ten soutiskový efekt.
+   */
+  /**
+   * Míchání zůstává na obalu, ne na vnitřní desce. Prvek s vlastním
+   * `transform` zakládá vrstvicí kontext, takže kdyby se míchalo až uvnitř,
+   * desky by se přetiskovaly jen samy se sebou a soutisk by zmizel. Takhle
+   * se obaly míchají mezi sebou přesně jako dřív.
+   */
+  "& .sim-kresba": {
+    position: "absolute",
+    inset: 0,
+    // na světlém podkladu násobíme, na tmavém rozsvěcíme (viz --soutisk)
+    mixBlendMode: "var(--soutisk)",
+    transition: "transform .12s ease-out",
   },
+  "& .sim-kresba > *": {
+    position: "absolute",
+    inset: 0,
+    maskSize: "contain",
+    maskRepeat: "no-repeat",
+    maskPosition: "center",
+    WebkitMaskSize: "contain",
+    WebkitMaskRepeat: "no-repeat",
+    WebkitMaskPosition: "center",
+  },
+  "& .sim-kresba-a > *": { background: "var(--kresba)" },
+  "& .sim-kresba-b > *": { background: "var(--kresba-2)" },
 };
 
-export const credit: SxProps<Theme> = {
-  fontFamily: "var(--font-mono)",
-  fontStyle: "italic",
-  fontSize: "0.66rem",
-  letterSpacing: "0.08em",
-  color: "var(--inkoust-45)",
-  mt: "0.8rem",
-};
