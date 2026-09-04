@@ -91,11 +91,12 @@ body{ -webkit-font-smoothing:antialiased; }
   --zaklad-3:#F07FB0;   /* jemné zvýraznění */
   /* písmo — tmavé s hnědým nádechem, ne švestkovým */
   --inkoust:#2A2320;
-  /* .75 = 4.7:1 na růžové, tedy AA pro běžný text; .72 dávalo 4.45 a těsně
-     nedosáhlo. Drobné popisky (.62) mají 3.5:1 — AA na malý text nesplňují,
-     ale odstup od základního textu drží hierarchii. */
-  --inkoust-70:rgba(42,35,32,.75);
-  --inkoust-45:rgba(42,35,32,.62);
+  /* Mono písmo v drobném stupni působí na růžové slabě, proto je obojí výš,
+     než by se u sans-serifu čekalo: .92 dává 7,2:1 a .76 dává 4,9:1, takže
+     AA splňuje i ten drobnější. Rozdíl mezi nimi (7,2 vs 4,9) je pořád dost
+     velký na to, aby hierarchie držela. */
+  --inkoust-70:rgba(42,35,32,.92);
+  --inkoust-45:rgba(42,35,32,.76);
   --obili:#78334A;      /* akcent — na sytě růžovém pozadí musí být tmavý,
                            aby držel kontrast 4,9 (světlejší propadne pod 4,5) */
   --voda:#6B8C84;
@@ -169,8 +170,9 @@ body{ -webkit-font-smoothing:antialiased; }
   --zaklad-2:#481C36;
   --zaklad-3:#562340;
   --inkoust:#FBA8CB;
-  --inkoust-70:rgba(251,168,203,.72);
-  --inkoust-45:rgba(251,168,203,.6);
+  /* na tmavém totéž obráceně — 7,0:1 a 5,2:1 */
+  --inkoust-70:rgba(251,168,203,.88);
+  --inkoust-45:rgba(251,168,203,.72);
   --obili:#E5A3B0;   /* světlá starorůžová, kontrast 8,2 na tmavé */
   --voda:#8FB3AC;
   --linka:rgba(251,168,203,.14);
