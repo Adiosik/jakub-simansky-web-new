@@ -60,7 +60,7 @@ export const csCZ: Translation = {
     },
     lessons: {
       title: "doučování",
-      body: "Rád bych touto cestou pomohl a nabídl možnost doučování hry na akustickou kytaru. Od úplných základů až po alternativní přístup, kde ze své zkušenosti mohu nabídnout třeba teorii „open tuning“ ladění, techniky finger-picking, slide techniky na [lap-steel] havajskou kytaru nebo dobro, techniky finger-picking, claw-hammer pro banjo atd.\n\nPro více informací pište kdykoliv.",
+      body: "Rád bych touto cestou pomohl a nabídl možnost doučování hry na akustickou kytaru. Od úplných základů až po alternativní přístup, kde ze své zkušenosti mohu nabídnout třeba teorii „open tuning“ ladění, techniky finger-picking, slide techniky na lap-steel havajskou kytaru nebo dobro, claw-hammer pro banjo atd.\n\nPro více informací pište kdykoliv.",
       photoAlt: "Jakub Šimanský s banjem, vedle opřené dvě kytary",
     },
     soon: "připravuji.",

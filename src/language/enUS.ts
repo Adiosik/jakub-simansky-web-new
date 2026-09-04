@@ -60,7 +60,7 @@ export const enUS: Translation = {
     },
     lessons: {
       title: "lessons",
-      body: "I'd like to pass some of this on and offer lessons in acoustic guitar. From the very basics through to a more alternative approach, where I can draw on my own experience — the theory behind open tunings, finger-picking techniques, slide technique on lap steel or dobro, finger-picking and claw-hammer for banjo, and so on.\n\nWrite any time for more information.",
+      body: "I'd like to pass some of this on and offer lessons in acoustic guitar. From the very basics through to a more alternative approach, where I can draw on my own experience — the theory behind open tunings, finger-picking techniques, slide technique on lap steel or dobro, claw-hammer for banjo, and so on.\n\nWrite any time for more information.",
       photoAlt: "Jakub Šimanský holding a banjo, two guitars leaning against the wall beside him",
     },
     soon: "coming soon.",
