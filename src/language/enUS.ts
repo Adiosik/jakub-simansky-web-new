@@ -37,7 +37,6 @@ export const enUS: Translation = {
     concerts: {
       title: "shows",
       solo: "solo",
-      soldOut: "sold out",
       empty: "no dates announced yet. follow on social media.",
     },
     records: {

@@ -43,7 +43,6 @@ export type Translation = {
       title: string;
       /** Štítek u termínu, kde Jakub hraje sám */
       solo: string;
-      soldOut: string;
       empty: string;
     };
     records: {

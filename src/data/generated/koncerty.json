@@ -1,0 +1,16 @@
+{
+  "vygenerovano": "2026-09-04T12:47:36Z",
+  "koncerty": [
+    {
+      "date": "2026-10-01",
+      "city": "Ostrava",
+      "venue": "Provoz Hlubina"
+    },
+    {
+      "date": "2026-02-02",
+      "city": "Brno",
+      "venue": "Hlavni",
+      "band": "Šimanský Niesner"
+    }
+  ]
+}

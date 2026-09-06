@@ -3,8 +3,14 @@ name: Deploy na GitHub Pages
 on:
   push:
     branches: [main]
-  # umožní spustit nasazení ručně z záložky Actions
+  # umožní spustit nasazení ručně z záložky Actions — hodí se, když Jakub
+  # něco přidá do Sheetu a nechce čekat na noční běh
   workflow_dispatch:
+  # jednou denně, ať se propíšou změny v Sheetu. Čas je v UTC, tedy 6:00
+  # našeho letního času. GitHub časy nedodržuje na minutu a ve špičce běh
+  # odsune — u denního stahování to nevadí.
+  schedule:
+    - cron: "0 4 * * *"
 
 # oprávnění, která potřebuje actions/deploy-pages
 permissions:
@@ -34,6 +40,15 @@ jobs:
       - run: npm install --no-audit --no-fund
 
       - run: npm run lint
+
+      # Stáhne koncerty ze Sheetu do src/data/generated/koncerty.json.
+      # Schválně to není součást `npm run build` — místní build tak funguje
+      # bez přístupu k Sheetu. Když se stažení nepovede, skript nechá na disku
+      # commitnutá data a skončí v pořádku, takže nasazení běží dál; důvod
+      # vypíše do protokolu tohohle kroku.
+      - run: npm run data
+        env:
+          SHEET_URL: ${{ secrets.SHEET_URL }}
 
       # `npm run build` pouští i tsc, takže chyba typů shodí nasazení
       - run: npm run build
