@@ -33,18 +33,22 @@ export const hero: SxProps<Theme> = {
 };
 
 /**
- * Příjmení — obří, malými písmeny. Od chvíle, kdy stojí v hero samo bez
- * křestního jména a bez linky nad sebou, snese výrazně větší stupeň.
+ * Nadpis stránky — skrytý očím, ale ne odečítačům obrazovky a vyhledávačům.
+ *
+ * `display: none` ani `visibility: hidden` použít nejde, ty text schovají
+ * i před nimi. Tenhle postup ho zmenší na jeden pixel mimo výřez a ořízne,
+ * takže nezabírá místo a nikam neposouvá rozvržení.
  */
-export const name: SxProps<Theme> = {
-  fontFamily: "var(--font-display)",
-  fontWeight: 500,
-  fontSize: "clamp(3.4rem,14vw,8.5rem)",
-  lineHeight: 1.02,
-  letterSpacing: "-0.02em",
-  textTransform: "lowercase",
-  m: 0,
-  maxWidth: "16ch",
+export const jmeno: SxProps<Theme> = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  padding: 0,
+  margin: "-1px",
+  overflow: "hidden",
+  clipPath: "inset(50%)",
+  whiteSpace: "nowrap",
+  border: 0,
 };
 
 /**
