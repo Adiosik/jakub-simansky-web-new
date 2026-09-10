@@ -26,6 +26,12 @@ běží bez přístupu k Sheetu a bere commitnutá data. Ta jsou v gitu schváln
 slouží jako záloha, když stahování selže. Skript kvůli tomu **nikdy neshodí
 nasazení** — každá chyba končí návratovým kódem 0 a poznámkou v protokolu.
 
+Action stažená data **commituje zpátky**, aby záloha odpovídala poslednímu
+úspěšnému stažení. Bez toho zestárne a při první neúspěšné aktualizaci se na
+web dostanou dávno neplatné záznamy — 10. 9. 2026 se takhle objevil testovací
+koncert v Ostravě jako skutečný termín. Ty commity dělá `github-actions[bot]`
+a workflow nespouštějí, takže nevzniká smyčka.
+
 ## Nasazení
 
 Push do `main` spouští build a nasazení na https://jakubsimansky.com.

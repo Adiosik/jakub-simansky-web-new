@@ -14,7 +14,8 @@ on:
 
 # oprávnění, která potřebuje actions/deploy-pages
 permissions:
-  contents: read
+  # zápis kvůli commitu stažených dat zpátky (viz krok „Uložit stažená data")
+  contents: write
   pages: write
   id-token: write
 
@@ -49,6 +50,31 @@ jobs:
       - run: npm run data
         env:
           SHEET_URL: ${{ secrets.SHEET_URL }}
+
+      # Commitnutá data slouží jako záloha, když stahování selže. Musí proto
+      # odpovídat poslednímu úspěšnému stažení — jinak zestárnou a web jednou
+      # vydeployuje měsíce staré záznamy. Přesně to se 10. 9. 2026 stalo:
+      # v záloze zůstal testovací koncert v Ostravě a po jednom neúspěšném
+      # stažení se objevil na webu jako skutečný termín.
+      #
+      # Push tokenem GITHUB_TOKEN nespouští workflow, takže tenhle commit
+      # nevyvolá další běh a nevznikne smyčka.
+      #
+      # `continue-on-error` je tu schválně: když se commit nepovede (souběh
+      # dvou běhů, dočasná chyba), nesmí to zastavit nasazení. Data se doplní
+      # při dalším běhu.
+      - name: Uložit stažená data
+        continue-on-error: true
+        run: |
+          if git diff --quiet -- src/data/generated; then
+            echo "Data beze změny, není co ukládat."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/generated
+          git commit -m "Data ze Sheetu $(date -u +%F)"
+          git push
 
       # `npm run build` pouští i tsc, takže chyba typů shodí nasazení
       - run: npm run build
