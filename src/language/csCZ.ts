@@ -65,6 +65,13 @@ export const csCZ: Translation = {
     soon: "připravuji.",
     photos: {
       title: "fotky",
+      credit: "foto:",
+      more: "zobrazit všechny",
+      less: "zobrazit méně",
+      open: "Zvětšit fotku",
+      close: "Zavřít",
+      prev: "Předchozí fotka",
+      next: "Další fotka",
     },
     video: {
       title: "video",

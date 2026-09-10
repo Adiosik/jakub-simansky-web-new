@@ -75,6 +75,16 @@ export type Translation = {
     soon: string;
     photos: {
       title: string;
+      /** Předpona před jménem autora fotky */
+      credit: string;
+      /** Tlačítko pod galerií — rozbalit / sbalit */
+      more: string;
+      less: string;
+      /** Lightbox — popisky tlačítek pro odečítače */
+      open: string;
+      close: string;
+      prev: string;
+      next: string;
     };
     video: {
       title: string;

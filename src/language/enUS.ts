@@ -65,6 +65,13 @@ export const enUS: Translation = {
     soon: "coming soon.",
     photos: {
       title: "photos",
+      credit: "photo:",
+      more: "show all",
+      less: "show less",
+      open: "Enlarge photo",
+      close: "Close",
+      prev: "Previous photo",
+      next: "Next photo",
     },
     video: {
       title: "video",
