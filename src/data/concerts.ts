@@ -24,7 +24,24 @@ export type Gig = {
 /** Kolik termínů se na stránce ukáže. */
 export const MAX_KONCERTU = 3;
 
+/**
+ * Po kolika dnech přestaneme datům věřit.
+ *
+ * Když stahování ze Sheetu delší dobu selhává, web jede z commitnuté zálohy.
+ * Proběhlé termíny z ní vypadnou samy, ale zrušený koncert v budoucnu ne —
+ * ten by web dál nabízel, i kdyby ho Jakub z tabulky dávno smazal. Po téhle
+ * lhůtě proto raději neukážeme nic; sekce má pro ten případ vlastní text,
+ * který odkáže na sociální sítě.
+ *
+ * Tři týdny jsou kompromis: při denním stahování se na tuhle mez nedosáhne
+ * ani omylem, a zrušený termín na webu nevydrží měsíc.
+ */
+export const MAX_STARI_DNI = 21;
+
 export const CONCERTS: Gig[] = data.koncerty;
+
+/** Kdy Apps Script naposledy přečetl tabulku. */
+export const VYGENEROVANO = data.vygenerovano;
 
 /**
  * Dnešní datum jako RRRR-MM-DD podle **místního** času, ne UTC.
@@ -44,6 +61,10 @@ function dnesniDatum(ted: Date) {
  * týden nefungovalo, koncerty, které mezitím proběhly, samy zmizí.
  */
 export function nadchazejici(ted = new Date()): Gig[] {
+  const stari = (ted.getTime() - new Date(VYGENEROVANO).getTime()) / 86_400_000;
+  // NaN (rozbité datum) bereme taky jako nedůvěryhodné
+  if (!(stari < MAX_STARI_DNI)) return [];
+
   const dnes = dnesniDatum(ted);
   return CONCERTS
     .filter((gig) => gig.date >= dnes)

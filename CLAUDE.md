@@ -26,6 +26,11 @@ běží bez přístupu k Sheetu a bere commitnutá data. Ta jsou v gitu schváln
 slouží jako záloha, když stahování selže. Skript kvůli tomu **nikdy neshodí
 nasazení** — každá chyba končí návratovým kódem 0 a poznámkou v protokolu.
 
+Web navíc datům **přestane věřit po 21 dnech** (`MAX_STARI_DNI`) a ukáže
+prázdný stav místo možná neplatných termínů. Kdyby tedy koncerty ze stránky
+zmizely, první, co zkontroluj, je `vygenerovano` v `koncerty.json` — znamená
+to, že stahování delší dobu neběží.
+
 Action stažená data **commituje zpátky**, aby záloha odpovídala poslednímu
 úspěšnému stažení. Bez toho zestárne a při první neúspěšné aktualizaci se na
 web dostanou dávno neplatné záznamy — 10. 9. 2026 se takhle objevil testovací
