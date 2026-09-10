@@ -66,6 +66,29 @@ export type Album = {
 // Řazeno chronologicky od nejnovějšího — první v pořadí je výchozí pro přehrání.
 export const ALBUMS: Album[] = [
   {
+    title: "Bez Niesnera",
+    year: 2026,
+    label: { csCZ: "Vlastním nákladem ve spolupráci s KAFARA", enUS: "Self-released in collaboration with KAFARA" },
+    format: { csCZ: "CD – MC kazeta – Digital", enUS: "CD – MC cassette – Digital" },
+    description: {
+      csCZ: "Devět zhudebněných příběhů, které oscilují mezi Jakubovým dětstvím, dospíváním a současností a dohromady skládají pomníček divnostem všedního dne v českém kontextu, kde to dobré je často skryté. Od legendárních postav santusáků, přes oblíbený zákusek babičky, který už skoro nikdo nezná, až po nesmrtelné hlášky zmařených talentů.\n\nV hudbě se jasně projevuje radost a hravost, přibyly nové kombinace banja, kytary, lap steel kytary a perkusí, včetně elektroniky a field-recordingu a s nimi nejen důraz na melodii jako nosný prvek příběhu, ale také na nadsázku a ironii. Bavit se je cíl.\n\nJakub album nahrál a mixoval na jaře 2026 v Brně a v Přerově, stejně tak je autorem obalu. Na hudbě se podílel harmonikou Ján Podracký, Tomáš Niesner se postaral o finální zvuk a Oliver Quinn vyrobil design CD a MC.",
+      enUS: "Nine stories set to music, moving between Jakub's childhood, his teens and the present, together building a small monument to the oddities of ordinary Czech life, where the good is often hidden. From the legendary figures of small-town drifters, through a grandmother's favourite cake that almost nobody makes any more, to the immortal one-liners of wasted talents.\n\nThe music is openly joyful and playful: new combinations of banjo, guitar, lap steel and percussion, plus electronics and field recordings, and with them not only melody as the story's backbone but also exaggeration and irony. Having fun is the point.\n\nJakub recorded and mixed the album in spring 2026 in Brno and Přerov, and made the cover himself. Ján Podracký played accordion, Tomáš Niesner handled the final sound and Oliver Quinn designed the CD and the cassette.",
+    },
+    tracks: [
+      "Krémeš (feat. Ján Podracký)",
+      "Fredy Krakonoš",
+      "Sicflajš",
+      "Jemná",
+      "Svátek Bláznů",
+      "Neboj Neboj",
+      "Hipipi",
+      "Šustěny",
+      "Zášmyk",
+    ],
+    cover: "/covers/bez-niesnera.jpg",
+    bandcampId: "4197047008",
+  },
+  {
     title: "What Do You Mean By That",
     year: 2025,
     label: { csCZ: "Vlastním nákladem", enUS: "Self-released" },

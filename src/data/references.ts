@@ -35,6 +35,15 @@ export type Reference = {
 
 export const REFERENCES: Reference[] = [
   {
+    source: "ČRo Radio Wave — Modeláři",
+    title: "Hudební bonboniéra mikropříběhů. Jakub Šimanský natočil desku Bez Niesnera",
+    author: "Viktor Palák, Banán",
+    kind: "interview",
+    orig: "CZ",
+    date: "2026-09-09",
+    url: "https://wave.rozhlas.cz/hudebni-bonboniera-mikropribehu-jakub-simansky-natocil-desku-bez-niesnera-9642013",
+  },
+  {
     source: "Nowe Idzie Od Morza",
     title: "Fantastic 4 (March 21st)",
     author: "Jakub Knera",
