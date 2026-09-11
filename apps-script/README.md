@@ -1,13 +1,17 @@
-# Endpoint pro koncerty
+# Endpoint pro koncerty a reference
 
-Koncerty na webu se neberou ze zdrojáku, ale z Google Sheetu. Tenhle skript je
-mezičlánek: přečte tabulku a vydá ji jako JSON, který si při buildu stáhne
-GitHub Action.
+Koncerty a reference na webu se neberou ze zdrojáku, ale z Google Sheetu.
+Tenhle skript je mezičlánek: přečte obě záložky a vydá je jako JSON, který si
+při buildu stáhne GitHub Action.
+
+Každá záložka se čte samostatně — když je jedna rozbitá nebo chybí, druhá
+projde. Názvy záložek musí sedět (`koncerty`, `reference`; na velikosti
+písmen a diakritice nezáleží).
 
 Soubor `Code.gs` je **kopie**. Skript ve skutečnosti běží uvnitř Sheetu; tady
 leží proto, aby byl verzovaný a šlo se do něj podívat bez přihlašování.
 
-## Tabulka
+## Záložka „koncerty"
 
 Hlavička v prvním řádku:
 
@@ -55,8 +59,7 @@ Nabídka je jen pohodlí — skript bere jakýkoli text, takže jednorázová
 spolupráce se dá do buňky napsat i ručně.
 
 Místo „místo konání" projde i `klub` nebo `sál`, místo „interpret" i `kapela`
-nebo `s kým`. Záložka se nemusí jmenovat `koncerty` — když se nenajde, vezme
-se první v pořadí a do odpovědi se napíše, ze které se četlo.
+nebo `s kým`.
 
 Sloupce se hledají **podle názvu, ne podle pořadí**, takže se dají přehazovat
 a vkládat mezi ně vlastní poznámkové sloupce. Přejmenovat hlavičku ale nejde —
@@ -64,6 +67,26 @@ tím se sloupec ztratí.
 
 Řádek, kterému chybí něco povinného, se **přeskočí** a vypíše se v poli
 `preskoceno` i s důvodem. Zbytek tabulky projde.
+
+## Záložka „reference"
+
+| druh | médium | autor | datum | jazyk | odkaz |
+|---|---|---|---|---|---|
+| Recenze | Kapitál noviny | Michael Papcun | 16.4.2025 | SK | https://… |
+
+Sloupce jsou ve stejném pořadí, v jakém se řádek čte na webu; odkaz je na
+konci, protože vidět není — celý řádek na něj jen vede.
+
+- **médium**, **druh** a **odkaz** jsou povinné
+- **druh** z rozevírací nabídky: `Recenze`, `Rozhovor`, `Média`
+- **odkaz** musí začínat `https://` — cokoli jiného se přeskočí (odkaz
+  z tabulky jde rovnou do webu a typ `javascript:` by po kliknutí spustil kód)
+- **datum** s kalendářem jako u koncertů; na webu se ukáže jen měsíc a rok.
+  Profily médií (Full Moon, Rate Your Music) datum nemají — nech ho prázdné.
+- **jazyk** z nabídky: `CZ`, `SK`, `EN`, `PL`
+
+Pořadí řádků nehraje roli — web řadí od nejnovějšího a reference bez data
+dává na konec.
 
 ## Nasazení
 
@@ -92,6 +115,6 @@ Nestačí přepsat kód v editoru. Musí se **Implementovat → Spravovat
 implementace → tužka → Verze: Nová verze**. Bez toho běží pořád ta stará
 a build dostane stará data, aniž by co hlásilo chybu.
 
-Totéž platí obráceně: když se na webu změní, jaká pole koncerty mají nebo jak
-se sloupce jmenují, musí se upravit i tenhle skript — viz `CLAUDE.md`
-v kořeni repozitáře.
+Totéž platí obráceně: když se na webu změní, jaká pole koncerty nebo reference
+mají nebo jak se sloupce jmenují, musí se upravit i tenhle skript — viz
+`CLAUDE.md` v kořeni repozitáře.

@@ -58,8 +58,6 @@ export type Translation = {
     };
     references: {
       title: string;
-      /** Popisek odkazu na zdroj citace */
-      source: string;
       /** Druhy ohlasů — značka u položky seznamu */
       review: string;
       interview: string;
@@ -73,13 +71,13 @@ export type Translation = {
     };
     /** Text sekce, která je ohlášená, ale ještě nemá obsah */
     soon: string;
+    /** Tlačítko pod dlouhým výpisem (galerie, reference) — rozbalit / sbalit */
+    showAll: string;
+    showLess: string;
     photos: {
       title: string;
       /** Předpona před jménem autora fotky */
       credit: string;
-      /** Tlačítko pod galerií — rozbalit / sbalit */
-      more: string;
-      less: string;
       /** Lightbox — popisky tlačítek pro odečítače */
       open: string;
       close: string;

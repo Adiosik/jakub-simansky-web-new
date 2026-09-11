@@ -1,16 +1,21 @@
 /**
  * References — sekce „reference": co o Jakubovi napsala a odvysílala média.
  *
- * Ohlasy s ověřenou citací se ukážou jako výrazné karty nahoře, zbytek jako
- * soupis odkazů pod nimi. Rozdíl je záměrný: článek, jehož doslovné znění
- * nemáme ověřené, se dá poctivě doložit odkazem, ale citovat ne.
+ * Soupis řádků, celý řádek je odkaz. Řazeno od nejnovějšího; zpočátku je vidět
+ * jen pět a zbytek je za tlačítkem ve stejném stylu jako u galerie, aby se
+ * z toho s přibývajícími ohlasy nestala nekonečná tabulka.
  * Obsah je v src/data/references.ts.
  */
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import type { Translation, Lang } from "../../language";
-import { REFERENCES, type Reference } from "../../data/references";
+import { SERAZENE, type Reference } from "../../data/references";
 import Section from "../Section";
+import ShowMore from "../core/ShowMore";
 import * as styles from "./styles";
+
+/** Kolik řádků je vidět, než se tabulka rozbalí. */
+const VIDET = 5;
 
 type Props = { texts: Translation; lang: Lang };
 
@@ -23,59 +28,38 @@ function datum(iso: string, lang: Lang) {
 }
 
 export default function References({ texts, lang }: Props) {
+  const [vse, setVse] = useState(false);
   const t = texts.sections.references;
-  if (REFERENCES.length === 0) return null;
+  if (SERAZENE.length === 0) return null;
 
   const druh = (r: Reference) =>
     r.kind === "review" ? t.review : r.kind === "interview" ? t.interview : t.media;
-
-  const citovane = REFERENCES.filter(
-    (r): r is Reference & { quote: Record<Lang, string> } => Boolean(r.quote),
-  );
-  const ostatni = REFERENCES.filter((r) => !r.quote);
+  const viditelne = vse ? SERAZENE : SERAZENE.slice(0, VIDET);
 
   return (
     <Section id="reference" title={t.title} wide tight>
-      {citovane.length > 0 && (
-        <Box sx={styles.grid(citovane.length)}>
-          {citovane.map((r) => (
-            <Box component="figure" key={r.url} sx={styles.item}>
-              <Box component="span" sx={styles.mark} aria-hidden="true">„</Box>
-              <Box component="blockquote" sx={styles.quote(citovane.length === 1)}>
-                {r.quote[lang]}
-              </Box>
-              <Box component="figcaption" sx={styles.author}>
-                {r.author ?? r.source}
-                <Box sx={styles.role}>
-                  {r.author ? r.source + " · " : ""}
-                  {druh(r)}
-                  {r.date ? " · " + datum(r.date, lang) : ""}
-                </Box>
-              </Box>
-              <Box component="a" href={r.url} target="_blank" rel="noopener noreferrer" sx={styles.source}>
-                {t.source}
+      <Box component="ul" sx={styles.press}>
+        {viditelne.map((r) => (
+          <Box component="li" key={r.url} sx={styles.pressItem}>
+            {/* Bez aria-label schválně: odečítač přečte celý obsah řádku —
+                druh, médium, autora i datum — a to dva odkazy na totéž
+                médium od sebe odliší samo. */}
+            <Box component="a" href={r.url} target="_blank" rel="noopener noreferrer"
+              sx={styles.pressLink}>
+              <Box component="span" sx={styles.pressKind}>{druh(r)}</Box>
+              <Box component="span" sx={styles.pressTitle}>{r.source}</Box>
+              <Box component="span" sx={styles.pressMeta}>
+                {/* jen to, co je vyplněné — jinak by zůstaly osiřelé tečky */}
+                {[r.author, r.date && datum(r.date, lang), r.orig].filter(Boolean).join(" · ")}
               </Box>
             </Box>
-          ))}
-        </Box>
-      )}
+          </Box>
+        ))}
+      </Box>
 
-      {ostatni.length > 0 && (
-        <Box component="ul" sx={styles.press(citovane.length > 0)}>
-          {ostatni.map((r) => (
-            <Box component="li" key={r.url} sx={styles.pressItem}>
-              <Box component="a" href={r.url} target="_blank" rel="noopener noreferrer"
-                sx={styles.pressLink}>
-                <Box component="span" sx={styles.pressKind}>{druh(r)}</Box>
-                <Box component="span" sx={styles.pressTitle}>{r.source}</Box>
-                <Box component="span" sx={styles.pressMeta}>
-                  {r.author ? r.author + " · " : ""}
-                  {r.date ? datum(r.date, lang) + " · " : ""}{r.orig}
-                </Box>
-              </Box>
-            </Box>
-          ))}
-        </Box>
+      {SERAZENE.length > VIDET && (
+        <ShowMore rozbaleno={vse} onToggle={() => setVse((v) => !v)} pocet={SERAZENE.length}
+          vice={texts.sections.showAll} mene={texts.sections.showLess} />
       )}
     </Section>
   );

@@ -174,27 +174,11 @@ export const credit: SxProps<Theme> = {
 };
 
 /**
- * Tlačítko pod galerií. Ukáže se jen tam, kde je co rozbalit — na desktopu
- * se vejde víc fotek než na mobilu, takže se to rozhoduje po zlomech.
+ * Kdy se ukáže tlačítko pod galerií (vzhled má společné ShowMore). Na
+ * desktopu se vejde víc fotek než na mobilu, takže se to rozhoduje po zlomech.
  */
 export const more = (pocet: number): SxProps<Theme> => ({
-  // kde se všechny fotky vejdou, není co rozbalovat ani sbalovat
   display: poZlomech((z) => (pocet > VIDET[z] ? "inline-flex" : "none")),
-  alignItems: "center",
-  mt: "clamp(1.4rem,3vw,2rem)",
-  mx: "auto",
-  fontFamily: "var(--font-mono)",
-  fontSize: "var(--text-drobne)",
-  letterSpacing: "0.12em",
-  color: "var(--inkoust)",
-  background: "none",
-  border: "none",
-  borderBottom: "1px solid var(--linka-2)",
-  p: "0.2rem 0",
-  cursor: "pointer",
-  transition: "color .2s ease, border-color .2s ease",
-  "&:hover": { color: "var(--obili)", borderBottomColor: "var(--obili)" },
-  "&:focus-visible": { outline: "2px solid var(--obili)", outlineOffset: "4px" },
 });
 
 /** Poznámka v sekci, která je ohlášená, ale obsah teprve bude. */

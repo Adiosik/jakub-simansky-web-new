@@ -52,7 +52,6 @@ export const enUS: Translation = {
     },
     references: {
       title: "praise",
-      source: "read the full piece",
       review: "review",
       interview: "interview",
       media: "media",
@@ -63,11 +62,11 @@ export const enUS: Translation = {
       photoAlt: "Jakub Šimanský holding a banjo, two guitars leaning against the wall beside him",
     },
     soon: "coming soon.",
+    showAll: "show all",
+    showLess: "show less",
     photos: {
       title: "photos",
       credit: "photo:",
-      more: "show all",
-      less: "show less",
       open: "Enlarge photo",
       close: "Close",
       prev: "Previous photo",

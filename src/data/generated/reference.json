@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-09-11T07:36:17Z",
+  "references": [
+    {
+      "source": "Rate Your Music",
+      "kind": "review",
+      "url": "https://rateyourmusic.com/artist/jakub-simansky",
+      "orig": "EN"
+    },
+    {
+      "source": "Full Moon",
+      "kind": "media",
+      "url": "https://www.fullmoonzine.cz/interpret/jakub-simansky",
+      "orig": "CZ"
+    },
+    {
+      "source": "Nowe Idzie Od Morza",
+      "kind": "review",
+      "url": "https://noweidzieodmorza.com/16323-fantastic-4-march-21st/",
+      "date": "2025-03-21",
+      "author": "Jakub Knera",
+      "orig": "EN"
+    },
+    {
+      "source": "Kapitál noviny",
+      "kind": "review",
+      "url": "https://kapital-noviny.sk/simansky-what-do-you-mean-by-that/",
+      "date": "2025-04-16",
+      "author": "Michael Papcun",
+      "orig": "SK"
+    },
+    {
+      "source": "ČRo Vltava — ArtCafé",
+      "kind": "interview",
+      "url": "https://www.mujrozhlas.cz/artcafe/kytarista-jakub-simansky-predstavuje-zbrusu-nove-album-what-do-you-mean",
+      "date": "2025-04-17",
+      "author": "David Pomahač, Anna Mašátová",
+      "orig": "CZ"
+    },
+    {
+      "source": "Kulturní magazín UNI",
+      "kind": "review",
+      "url": "https://www.magazinuni.cz/hudba/jakub-simansky-what-do-you-mean-by-that/",
+      "date": "2025-05-01",
+      "author": "Tomáš S. Polívka",
+      "orig": "CZ"
+    },
+    {
+      "source": "ČRo Radio Wave — Modeláři",
+      "kind": "interview",
+      "url": "https://wave.rozhlas.cz/hudebni-bonboniera-mikropribehu-jakub-simansky-natocil-desku-bez-niesnera-9642013",
+      "date": "2026-09-09",
+      "author": "Viktor Palák, Banán",
+      "orig": "CZ"
+    }
+  ]
+}

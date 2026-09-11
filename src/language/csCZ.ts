@@ -52,7 +52,6 @@ export const csCZ: Translation = {
     },
     references: {
       title: "reference",
-      source: "číst celé",
       review: "recenze",
       interview: "rozhovor",
       media: "média",
@@ -63,11 +62,11 @@ export const csCZ: Translation = {
       photoAlt: "Jakub Šimanský s banjem, vedle opřené dvě kytary",
     },
     soon: "připravuji.",
+    showAll: "zobrazit všechny",
+    showLess: "zobrazit méně",
     photos: {
       title: "fotky",
       credit: "foto:",
-      more: "zobrazit všechny",
-      less: "zobrazit méně",
       open: "Zvětšit fotku",
       close: "Zavřít",
       prev: "Předchozí fotka",

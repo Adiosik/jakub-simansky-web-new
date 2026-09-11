@@ -8,12 +8,13 @@
  * velikosti okna. Skryté fotky se nevykreslí, takže je prohlížeč ani
  * nezačne stahovat, dokud se na tlačítko nekline.
  */
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import Box from "@mui/material/Box";
 import type { Translation, Lang } from "../../language";
 import type { Photo } from "../../data/gallery";
 import { asset } from "../../asset";
 import Section from "../Section";
+import ShowMore from "../core/ShowMore";
 import Lightbox from "./Lightbox";
 import * as styles from "./styles";
 
@@ -29,32 +30,6 @@ type Props = {
 export default function Photos({ id, title, intro, photos, texts, lang }: Props) {
   const [vse, setVse] = useState(false);
   const [otevrena, setOtevrena] = useState<number | null>(null);
-  const tlacitko = useRef<HTMLButtonElement | null>(null);
-  // kde na obrazovce bylo tlačítko těsně před sbalením
-  const drzetPozici = useRef<number | null>(null);
-
-  const prepni = () => {
-    if (vse && tlacitko.current) drzetPozici.current = tlacitko.current.getBoundingClientRect().top;
-    setVse((v) => !v);
-  };
-
-  /**
-   * Po sbalení vrátit tlačítko na totéž místo obrazovky.
-   *
-   * Sbalením zmizí kus stránky nad místem, kde se člověk dívá, a prohlížeč ho
-   * odhodí dolů — na mobilu až na reference. Takhle zůstane tlačítko pod
-   * prstem a nad ním poslední fotky, které zůstaly vidět.
-   *
-   * useLayoutEffect, ne useEffect: posun musí proběhnout dřív, než se sbalená
-   * stránka poprvé vykreslí, jinak by bylo vidět cuknutí. A `instant`, protože
-   * web má jinak plynulé rolování a tady by bylo znát.
-   */
-  useLayoutEffect(() => {
-    if (drzetPozici.current === null || !tlacitko.current) return;
-    const posun = tlacitko.current.getBoundingClientRect().top - drzetPozici.current;
-    window.scrollBy({ top: posun, behavior: "instant" });
-    drzetPozici.current = null;
-  }, [vse]);
   const t = texts.sections.photos;
 
   // dokola: za poslední fotkou je zase první. useCallback, ať lightbox
@@ -91,10 +66,9 @@ export default function Photos({ id, title, intro, photos, texts, lang }: Props)
         ))}
       </Box>
 
-      <Box component="button" type="button" ref={tlacitko} sx={styles.more(photos.length)}
-        aria-expanded={vse} onClick={prepni}>
-        {vse ? t.less : `${t.more} (${photos.length})`}
-      </Box>
+      <ShowMore rozbaleno={vse} onToggle={() => setVse((v) => !v)} pocet={photos.length}
+        vice={texts.sections.showAll} mene={texts.sections.showLess}
+        sx={styles.more(photos.length)} />
 
       <Lightbox photos={photos} index={otevrena} onClose={() => setOtevrena(null)}
         onMove={posun} texts={texts} lang={lang} />
