@@ -78,12 +78,12 @@ var GALLERY_FOLDER_ID = '1w7efvVKUsScCE0C0rqMyqR81I_deqe_B';
 var IMAGE_SECTIONS = ['fotky'];
 
 /**
- * Podsložky, jejichž název NENÍ jméno autora — patří do nich fotky bez
- * uvedeného fotografa. Bez téhle výjimky by skript vzal název složky za
- * autora a pod fotkou by stálo „foto: Bez autora". Porovnává se přes
- * klic(), takže nezáleží na velikosti písmen ani diakritice.
+ * Co NENÍ jméno autora, ale znamená „bez autora" — jako název podsložky
+ * i jako hodnota ve sloupci autor v záložce fotky. Bez téhle výjimky by pod
+ * fotkou stálo „foto: Bez autora". Porovnává se přes klic(), takže nezáleží
+ * na velikosti písmen ani diakritice.
  */
-var NO_AUTHOR_FOLDERS = ['bezautora', 'vlastni'];
+var NO_AUTHOR = ['bezautora', 'vlastni'];
 
 /** Co se ze složky pustí ven. Jiné soubory (PDF, dokumenty…) se ignorují. */
 var IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
@@ -159,9 +159,8 @@ function listImages(section) {
   var subfolders = root.getFolders();
   while (subfolders.hasNext()) {
     var sub = subfolders.next();
-    var name = sub.getName().trim();
-    var folderAuthor = NO_AUTHOR_FOLDERS.indexOf(klic(name)) === -1 ? name : null;
-    collectPhotos(sub, folderAuthor, meta, items);
+    if (sub.isTrashed()) continue;
+    collectPhotos(sub, sub.getName().trim(), meta, items);
   }
   items.sort(function (a, b) { return b.created.localeCompare(a.created); });
   return { items: items, preskoceno: captions.preskoceno || [] };
@@ -171,6 +170,8 @@ function collectPhotos(folder, folderAuthor, meta, items) {
   var files = folder.getFiles();
   while (files.hasNext()) {
     var file = files.next();
+    // smazaná fotka leží v koši, ale getFiles() ji ve složce vrací dál
+    if (file.isTrashed()) continue;
     if (IMAGE_TYPES.indexOf(file.getMimeType()) === -1) continue;
     var m = meta[withoutExtension(file.getName())] || {};
     var item = {
@@ -184,7 +185,7 @@ function collectPhotos(folder, folderAuthor, meta, items) {
     };
     // řádek v záložce má přednost před názvem podsložky
     var author = m.author || folderAuthor;
-    if (author) item.author = author;
+    if (author && NO_AUTHOR.indexOf(klic(author)) === -1) item.author = author;
     if (m.alt) item.alt = m.alt;
     if (m.altEn) item.altEn = m.altEn;
     if (m.crop) item.crop = m.crop;
@@ -207,7 +208,7 @@ function sectionFolder(section) {
   var subfolders = gallery.getFolders();
   while (subfolders.hasNext()) {
     var sub = subfolders.next();
-    if (klic(sub.getName()) === section) return { folder: sub };
+    if (!sub.isTrashed() && klic(sub.getName()) === section) return { folder: sub };
   }
   return { error: 'V galerii chybí složka „' + section + '".' };
 }
@@ -226,7 +227,7 @@ function servePhoto(id) {
   var unavailable = { error: 'Fotka není k dispozici.' };
   var file;
   try { file = DriveApp.getFileById(id); } catch (err) { return unavailable; }
-  if (IMAGE_TYPES.indexOf(file.getMimeType()) === -1) return unavailable;
+  if (file.isTrashed() || IMAGE_TYPES.indexOf(file.getMimeType()) === -1) return unavailable;
 
   var allowed = IMAGE_SECTIONS.some(function (section) {
     var folder = sectionFolder(section);

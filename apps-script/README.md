@@ -109,7 +109,8 @@ Jakub Šimanský - Galerie
 - **Nový fotograf = nová složka ve Fotkách**, pojmenovaná přesně tak, jak má
   jméno stát na webu (i s diakritikou) — objeví se jako „foto: …".
 - Fotky bez autora patří do složky **Bez autora** (projde i **Vlastní**),
-  případně rovnou do Fotek. U nich se jméno neukáže.
+  případně rovnou do Fotek. U nich se jméno neukáže. Totéž platí, když se
+  „Bez autora" napíše do sloupce autor v záložce fotky.
 - Jen jedna úroveň: složka ve složce fotografa se už nečte.
 - Formát je jedno (JPG, PNG, HEIC z iPhonu…), nahrávají se originály —
   zmenšení a převod na WebP obstará build. Ten z fotek zároveň smaže
