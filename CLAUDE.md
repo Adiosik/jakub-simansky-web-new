@@ -32,15 +32,16 @@ slouží jako záloha, když stahování selže. Skript kvůli tomu **nikdy nesh
 nasazení** — každá chyba končí návratovým kódem 0 a poznámkou v protokolu.
 
 Web navíc koncertům **přestane věřit po 21 dnech** (`MAX_STARI_DNI`) a ukáže
-prázdný stav místo možná neplatných termínů. U referencí tahle pojistka
-schválně **není** — starý rozhovor je pořád pravdivý, zbytečně by zmizela
-celá sekce. Prázdný seznam referencí se naopak nezapíše vůbec (skoro jistě
-jde o omylem vymazanou záložku) a zůstane záloha.
-
-Odkazy v referencích se kontrolují dvakrát — v Apps Scriptu i ve stahovacím
-skriptu — a projde jen `http(s)://`. Jdou z tabulky rovnou do `href`. Kdyby tedy koncerty ze stránky
+prázdný stav místo možná neplatných termínů. Kdyby tedy koncerty ze stránky
 zmizely, první, co zkontroluj, je `vygenerovano` v `koncerty.json` — znamená
 to, že stahování delší dobu neběží.
+
+U referencí tahle pojistka schválně **není** — starý rozhovor je pořád
+pravdivý, zbytečně by zmizela celá sekce. Prázdný seznam referencí se naopak
+nezapíše vůbec (skoro jistě jde o omylem vymazanou záložku) a zůstane záloha.
+
+Odkazy v referencích se kontrolují dvakrát — v Apps Scriptu i ve stahovacím
+skriptu — a projde jen `http(s)://`. Jdou z tabulky rovnou do `href`.
 
 Action stažená data **commituje zpátky**, aby záloha odpovídala poslednímu
 úspěšnému stažení. Bez toho zestárne a při první neúspěšné aktualizaci se na

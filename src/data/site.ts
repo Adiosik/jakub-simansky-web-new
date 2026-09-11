@@ -15,6 +15,6 @@ export const PROFILE_PHOTO = "/photos/hlava.png";
  * deska ještě nevyšla a nemá ani seznam skladeb, ani ID na Bandcampu.
  */
 /** Fotka u doučování — Jakub s banjem mezi nástroji. */
-export const LESSONS_PHOTO = "/photos/profil.png";
+export const LESSONS_PHOTO = "/photos/simansky-banjo.webp";
 
 export const NOW_COVER = "/covers/bez-niesnera.jpg";

@@ -54,7 +54,7 @@ export const FOTKY: Photo[] = [
     pozice: "70% 50%",
   },
   {
-    src: "/photos/profil.png",
+    src: "/photos/simansky-banjo.webp",
     alt: {
       csCZ: "Jakub Šimanský s banjem, vedle opřené dvě kytary",
       enUS: "Jakub Šimanský holding a banjo, two guitars leaning against the wall beside him",
