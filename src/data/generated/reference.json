@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T07:49:16Z",
+  "generatedAt": "2026-09-11T07:51:16Z",
   "references": [
     {
       "source": "Rate Your Music",
@@ -51,13 +51,6 @@
       "url": "https://wave.rozhlas.cz/hudebni-bonboniera-mikropribehu-jakub-simansky-natocil-desku-bez-niesnera-9642013",
       "date": "2026-09-09",
       "author": "Viktor Palák, Banán",
-      "orig": "CZ"
-    },
-    {
-      "source": "Test",
-      "kind": "media",
-      "url": "https://jakubsimansky.com/",
-      "author": "Daniel Šimanský",
       "orig": "CZ"
     }
   ]
