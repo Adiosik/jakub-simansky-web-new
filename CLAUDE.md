@@ -49,6 +49,27 @@ web dostanou dávno neplatné záznamy — 10. 9. 2026 se takhle objevil testova
 koncert v Ostravě jako skutečný termín. Ty commity dělá `github-actions[bot]`
 a workflow nespouštějí, takže nevzniká smyčka.
 
+## Fotky z Google Disku
+
+Fotky galerie nahrává Jakub do složky „Jakub Šimanský - Galerie/Fotky" na
+Disku simansky.dan@gmail.com, podsložka = jméno fotografa (podrobnosti
+v `apps-script/README.md`). Tentýž Apps Script vydá jejich seznam a na
+`?photo=ID` jednotlivou fotku. `npm run data` nové a změněné fotky stáhne,
+zmenší přes sharp (HEIC přes heic-decode) do `public/photos/gallery/<id>.webp`
+a seznam zapíše do `src/data/generated/photos.json`.
+
+- Fotka se stahuje, jen když je nová nebo se jí změnilo `updated` — originály
+  mají desítky MB a Apps Script má kvóty.
+- Fotky, které z Disku zmizely, skript smaže i ze složky.
+- Obojí commituje Action zpátky, stejně jako koncerty. Ručně se do toho
+  nesahá.
+- Výřez do čtverce je CSS `object-position` spočítaný v buildu
+  (`defaultPosition`), přepsat ho jde sloupcem „výřez" v záložce `fotky`.
+  Automatické hledání výřezu (sharp attention) bylo vyzkoušené a mířilo
+  vedle.
+- `servePhoto` vydá jen obrázek ze složky Fotky — endpoint je veřejný a běží
+  pod Danielovým účtem.
+
 ## Konvence kódu
 
 **Názvy v kódu anglicky** — proměnné, funkce, konstanty, typy, komponenty,

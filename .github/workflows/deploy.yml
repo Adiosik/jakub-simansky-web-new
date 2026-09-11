@@ -42,7 +42,8 @@ jobs:
 
       - run: npm run lint
 
-      # Stáhne koncerty ze Sheetu do src/data/generated/koncerty.json.
+      # Stáhne koncerty a reference ze Sheetu do src/data/generated/ a nové
+      # fotky z Disku, zmenšené, do public/photos/gallery/.
       # Schválně to není součást `npm run build` — místní build tak funguje
       # bez přístupu k Sheetu. Když se stažení nepovede, skript nechá na disku
       # commitnutá data a skončí v pořádku, takže nasazení běží dál; důvod
@@ -63,16 +64,19 @@ jobs:
       # `continue-on-error` je tu schválně: když se commit nepovede (souběh
       # dvou běhů, dočasná chyba), nesmí to zastavit nasazení. Data se doplní
       # při dalším běhu.
+      #
+      # `git status`, ne `git diff`: nová fotka je dosud nesledovaný soubor
+      # a ten `git diff` nevidí.
       - name: Uložit stažená data
         continue-on-error: true
         run: |
-          if git diff --quiet -- src/data/generated; then
+          if [ -z "$(git status --porcelain -- src/data/generated public/photos/gallery)" ]; then
             echo "Data beze změny, není co ukládat."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/generated
+          git add -A -- src/data/generated public/photos/gallery
           git commit -m "Data ze Sheetu $(date -u +%F)"
           git push
 

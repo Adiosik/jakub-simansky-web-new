@@ -1,4 +1,4 @@
-# Endpoint pro koncerty a reference
+# Endpoint pro koncerty, reference a fotky
 
 Koncerty a reference na webu se neberou ze zdrojáku, ale z Google Sheetu.
 Tenhle skript je mezičlánek: přečte obě záložky a vydá je jako JSON, který si
@@ -88,6 +88,101 @@ konci, protože vidět není — celý řádek na něj jen vede.
 Pořadí řádků nehraje roli — web řadí od nejnovějšího a reference bez data
 dává na konec.
 
+## Fotky z Disku
+
+Fotky do galerie se nenahrávají do Sheetu, ale do složky na Disku
+simansky.dan@gmail.com. Skript z ní vydá seznam a build si fotky stáhne
+a zmenší.
+
+```
+Jakub Šimanský - Galerie
+├── Fotky
+│   ├── Kristína Ozimaničová     ← složka = jméno fotografa
+│   │   ├── koncert-cargo.jpg
+│   │   └── …
+│   ├── Libor Galia
+│   └── Bez autora               ← fotky bez uvedeného fotografa
+├── Video                        (zatím se nečte, viz níž)
+└── Art                          (zatím se nečte, bude jako Fotky)
+```
+
+- **Nový fotograf = nová složka ve Fotkách**, pojmenovaná přesně tak, jak má
+  jméno stát na webu (i s diakritikou) — objeví se jako „foto: …".
+- Fotky bez autora patří do složky **Bez autora** (projde i **Vlastní**),
+  případně rovnou do Fotek. U nich se jméno neukáže.
+- Jen jedna úroveň: složka ve složce fotografa se už nečte.
+- Formát je jedno (JPG, PNG, HEIC z iPhonu…), nahrávají se originály —
+  zmenšení a převod na WebP obstará build. Ten z fotek zároveň smaže
+  metadata, včetně GPS polohy.
+- Na webu jsou fotky od naposledy nahrané.
+- Složka **Fotky** se musí jmenovat takhle (velikost písmen a diakritika
+  nevadí). Po přejmenování ji skript nenajde.
+
+**Art** bude fungovat stejně jako Fotky — složky podle autorů, originály.
+Až bude na webu, stačí ho ve skriptu připsat do `IMAGE_SECTIONS`.
+
+**Video** takhle fungovat nemůže. Soubory mají stovky MB, Apps Script vydá
+najednou zhruba 50 MB a GitHub Pages nechce soubory nad 100 MB — video by
+v každém kroku narazilo. Videa patří na YouTube (nebo Vimeo) a web je
+jen vloží; odkazy může Jakub psát do Sheetu jako reference.
+
+Nepovinná záložka **fotky** v Sheetu u konkrétní fotky přepíše autora,
+doplní popis nebo určí výřez. Páruje se podle názvu souboru bez přípony
+a stačí vyplnit, co je potřeba — ostatní buňky nech prázdné:
+
+| soubor | autor | popis | popis en | výřez |
+|---|---|---|---|---|
+| simansky-vrbaak | | Jakub opřený o zeď s graffiti | Jakub leaning against a wall | dole |
+
+- **popis** a **popis en** čte odečítač obrazovky nevidomým; bez nich se
+  fotka ohlásí jen jako „Jakub Šimanský"
+- **výřez**: galerie ukazuje fotky ve čtvercích. Fotka na výšku se ořízne
+  kousek od horního okraje (tam bývá hlava), na šířku na střed. Když to
+  u některé nesedí, napiš, která část má zůstat vidět: `nahoře`, `dole`,
+  `vlevo`, `vpravo` nebo `střed`. Hodí se z toho udělat rozevírací nabídku.
+  Celá fotka je vidět vždycky po rozkliknutí.
+
+Skript z Disku vydá jen obrázek, který leží ve Fotkách nebo ve složce
+fotografa v nich. Endpoint je veřejný a běží pod Danielovým účtem — bez téhle
+kontroly by se přes něj dal stáhnout kterýkoli soubor z Disku.
+
+### Jak se fotka dostane na web
+
+1. **Jakub** nahraje originál do Fotky → složka fotografa.
+2. **GitHub Action** běží každé ráno v 6:00, nebo ručně přes Actions → Deploy
+   na GitHub Pages → Run workflow. Zeptá se tohohle skriptu, co je ve
+   Fotkách, a dostane seznam: ID, název, autora, datum změny a řádek ze
+   záložky fotky, pokud tam je.
+3. **Nové nebo změněné fotky** si stáhne jednu po druhé přes `?photo=ID`.
+   Fotky, které už zná (stejné ID a datum změny), přeskočí — originály mají
+   desítky MB a skript má denní kvóty.
+4. **Knihovna sharp** každou staženou fotku:
+   - natočí podle údaje z foťáku (fotky z mobilu by jinak ležely na boku)
+   - zmenší na 1600 px po delší straně
+   - smaže metadata, včetně GPS polohy
+   - uloží jako WebP — z 15 MB originálu je kolem 150 kB
+
+   HEIC z iPhonu sharp sám neumí (kodek je zatížený patenty), rozbalí ho
+   předtím knihovna heic-decode.
+5. Action zmenšené fotky (`public/photos/gallery/`) a jejich seznam
+   (`src/data/generated/photos.json`) **commitne do repozitáře**, stejně
+   jako koncerty. Když se příště stažení nepovede, web postaví z posledního
+   dobrého stavu.
+6. **Web** podle seznamu poskládá galerii, od naposledy nahrané fotky.
+
+Na webu se tedy nová fotka objeví až po dalším běhu Action, ne hned po
+nahrání. Smazaná fotka zmizí stejně — při dalším běhu i z repozitáře.
+
+Když se jedna fotka nepovede (rozbitý soubor, výpadek), přeskočí se
+a v protokolu Action je důvod. Ostatní fotky, koncerty i nasazení jedou dál.
+
+**Ořez do čtverce** se s fotkou samotnou neděje — soubor zůstává celý
+a po rozkliknutí je vidět vcelku. Pro čtverec v mřížce se jen uloží, kterou
+část ukázat (CSS `object-position`): na výšku kousek od horního okraje, na
+šířku střed, nebo co je ve sloupci **výřez**. Automatické hledání výřezu
+bylo vyzkoušené, ale u dvou ze šesti fotek mířilo na okna nebo keř místo na
+Jakuba.
+
 ## Nasazení
 
 1. V Sheetu **Rozšíření → Apps Script**. Musí to být odsud — skript se tím
@@ -95,9 +190,10 @@ dává na konec.
    neměl k jaké tabulce sáhnout a spadl by na `SpreadsheetApp.getActive()`.
 2. Obsah `Code.gs` vložit do editoru (přepsat, co tam je) a **uložit**.
    Dokud se neuloží, editor v liště nenabídne žádné funkce.
-3. Vybrat funkci **nahled** a **Spustit** — poprvé si to vyžádá povolení.
-   V protokolu se objeví totéž, co pak vrátí endpoint; tímhle se dá ověřit
-   tabulka ještě před nasazením.
+3. Vybrat funkci **nahled** a **Spustit** — poprvé si to vyžádá povolení
+   (k tabulce a k Disku). V protokolu se objeví totéž, co pak vrátí endpoint;
+   tímhle se dá ověřit tabulka ještě před nasazením. Funkce **previewPhotos**
+   vypíše, co našla ve Fotkách a komu fotky připsala.
 4. **Implementovat → Nová implementace → Webová aplikace**
    - Popis: co se v téhle verzi změnilo („Přidán sloupec interpret"), ne co
      skript dělá. Popisy se v přehledu implementací řadí pod sebe a časem
