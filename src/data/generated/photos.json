@@ -1,63 +1,75 @@
 {
   "photos": [
     {
-      "id": "1GfIedzaxkUVvC7214tMPj-TyFfUL-VjY",
-      "name": "simansky-banjo.webp",
-      "src": "/photos/gallery/1GfIedzaxkUVvC7214tMPj-TyFfUL-VjY.webp",
-      "width": 852,
-      "height": 850,
-      "position": "50% 50%",
-      "updated": "2026-09-11T12:39:04.000Z"
+      "id": "14D4YU6L3mRmvD4K8RBzyt27eaOaUuMzB",
+      "name": "Šimanský photo Kristína Ozimaničová.jpg",
+      "src": "/photos/gallery/14D4YU6L3mRmvD4K8RBzyt27eaOaUuMzB.webp",
+      "width": 1600,
+      "height": 1078,
+      "position": "0% 50%",
+      "updated": "2026-09-10T15:53:30.000Z",
+      "author": "Kristína Ozimaničová",
+      "alt": "Jakub Šimanský z profilu před rozbrázděnou skalní stěnou",
+      "altEn": "Jakub Šimanský in profile in front of a ridged rock wall"
     },
     {
-      "id": "1pranD0EIBliHOP2bFB20YJiQ2wDl5WVC",
-      "name": "simansky-ozimanicova-1.webp",
-      "src": "/photos/gallery/1pranD0EIBliHOP2bFB20YJiQ2wDl5WVC.webp",
+      "id": "1d6qkquNCgqw_0KYVgdXxcjHAA1-dXC2u",
+      "name": "Šimanský photo Kristína Ozimaničová2.jpg",
+      "src": "/photos/gallery/1d6qkquNCgqw_0KYVgdXxcjHAA1-dXC2u.webp",
       "width": 1600,
       "height": 1078,
       "position": "50% 50%",
-      "updated": "2026-09-10T16:19:53.000Z",
-      "author": "Kristína Ozimaničová"
+      "updated": "2026-09-10T15:53:51.000Z",
+      "author": "Kristína Ozimaničová",
+      "alt": "Jakub Šimanský se zavřenýma očima, v kostkované šále, před skalní stěnou",
+      "altEn": "Jakub Šimanský with his eyes closed, in a checked scarf, in front of a rock wall"
     },
     {
-      "id": "1hwZ_WGEgajRhVCQ3kploV1bE-C5VSOLq",
-      "name": "simansky-vrbaak.webp",
-      "src": "/photos/gallery/1hwZ_WGEgajRhVCQ3kploV1bE-C5VSOLq.webp",
+      "id": "1Jm5CNq5UI6ZV_IXQc58JPqCeYBe-xse3",
+      "name": "profil.png",
+      "src": "/photos/gallery/1Jm5CNq5UI6ZV_IXQc58JPqCeYBe-xse3.webp",
+      "width": 865,
+      "height": 850,
+      "position": "50% 50%",
+      "updated": "2026-08-01T08:18:03.000Z",
+      "alt": "Jakub Šimanský s banjem, vedle opřené dvě kytary",
+      "altEn": "Jakub Šimanský holding a banjo, two guitars leaning against the wall beside him"
+    },
+    {
+      "id": "1oH5dgFEsJOntoQf24PVZp3xHwFI3pGj8",
+      "name": "Jakub Simansky foto Vrbaak.jpg",
+      "src": "/photos/gallery/1oH5dgFEsJOntoQf24PVZp3xHwFI3pGj8.webp",
       "width": 1067,
       "height": 1600,
-      "position": "50% 20%",
-      "updated": "2026-09-10T16:33:56.000Z",
-      "author": "Vrbaak"
+      "position": "50% 100%",
+      "updated": "2026-09-11T13:33:33.000Z",
+      "author": "Vrbaak",
+      "alt": "Černobílá fotka: Jakub Šimanský opřený o betonovou zeď s graffiti, v ruce pouzdro od kytary",
+      "altEn": "Black-and-white photo: Jakub Šimanský leaning against a concrete wall with graffiti, holding a guitar case"
     },
     {
-      "id": "1iWVLdVhsxcOylq3FN1srWYgtYyfBCMn_",
-      "name": "simansky-galia.webp",
-      "src": "/photos/gallery/1iWVLdVhsxcOylq3FN1srWYgtYyfBCMn_.webp",
+      "id": "1q8jj7Fa2UCvH8RMyd8sIAHM6j3R_TRC8",
+      "name": "jakub simansky foto kristyna ozimanicova (4).jpg",
+      "src": "/photos/gallery/1q8jj7Fa2UCvH8RMyd8sIAHM6j3R_TRC8.webp",
+      "width": 1600,
+      "height": 1078,
+      "position": "50% 50%",
+      "updated": "2026-09-10T16:30:50.000Z",
+      "author": "Kristína Ozimaničová",
+      "alt": "Jakub Šimanský v modré čepici hledí vzhůru, ruce sepjaté, v lese",
+      "altEn": "Jakub Šimanský in a blue beanie looking up, hands clasped, in a forest"
+    },
+    {
+      "id": "1Gm7xesZH5ZE7Bfkv4MTIsp5v2rM6FeXY",
+      "name": "Jakub Simansky foto Libor Galia.jpg",
+      "src": "/photos/gallery/1Gm7xesZH5ZE7Bfkv4MTIsp5v2rM6FeXY.webp",
       "width": 1065,
       "height": 1600,
       "position": "50% 20%",
-      "updated": "2026-09-10T16:33:58.000Z",
-      "author": "Libor Galia"
-    },
-    {
-      "id": "1orrD2GsuxAsToqmtWDMb1nDuxO-3UlJp",
-      "name": "simansky-ozimanicova-2.webp",
-      "src": "/photos/gallery/1orrD2GsuxAsToqmtWDMb1nDuxO-3UlJp.webp",
-      "width": 1600,
-      "height": 1078,
-      "position": "50% 50%",
-      "updated": "2026-09-10T16:19:54.000Z",
-      "author": "Kristína Ozimaničová"
-    },
-    {
-      "id": "1nqgfAc3KgObMFHcRrFJmdCgHjM-aaNem",
-      "name": "simansky-ozimanicova-4.webp",
-      "src": "/photos/gallery/1nqgfAc3KgObMFHcRrFJmdCgHjM-aaNem.webp",
-      "width": 1600,
-      "height": 1078,
-      "position": "50% 50%",
-      "updated": "2026-09-10T16:33:57.000Z",
-      "author": "Kristína Ozimaničová"
+      "updated": "2026-09-11T12:46:38.000Z",
+      "author": "Libor Galia",
+      "alt": "Jakub Šimanský v modré košili před keřem s červeným podzimním listím",
+      "altEn": "Jakub Šimanský in a blue shirt in front of a bush with red autumn leaves"
     }
   ]
 }
