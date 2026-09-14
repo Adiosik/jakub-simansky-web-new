@@ -41,7 +41,7 @@ export const csCZ: Translation = {
     },
     records: {
       title: "alba",
-      readMore: "číst o albu",
+      readMore: "o albu",
     },
     contact: {
       title: "kontakt",

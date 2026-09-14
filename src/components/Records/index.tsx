@@ -4,7 +4,7 @@
  * popis a skladby. Název je nahoře, aby bylo jasné, ke které desce obal patří,
  * ještě než se k němu doroluje.
  *
- * Popis a skladby jsou schované za tlačítkem „číst o albu". Rozepsané pod
+ * Popis a skladby jsou schované za tlačítkem „o albu". Rozepsané pod
  * každou deskou dělaly ze sekce stěnu textu; takhle je na první pohled vidět
  * jen to hlavní.
  *

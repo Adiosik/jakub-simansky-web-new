@@ -41,7 +41,7 @@ export const enUS: Translation = {
     },
     records: {
       title: "albums",
-      readMore: "read about the album",
+      readMore: "about the album",
     },
     contact: {
       title: "contact",

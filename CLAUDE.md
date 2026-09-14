@@ -100,4 +100,6 @@ Na co si při něm dát pozor:
 ## Nasazení
 
 Push do `main` spouští build a nasazení na https://jakubsimansky.com.
-**Push vždy nech schválit Danielem**, nepouštěj ho z vlastní iniciativy.
+**Commit i push vždy nech schválit Danielem**, nepouštěj je z vlastní
+iniciativy. Změny nech v pracovní kopii, dokud je Daniel neodsouhlasí.
+Jeho „pushni" / „pošli na github" znamená obojí najednou — commit i push.
