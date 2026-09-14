@@ -47,6 +47,8 @@ export type Translation = {
     };
     records: {
       title: string;
+      /** tlačítko, které rozbalí popis alba */
+      readMore: string;
     };
     contact: {
       title: string;

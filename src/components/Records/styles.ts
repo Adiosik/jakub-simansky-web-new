@@ -36,6 +36,7 @@ export const cover: SxProps<Theme> = {
   ...SIRKA,
   display: "block",
   aspectRatio: "1 / 1",
+  mt: "1.6rem",
   overflow: "hidden",
   background: "var(--zaklad-2)",
   // jemný stín pod obalem — nadlehčí desku nad podkladem, při najetí se prohloubí
@@ -65,7 +66,7 @@ export const title: SxProps<Theme> = {
   fontWeight: 500,
   lineHeight: 1.3,
   color: "var(--inkoust)",
-  m: "1.6rem 0 0",
+  m: 0,
   maxWidth: "30ch",
 };
 
@@ -75,6 +76,16 @@ export const meta: SxProps<Theme> = {
   letterSpacing: "0.16em",
   color: "var(--inkoust-45)",
   mt: "0.55rem",
+};
+
+/** Rozbalovací část — popis a skladby pod sebou, vycentrované jako zbytek desky. */
+export const about: SxProps<Theme> = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "100%",
+  // `display: flex` by jinak přebilo atribut hidden a popis by byl vidět i sbalený
+  "&[hidden]": { display: "none" },
 };
 
 export const desc: SxProps<Theme> = {

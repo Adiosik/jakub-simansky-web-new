@@ -1,6 +1,7 @@
 /**
  * ShowMore — tlačítko „zobrazit všechny / zobrazit méně" pod dlouhým výpisem.
- * Používá ho galerie i reference, aby vypadalo a chovalo se všude stejně.
+ * Používá ho galerie, reference i popis alba, aby vypadalo a chovalo se všude
+ * stejně.
  *
  * Po sbalení drží tlačítko na stejném místě obrazovky. Sbalením zmizí kus
  * stránky nad místem, kam se člověk dívá, a prohlížeč by ho jinak odhodil
@@ -16,14 +17,16 @@ type Props = {
   rozbaleno: boolean;
   onToggle: () => void;
   /** celkový počet položek, ukáže se v závorce u „zobrazit všechny" */
-  pocet: number;
+  pocet?: number;
   vice: string;
   mene: string;
+  /** id obsahu, který tlačítko rozbaluje — odečítač pak ohlásí, k čemu patří */
+  controls?: string;
   /** doplňkové styly — typicky kdy se má tlačítko ukázat */
   sx?: SxProps<Theme>;
 };
 
-export default function ShowMore({ rozbaleno, onToggle, pocet, vice, mene, sx }: Props) {
+export default function ShowMore({ rozbaleno, onToggle, pocet, vice, mene, controls, sx }: Props) {
   const ref = useRef<HTMLButtonElement | null>(null);
   // kde na obrazovce bylo tlačítko těsně před sbalením
   const drzetPozici = useRef<number | null>(null);
@@ -44,9 +47,9 @@ export default function ShowMore({ rozbaleno, onToggle, pocet, vice, mene, sx }:
   }, [rozbaleno]);
 
   return (
-    <Box component="button" type="button" ref={ref} aria-expanded={rozbaleno} onClick={klik}
-      sx={[styles.tlacitko, ...(Array.isArray(sx) ? sx : [sx])]}>
-      {rozbaleno ? mene : `${vice} (${pocet})`}
+    <Box component="button" type="button" ref={ref} aria-expanded={rozbaleno} aria-controls={controls}
+      onClick={klik} sx={[styles.tlacitko, ...(Array.isArray(sx) ? sx : [sx])]}>
+      {rozbaleno ? mene : pocet === undefined ? vice : `${vice} (${pocet})`}
     </Box>
   );
 }
