@@ -56,10 +56,3 @@ Kód je pod MIT (viz [LICENSE](LICENSE)). **Obsah pod ni nespadá** — hudba, t
 fotky, obaly desek a citované ohlasy zůstávají autorům a nesmí se bez svolení
 použít. Písma jsou hostovaná u nás (ne z Google Fonts, kvůli GDPR) a mají vlastní
 licenci SIL OFL 1.1, viz [src/assets/fonts/OFL.txt](src/assets/fonts/OFL.txt).
-
-## Než web půjde ven
-- `src/data/references.ts` — **ohlasy jsou zatím vymyšlená výplň** kvůli
-  rozvržení, podepsaná `Jméno Příjmení` / `Název klubu`. Nahradit skutečnými
-  citacemi a jmény.
-- `src/data/albums.ts` — nejnovější deska má `label: "—"`, doplnit vydavatelství.
-- `src/language/*` — `hero.photoCredit` je obecný, doplnit autora fotky.
