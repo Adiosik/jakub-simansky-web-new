@@ -4,7 +4,7 @@ Formát dle [Keep a Changelog](https://keepachangelog.com/cs/1.1.0/),
 verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 
 > Před každým commitem zapiš změny do sekce `[Unreleased]` (Added / Changed / Fixed / Removed).
-> Při pushi do `main` se z `[Unreleased]` stane nová verze s datem (skill `project-release`).
+> Po uceleném bloku nasazeném do produkce se z `[Unreleased]` stane nová verze s datem (skill `project-release`).
 > Běžné stažení dat ze Sheetu (denní běh) do CHANGELOGu nepatří.
 
 ## [Unreleased]
