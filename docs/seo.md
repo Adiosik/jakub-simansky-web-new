@@ -54,14 +54,18 @@ PageSpeed Insights, mobil, měřeno přes https://pagespeed.web.dev/ (API bez kl
 |---|---|---|---|---|---|---|
 | 2026-11-19 | 72 | 6,1 s | 180 ms | 0 | 3,8 MB | před úpravami; LCP prvek je text v hlavičce, stránka je čistě klientský React |
 | 2026-11-19 | 91 | 2,3 s | 150 ms | 0 | — | po WebP + `inert` (commit 9538303); přístupnost 100; Speed Index 6,1 s (dřív 4,6 s) — jedno měření, zbývá „nepoužívaný JS“ 770 KiB (hlavně Bandcamp) |
+| 2026-11-19 | 96 | 2,3 s | 170 ms | 0 | — | po přehrávačích Bandcampu (commit 1d55c0c); FCP 0,8 s, Speed Index 1,2 s; „nepoužívaný JS“ 40 KiB (dřív 770) |
 
 - [x] Obrázky ve WebP: maska hlavy `hlava.webp` (alfa kanál beze ztráty, shodný s PNG na pixel, takže
       animace soutisku je stejná), obaly alb WebP v původní velikosti, `bez-niesnera` zmenšen z 3072 na
       1280 px. Dohromady 2,5 MB → 0,26 MB. `hlava.png` zůstává v repozitáři jako zdroj pro ikony
       a `og-image`, web ho nenačítá. (2026-11-19)
 - [x] Zavřené mobilní menu je `inert` — jeho odkazy nejdou vybrat klávesnicí. (2026-11-19)
-- [ ] Přehrávače Bandcampu načítat později (`src/components/Album/Embed.tsx`, předstih 800 px) — 3 iframe
-      ≈ 1,6 MB a ~0,9 s hlavního vlákna. UI/UX doporučuje menší předstih / načtení po `load`.
+- [x] Přehrávače Bandcampu (≈ 1,6 MB a ~0,9 s hlavního vlákna) se stahují až po první interakci nebo
+      800 px před výřezem, pak ve frontě; do načtení průhledné místo. Testy: Slow/Fast 4G, žádný prázdný
+      přehrávač. (UI/UX, 2026-11-19)
+- [ ] Zvážit větší předstih (např. 1500 px): na Slow 4G při pomalém scrollu čeká druhé album ve výřezu
+      ~1,7 s. Okrajový případ — Daniel 2026-11-19: vynechat, rychlost stačí.
 - [ ] Předvykreslení stránky při buildu — hlavní lék na LCP, souvisí se „statickým obsahem pro boty“ výše.
 - GitHub Pages drží cache 10 min, nastavit nejde.
 
