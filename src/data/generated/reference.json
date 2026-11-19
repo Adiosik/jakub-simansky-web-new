@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T12:34:46Z",
+  "generatedAt": "2026-11-19T12:25:19Z",
   "references": [
     {
       "source": "Rate Your Music",
@@ -51,6 +51,14 @@
       "url": "https://wave.rozhlas.cz/hudebni-bonboniera-mikropribehu-jakub-simansky-natocil-desku-bez-niesnera-9642013",
       "date": "2026-09-09",
       "author": "Viktor Palák, Banán",
+      "orig": "CZ"
+    },
+    {
+      "source": "Deník Alarm",
+      "kind": "interview",
+      "url": "https://denikalarm.cz/2026/11/nechat-veci-jen-tak-plynout-jakub-simansky-ve-sve-hudbe-ozivuje-malomestsky-folklor/",
+      "date": "2026-11-03",
+      "author": "Karel Veselý, Nora Třísková",
       "orig": "CZ"
     }
   ]
