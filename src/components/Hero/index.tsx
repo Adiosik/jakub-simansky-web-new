@@ -24,7 +24,7 @@ export default function Hero({ texts }: { texts: Translation }) {
 
   return (
     <Box component="section" id="top" sx={styles.hero}>
-      <Box component="h1" sx={styles.jmeno}>šimanský</Box>
+      <Box component="h1" sx={styles.jmeno}>Jakub Šimanský</Box>
 
       <Box component="figure" className="sim-anim d1" sx={styles.figure} ref={ref}
         onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>

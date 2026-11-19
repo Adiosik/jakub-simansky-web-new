@@ -16,6 +16,7 @@ verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 - `docs/seo.md` — vyhledatelnost: pravidla, úkoly mimo web, měsíční kontrola.
 
 ### Changed
+- SEO: skrytý hlavní nadpis `h1` je „Jakub Šimanský“ místo „šimanský“; fotky v mřížce galerie mají popisek (alt) pro vyhledávání obrázků.
 - Titulek stránky: „Jakub Šimanský — kytarista, americký primitivismus“.
 
 ## [1.0.0] — 2026-11-05

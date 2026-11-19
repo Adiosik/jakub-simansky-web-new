@@ -56,7 +56,9 @@ export default function Photos({ id, title, intro, photos, texts, lang }: Props)
                 i klávesnicí a odečítač ohlásí, že se dá otevřít */}
             <Box component="button" type="button" sx={styles.zoom}
               aria-label={`${t.open}: ${photo.alt[lang]}`} onClick={() => setOtevrena(i)}>
-              <Box component="img" src={asset(photo.src)} alt="" loading="lazy"
+              {/* alt kvůli vyhledávání obrázků; odečítač ho číst nebude, název
+                  tlačítka dává aria-label výš, takže popis nezazní dvakrát */}
+              <Box component="img" src={asset(photo.src)} alt={photo.alt[lang]} loading="lazy"
                 sx={{ ...styles.photo, objectPosition: photo.pozice ?? "50% 50%" }} />
             </Box>
             {photo.autor && (

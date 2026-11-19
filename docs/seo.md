@@ -41,8 +41,8 @@ jména 1200 × 630 (a upravit `og:image:alt`).
       Nebylo uděláno: obsah by před načtením JS krátce problikl (vliv na vzhled). Rozhodnout s UI/UX.
 - [ ] **Anglická verze na vlastní adrese** (`/en/` + `hreflang`) — dnes vyhledávače znají jen CZ.
       Mění chování přepínače jazyka → UI/UX.
-- [ ] `h1` je „šimanský“ (vizuálně skrytý) — pro vyhledávače lepší „Jakub Šimanský“. Převzalo UI/UX (2026-11-19), čeká na Danielův souhlas.
-- [ ] Fotky v mřížce galerie mají `alt=""` (popis jen v lightboxu) — pro Google Obrázky dát alt i v mřížce. Převzalo UI/UX (2026-11-19), čeká na Danielův souhlas.
+- [x] `h1` „Jakub Šimanský“ (vizuálně skrytý, dřív „šimanský“) — UI/UX (2026-11-19).
+- [x] Fotky v mřížce galerie mají alt (stejný jako v lightboxu), tlačítko si drží vlastní aria-label — UI/UX (2026-11-19).
 - [x] Ikony webu (`favicon.ico` 48 × 48, `apple-touch-icon`, manifest) — dělá UI/UX (2026-11-19).
 - [ ] Výkon: PageSpeed na mobilu (bundle 350 kB JS) — změřit.
 
