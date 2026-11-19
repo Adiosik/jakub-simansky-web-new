@@ -19,6 +19,7 @@ verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 - SEO: skrytý hlavní nadpis `h1` je „Jakub Šimanský“ místo „šimanský“; fotky v mřížce galerie mají popisek (alt) pro vyhledávání obrázků.
 - Titulek stránky: „Jakub Šimanský — kytarista, americký primitivismus“.
 - Rychlost: obrázky ve WebP — maska kresby hlavy (`hlava.webp`, alfa beze ztráty) a obaly alb, obal „Bez Niesnera“ zmenšen na 1280 px; obrázky mají místo 2,5 MB 0,26 MB, vzhled beze změny.
+- Rychlost: přehrávače Bandcampu se stahují až po první interakci (scroll, dotyk, klik, klávesa) nebo 800 px před výřezem, ne 1,2 s po načtení; po interakci jeden po druhém v pořadí na stránce, ať první nesdílí přenos s ostatními. Místo bílého pruhu je před načtením průhledná plocha v barvě stránky.
 
 ### Fixed
 - Přístupnost: zavřené mobilní menu je `inert`, jeho odkazy už nejdou vybrat klávesnicí.

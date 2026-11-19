@@ -56,7 +56,7 @@ export default function Records({ texts, lang }: Props) {
             <Box sx={styles.meta}>{album.year} · {text(album.label, lang)}</Box>
             {album.format && <Box sx={styles.format}>({text(album.format, lang)})</Box>}
             <Box sx={styles.cover}><AlbumCover album={album} index={i} /></Box>
-            <Embed album={album} sx={{ ...styles.SIRKA, mt: "1.4rem" }} />
+            <Embed album={album} order={i} sx={{ ...styles.SIRKA, mt: "1.4rem" }} />
             <About id={`album-${i}-about`} texts={texts}>
               {album.description && <Box sx={styles.desc}>{album.description[lang]}</Box>}
               <Box sx={styles.tracks}>

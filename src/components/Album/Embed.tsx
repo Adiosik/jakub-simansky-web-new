@@ -13,10 +13,13 @@
  * uživatel dojel. Řešíme to třemi věcmi dohromady:
  *  1. místo je od začátku vyhrazené (obal má pevnou výšku), takže se stránka
  *     po načtení nikam neposune;
- *  2. stahovat se začne, až je album 800 px od výřezu — do chvíle, než se na
- *     něj dojede, je obvykle hotovo;
- *  3. hotový rámeček se prolne, ne že by cvakl.
- * Zároveň tím pořád neplatíme za tři cizí `iframe` hned při načtení stránky.
+ *  2. stahovat se začne, až je album 800 px od výřezu, nebo při první
+ *     interakci uživatele (viz níž) — do chvíle, než se na něj dojede, je
+ *     obvykle hotovo;
+ *  3. hotový rámeček se prolne, ne že by cvakl. Do té doby je na jeho místě
+ *     průhledná plocha v barvě stránky, žádný bílý pruh.
+ * Zároveň tím neplatíme za tři cizí `iframe` (kód Bandcampu i jejich Google
+ * Tag Manager, dohromady asi 1,6 MB) hned při načtení stránky.
  */
 import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
@@ -38,10 +41,35 @@ const PREDSTIH = 800;
 const BGCOL = "fba8cb";
 const LINKCOL = "78334a";
 
+/**
+ * Pořadí stahování po první interakci. Tři přehrávače najednou si na pomalé
+ * síti (mobil, 4G) dělí přenos a každý se objeví až po mnoha vteřinách —
+ * včetně toho, ke kterému uživatel právě dojel. Proto jdou za sebou v pořadí
+ * na stránce: další začne, až je předchozí načtený (nebo po STAGGER_MAX ms).
+ * Přehrávač blízko výřezu frontu přeskočí (spouštěč s předstihem níž).
+ */
+const STAGGER_MAX = 4000;
+const loadedSignals = new Map<number, () => void>();
+const loadedPromises = new Map<number, Promise<void>>();
+function loaded(order: number) {
+  if (!loadedPromises.has(order)) {
+    loadedPromises.set(order, new Promise<void>((resolve) => loadedSignals.set(order, resolve)));
+  }
+  return loadedPromises.get(order)!;
+}
+const markLoaded = (order: number) => { loaded(order); loadedSignals.get(order)!(); };
+
 const embedSrc = (id: string) =>
   `https://bandcamp.com/EmbeddedPlayer/album=${id}/size=large/bgcol=${BGCOL}/linkcol=${LINKCOL}/artwork=none/tracklist=false/`;
 
-export default function Embed({ album, sx }: { album: Album; sx?: SxProps<Theme> }) {
+type Props = {
+  album: Album;
+  /** pořadí alba na stránce — určuje frontu stahování po první interakci */
+  order: number;
+  sx?: SxProps<Theme>;
+};
+
+export default function Embed({ album, order, sx }: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [stahovat, setStahovat] = useState(false);
   const [nacteno, setNacteno] = useState(false);
@@ -78,30 +106,49 @@ export default function Embed({ album, sx }: { album: Album; sx?: SxProps<Theme>
   }, [stahovat]);
 
   /**
-   * Druhý spouštěč: chvíli po dotažení stránky se doplní i alba, na která
-   * se ještě nedojelo. Samotný předstih před výřezem na mobilu nestačil —
-   * displej je nízký, takže 800 px je sotva screen a půl, a při rychlém
-   * scrollu uživatel dojede k přehrávači dřív, než se stihne stáhnout.
-   * Čeká se na `load`, aby si to nekonkurovalo s fonty a obaly alb.
+   * Druhý spouštěč: první interakce uživatele (scroll, dotyk, klik, klávesa)
+   * stáhne všechna alba, i ta, ke kterým se ještě nedojelo — za sebou podle
+   * fronty výš, ať první přehrávač nesdílí přenos s ostatními. Samotný
+   * předstih před výřezem na mobilu nestačil — displej je nízký, 800 px je
+   * sotva screen a půl a při rychlém scrollu by uživatel dojel k přehrávači
+   * dřív, než se stáhne. Dřív to byl časovač 1,2 s po `load`; ten ale stahoval
+   * i u návštěvníka, který jen kouká na úvod, a měření rychlosti (PageSpeed)
+   * ho započítalo. Klik v menu na „hudba → alba“ je sám interakce, plynulý
+   * scroll k albům pak dá přehrávačům zhruba vteřinu náskok.
    */
   useEffect(() => {
     if (stahovat) return;
-    let id = 0;
-    const naplanuj = () => { id = window.setTimeout(() => setStahovat(true), 1200); };
-    if (document.readyState === "complete") naplanuj();
-    else window.addEventListener("load", naplanuj, { once: true });
-    return () => {
-      clearTimeout(id);
-      window.removeEventListener("load", naplanuj);
+    const START_EVENTS = ["scroll", "wheel", "pointerdown", "touchstart", "keydown"] as const;
+    let cancelled = false;
+    let timer = 0;
+    const start = () => {
+      START_EVENTS.forEach((ev) => window.removeEventListener(ev, start));
+      if (order === 0) { setStahovat(true); return; }
+      // čeká na předchozí album ve frontě, nejdéle STAGGER_MAX
+      const go = () => { if (!cancelled) setStahovat(true); };
+      loaded(order - 1).then(go);
+      timer = window.setTimeout(go, STAGGER_MAX);
     };
-  }, [stahovat]);
+    START_EVENTS.forEach((ev) => window.addEventListener(ev, start, { passive: true }));
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+      START_EVENTS.forEach((ev) => window.removeEventListener(ev, start));
+    };
+  }, [stahovat, order]);
 
   /**
    * Pojistka k `onLoad`. U cizího rámečku se na tu událost nedá spolehnout
    * a kdyby nepřišla, zůstal by přehrávač načtený, ale neviditelný. Po dvou
    * vteřinách ho odkryjeme tak jako tak — to je horší varianta než prolnutí,
-   * ale pořád lepší než prázdné bílé pole.
+   * ale pořád lepší než prázdné místo.
    */
+  // album bez přehrávače frontu nedrží; jinak ji pouští až skutečné
+  // `onLoad` (pojistka 2 s jen odkrývá, frontu hlídá STAGGER_MAX)
+  useEffect(() => {
+    if (!album.bandcampId) markLoaded(order);
+  }, [order, album.bandcampId]);
+
   useEffect(() => {
     if (!stahovat || nacteno) return;
     const id = setTimeout(() => setNacteno(true), 2000);
@@ -116,10 +163,11 @@ export default function Embed({ album, sx }: { album: Album; sx?: SxProps<Theme>
       sx={{
         width: `min(100%, ${EMBED_WIDTH}px)`,
         height: EMBED_HEIGHT,
-        // Podklad je bílý schválně, i v tmavém režimu: přehrávač sám bílý je,
-        // takže s jakoukoli jinou barvou by po načtení blikl. Takhle na místě
-        // od začátku stojí ta plocha, která tam nakonec bude.
-        background: "#fff",
+        // Podklad průhledný, tedy v barvě stránky ve světlém i tmavém režimu.
+        // Dřív tu byla bílá (přehrávač sám bílý je), jenže pak na stránce
+        // svítil prázdný bílý pruh, dokud se přehrávač nenačetl; bílá plocha
+        // teď naroste prolnutím až s ním.
+        background: "transparent",
         ...sx,
       }}
     >
@@ -136,8 +184,9 @@ export default function Embed({ album, sx }: { album: Album; sx?: SxProps<Theme>
           }}
           src={embedSrc(album.bandcampId)}
           title={`${album.title} — Bandcamp`}
-          loading="lazy"
-          onLoad={() => setNacteno(true)}
+          // bez loading="lazy": kdy stahovat, řídí spouštěče výš — prohlížeč
+          // by jinak album dál od výřezu odložil a „všechna naráz“ by neplatilo
+          onLoad={() => { setNacteno(true); markLoaded(order); }}
           allow="autoplay; encrypted-media"
         />
       )}
