@@ -1,5 +1,28 @@
-import { defineConfig } from 'vite'
+import { defineConfig, runnerImport, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
+
+/**
+ * Vloží do <head> strukturovaná data (JSON-LD) pro vyhledávače — osobu,
+ * desky a nadcházející koncerty. Počítá se při každém buildu z dat webu
+ * (src/seo/structuredData.ts); stránku samotnou to nijak nemění.
+ * runnerImport, protože soubor je TypeScript s importy dat webu.
+ */
+function structuredData(): Plugin {
+  return {
+    name: 'structured-data',
+    async transformIndexHtml() {
+      const { module } = await runnerImport<{ structuredDataJson: () => string }>(
+        './src/seo/structuredData.ts',
+      )
+      return [{
+        tag: 'script',
+        attrs: { type: 'application/ld+json' },
+        children: module.structuredDataJson(),
+        injectTo: 'head',
+      }]
+    },
+  }
+}
 
 // https://vite.dev/config/
 // Web běží na vlastní doméně https://jakubsimansky.com/, tedy z kořene —
@@ -10,5 +33,5 @@ import react from '@vitejs/plugin-react'
 // nastavené na ni — v historii gitu to je.)
 export default defineConfig({
   base: '/',
-  plugins: [react()],
+  plugins: [react(), structuredData()],
 })

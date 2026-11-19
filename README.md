@@ -49,7 +49,9 @@ navázané na `BASE_URL`, takže přežijí i případný návrat do podcesty.
 - `src/data/*` — obsah (alba, koncerty, reference, sítě, kontakt)
 - `src/language/*` — překlady CZ/EN
 - `src/index.css` — design tokeny (barvy), reset a CSS animace
-- `public/` — obrázky (`covers/`, `photos/`)
+- `src/seo/structuredData.ts` — strukturovaná data pro vyhledávače (vkládá je při buildu plugin ve `vite.config.ts`)
+- `public/` — obrázky (`covers/`, `photos/`), `robots.txt`, `sitemap.xml`, `llms.txt`, `og-image.jpg`
+- `docs/seo.md` — vyhledatelnost: pravidla, co je hotové, co musí udělat Daniel / Jakub, měsíční kontrola
 
 ## Licence
 Kód je pod MIT (viz [LICENSE](LICENSE)). **Obsah pod ni nespadá** — hudba, texty,

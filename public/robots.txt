@@ -1,0 +1,5 @@
+# Vše povoleno — i vyhledávací a AI boti (viz docs/seo.md).
+User-agent: *
+Allow: /
+
+Sitemap: https://jakubsimansky.com/sitemap.xml

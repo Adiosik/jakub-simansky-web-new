@@ -11,6 +11,12 @@ verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 
 ### Added
 - Ikona webu z Jakubovy kresby hlavy (vektor): růžová, v tmavém motivu fialová a přepíná se s ním; `.ico` pro starší prohlížeče, ikona na plochu telefonu se soutiskem a `site.webmanifest`.
+- SEO: popis stránky, Open Graph a náhledový obrázek pro sdílení (`og-image.jpg`), kanonická adresa, `robots.txt`, `sitemap.xml`, `llms.txt`.
+- SEO: strukturovaná data (JSON-LD) — osoba s odkazy na profily a kapely, desky a nadcházející koncerty; generují se při buildu z dat webu.
+- `docs/seo.md` — vyhledatelnost: pravidla, úkoly mimo web, měsíční kontrola.
+
+### Changed
+- Titulek stránky: „Jakub Šimanský — kytarista, americký primitivismus“.
 
 ## [1.0.0] — 2026-11-05
 
