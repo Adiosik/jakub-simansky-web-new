@@ -53,7 +53,7 @@ PageSpeed Insights, mobil, měřeno přes https://pagespeed.web.dev/ (API bez kl
 | Datum | Výkon | LCP | TBT | CLS | Velikost | Poznámka |
 |---|---|---|---|---|---|---|
 | 2026-11-19 | 72 | 6,1 s | 180 ms | 0 | 3,8 MB | před úpravami; LCP prvek je text v hlavičce, stránka je čistě klientský React |
-| _po nasazení_ | | | | | | obrázky WebP + `inert` na menu |
+| 2026-11-19 | 91 | 2,3 s | 150 ms | 0 | — | po WebP + `inert` (commit 9538303); přístupnost 100; Speed Index 6,1 s (dřív 4,6 s) — jedno měření, zbývá „nepoužívaný JS“ 770 KiB (hlavně Bandcamp) |
 
 - [x] Obrázky ve WebP: maska hlavy `hlava.webp` (alfa kanál beze ztráty, shodný s PNG na pixel, takže
       animace soutisku je stejná), obaly alb WebP v původní velikosti, `bez-niesnera` zmenšen z 3072 na
