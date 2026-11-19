@@ -44,6 +44,9 @@ export type Translation = {
       /** Štítek u termínu, kde Jakub hraje sám */
       solo: string;
       empty: string;
+      /** Tlačítko, které rozbalí odehrané koncerty */
+      showPast: string;
+      hidePast: string;
     };
     records: {
       title: string;

@@ -27,6 +27,9 @@ Hlavička v prvním řádku:
 - **interpret** se vybírá z rozevírací nabídky (viz níž). „Solo" se do dat
   nepropíše — web má pro sólo vlastní štítek, který umí i anglicky. Prázdná
   buňka znamená totéž.
+- **Odehrané koncerty z tabulky nemazat.** Web je sám přesune do bloku
+  „odehrané“ (den po koncertu, s dalším denním stažením). Smazaný řádek
+  by z webu zmizel úplně. Pořadí řádků je jedno, web si je seřadí podle data.
 
 ### Kalendář u data
 
@@ -52,11 +55,14 @@ Aby Jakub nemusel názvy kapel psát a překlepy nedělaly z jedné kapely dvě:
 
 1. klikni na písmeno sloupce **interpret** (označí se celý)
 2. **Vložit → Rozevírací nabídka**
-3. jako možnosti vypiš: `Solo`, `Šimanský Niesner`, `Šimanský Vaľko Podracký`
+3. jako možnosti vypiš: `Solo`, `Šimanský Niesner`, `Šimanský Vaľko Podracký`,
+   `Šimanský Kalhausová`
 4. Hotovo
 
 Nabídka je jen pohodlí — skript bere jakýkoli text, takže jednorázová
-spolupráce se dá do buňky napsat i ručně.
+spolupráce se dá do buňky napsat i ručně. Zkratky `ŠN`, `ŠVP` a `ŠK` (i bez
+diakritiky a malými) převede web na plný název; seznam sestav a zkratek je
+v `src/data/bands.ts`, Apps Script se kvůli nim neměnil.
 
 Místo „místo konání" projde i `klub` nebo `sál`, místo „interpret" i `kapela`
 nebo `s kým`.

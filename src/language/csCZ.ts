@@ -38,6 +38,8 @@ export const csCZ: Translation = {
       title: "koncerty",
       solo: "sólo",
       empty: "zatím žádné vypsané termíny. sleduj sociální sítě.",
+      showPast: "odehrané",
+      hidePast: "skrýt odehrané",
     },
     records: {
       title: "alba",

@@ -38,6 +38,8 @@ export const enUS: Translation = {
       title: "shows",
       solo: "solo",
       empty: "no dates announced yet. follow on social media.",
+      showPast: "past shows",
+      hidePast: "hide past shows",
     },
     records: {
       title: "albums",

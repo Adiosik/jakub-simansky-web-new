@@ -22,7 +22,7 @@ export type Gig = {
 };
 
 /** Kolik termínů se na stránce ukáže. */
-export const MAX_KONCERTU = 3;
+export const MAX_KONCERTU = 10;
 
 /**
  * Po kolika dnech přestaneme datům věřit.
@@ -70,4 +70,23 @@ export function nadchazejici(ted = new Date()): Gig[] {
     .filter((gig) => gig.date >= dnes)
     .sort((a, b) => a.date.localeCompare(b.date))
     .slice(0, MAX_KONCERTU);
+}
+
+/**
+ * Odehrané koncerty, od nejnovějšího.
+ *
+ * Pojistka MAX_STARI_DNI tu schválně neplatí — minulost se nemění a sekce by
+ * zbytečně zmizela. Berou se ale jen termíny do dne posledního stažení:
+ * kdyby stahování dlouho neběželo a Jakub mezitím koncert zrušil, nesmí se
+ * na webu objevit jako odehraný.
+ */
+export function pastGigs(now = new Date()): Gig[] {
+  const generated = new Date(VYGENEROVANO);
+  if (Number.isNaN(generated.getTime())) return [];
+
+  const today = dnesniDatum(now);
+  const lastKnownDay = dnesniDatum(generated);
+  return CONCERTS
+    .filter((gig) => gig.date < today && gig.date <= lastKnownDay)
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
