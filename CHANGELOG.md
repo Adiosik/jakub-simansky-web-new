@@ -25,6 +25,7 @@ verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 - Koncerty: místo 3 se ukáže až 10 nadcházejících termínů.
 
 ### Fixed
+- Skok z menu na sekci, na kterou se ještě nedojelo (např. „kapely“ po načtení stránky), dojel o 42 px dál a nadpis zajel pod hlavičku; náběhová animace už neposouvá samotnou kotvu.
 - Přístupnost: zavřené mobilní menu je `inert`, jeho odkazy už nejdou vybrat klávesnicí.
 
 ## [1.0.0] — 2026-11-05

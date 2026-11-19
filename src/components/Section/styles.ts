@@ -26,11 +26,16 @@ export const section = (wide: boolean): SxProps<Theme> => ({
   mt: "var(--mezera)",
   // aby nadpis sekce nezmizel pod lepkavou hlavičkou při skoku z navigace
   scrollMarginTop: "5.5rem",
+});
+
+/** Vnitřek sekce, který při scrollu najede (.sim-in) — viz Section/index.tsx. */
+export const reveal: SxProps<Theme> = {
+  width: "100%",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   textAlign: "center",
-});
+};
 
 /**
  * Nadpis sekce. Dřív ho z okolního textu vydělovala lomítka („/ desky /");
