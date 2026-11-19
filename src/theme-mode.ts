@@ -23,6 +23,9 @@ export function nactiMotiv(): Motiv {
 
 export function pouzijMotiv(motiv: Motiv) {
   document.documentElement.dataset.theme = motiv;
+  // ikona v záložce jde s motivem; při načtení totéž dělá skript v index.html
+  const favicon = document.getElementById("favicon") as HTMLLinkElement | null;
+  if (favicon) favicon.href = motiv === "dark" ? "/favicon-dark.svg" : "/favicon.svg";
   try {
     localStorage.setItem(KLIC, motiv);
   } catch { /* nevadí, přežije to jen do zavření karty */ }

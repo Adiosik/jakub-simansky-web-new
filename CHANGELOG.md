@@ -9,6 +9,9 @@ verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 
 ## [Unreleased]
 
+### Added
+- Ikona webu z Jakubovy kresby hlavy (vektor): růžová, v tmavém motivu fialová a přepíná se s ním; `.ico` pro starší prohlížeče, ikona na plochu telefonu se soutiskem a `site.webmanifest`.
+
 ## [1.0.0] — 2026-11-05
 
 Výchozí verze — první číslovaná, stav webu nasazeného na GitHub Pages (jakubsimansky.com).

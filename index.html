@@ -2,7 +2,13 @@
 <html lang="cs">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Ikona: kresba hlavy. SVG pro záložku (v tmavém motivu ho skript níž
+         i src/theme-mode.ts přepnou na favicon-dark.svg), .ico pro starší
+         prohlížeče, PNG pro plochu telefonu. Vše vzniklo z public/photos/hlava.png. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" id="favicon" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jakub Šimanský</title>
     <script>
@@ -14,6 +20,7 @@
         try {
           var m = localStorage.getItem('sim:motiv');
           document.documentElement.dataset.theme = m === 'dark' ? 'dark' : 'light';
+          if (m === 'dark') document.getElementById('favicon').href = '/favicon-dark.svg';
         } catch (e) { /* soukromé okno — zůstane světlý */ }
       })();
     </script>
