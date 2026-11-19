@@ -8,7 +8,7 @@ export const EMAIL = "simanskyjakub@gmail.com";
  * Názvy souborů držíme bez mezer, diakritiky a velkých písmen — takové se
  * nemusí v adrese kódovat a GitHub Pages rozlišuje velikost písmen.
  */
-export const PROFILE_PHOTO = "/photos/hlava.png";
+export const PROFILE_PHOTO = "/photos/hlava.webp";
 
 /**
  * Obal desky vyzdvižené v sekci „aktuálně". Zatím není v ALBUMS, protože
@@ -17,4 +17,4 @@ export const PROFILE_PHOTO = "/photos/hlava.png";
 /** Fotka u doučování — Jakub s banjem mezi nástroji. */
 export const LESSONS_PHOTO = "/photos/simansky-banjo.webp";
 
-export const NOW_COVER = "/covers/bez-niesnera.jpg";
+export const NOW_COVER = "/covers/bez-niesnera.webp";

@@ -85,7 +85,7 @@ export const ALBUMS: Album[] = [
       "Šustěny",
       "Zášmyk",
     ],
-    cover: "/covers/bez-niesnera.jpg",
+    cover: "/covers/bez-niesnera.webp",
     bandcampId: "4197047008",
   },
   {
@@ -110,7 +110,7 @@ export const ALBUMS: Album[] = [
       "Stabilitas Loci",
       "Cocktail Menu",
     ],
-    cover: "/covers/what-do-you-mean-by-that.png",
+    cover: "/covers/what-do-you-mean-by-that.webp",
     bandcampId: "3074193416",
   },
   {
@@ -131,7 +131,7 @@ export const ALBUMS: Album[] = [
       "The Black Rose The White Masks",
       "K-Hole Forever",
     ],
-    cover: "/covers/face-to-face-vol2.png",
+    cover: "/covers/face-to-face-vol2.webp",
     bandcampId: "931041984",
   },
   {
@@ -156,7 +156,7 @@ export const ALBUMS: Album[] = [
       "The Red Pony",
       "In the Sacred Groves of Barbaricum",
     ],
-    cover: "/covers/face-to-face-vol1.png",
+    cover: "/covers/face-to-face-vol1.webp",
     bandcampId: "767735595",
   },
 ];

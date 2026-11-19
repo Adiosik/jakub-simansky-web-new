@@ -18,6 +18,10 @@ verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 ### Changed
 - SEO: skrytý hlavní nadpis `h1` je „Jakub Šimanský“ místo „šimanský“; fotky v mřížce galerie mají popisek (alt) pro vyhledávání obrázků.
 - Titulek stránky: „Jakub Šimanský — kytarista, americký primitivismus“.
+- Rychlost: obrázky ve WebP — maska kresby hlavy (`hlava.webp`, alfa beze ztráty) a obaly alb, obal „Bez Niesnera“ zmenšen na 1280 px; obrázky mají místo 2,5 MB 0,26 MB, vzhled beze změny.
+
+### Fixed
+- Přístupnost: zavřené mobilní menu je `inert`, jeho odkazy už nejdou vybrat klávesnicí.
 
 ## [1.0.0] — 2026-11-05
 

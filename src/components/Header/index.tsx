@@ -178,8 +178,9 @@ export default function Header({ texts, lang, onLang, motiv, onMotiv }: Props) {
         </Box>
       </Box>
 
-      {/* Mobilní menu */}
-      <Box sx={styles.sheet(sheetOpen)} aria-hidden={!sheetOpen}>
+      {/* Mobilní menu — zavřené je `inert`, aby jeho odkazy nešly vybrat
+          klávesnicí, i když nejsou vidět (samotné aria-hidden fokus nebere) */}
+      <Box sx={styles.sheet(sheetOpen)} aria-hidden={!sheetOpen} inert={!sheetOpen}>
         <Box component="button" type="button" sx={styles.sheetClose}
           onClick={() => setSheetOpen(false)} aria-label={texts.nav.closeMenu}>✕</Box>
         <Box component="a" href={`#${ID.now}`} sx={styles.sheetItem} onClick={() => setSheetOpen(false)}>{texts.now.title}</Box>

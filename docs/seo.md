@@ -44,7 +44,26 @@ jména 1200 × 630 (a upravit `og:image:alt`).
 - [x] `h1` „Jakub Šimanský“ (vizuálně skrytý, dřív „šimanský“) — UI/UX (2026-11-19).
 - [x] Fotky v mřížce galerie mají alt (stejný jako v lightboxu), tlačítko si drží vlastní aria-label — UI/UX (2026-11-19).
 - [x] Ikony webu (`favicon.ico` 48 × 48, `apple-touch-icon`, manifest) — dělá UI/UX (2026-11-19).
-- [ ] Výkon: PageSpeed na mobilu (bundle 350 kB JS) — změřit.
+- [ ] Výkon — viz „Rychlost webu“ níže (podsessiona Rychlost webu).
+
+## Rychlost webu
+
+PageSpeed Insights, mobil, měřeno přes https://pagespeed.web.dev/ (API bez klíče mívá vyčerpanou kvótu).
+
+| Datum | Výkon | LCP | TBT | CLS | Velikost | Poznámka |
+|---|---|---|---|---|---|---|
+| 2026-11-19 | 72 | 6,1 s | 180 ms | 0 | 3,8 MB | před úpravami; LCP prvek je text v hlavičce, stránka je čistě klientský React |
+| _po nasazení_ | | | | | | obrázky WebP + `inert` na menu |
+
+- [x] Obrázky ve WebP: maska hlavy `hlava.webp` (alfa kanál beze ztráty, shodný s PNG na pixel, takže
+      animace soutisku je stejná), obaly alb WebP v původní velikosti, `bez-niesnera` zmenšen z 3072 na
+      1280 px. Dohromady 2,5 MB → 0,26 MB. `hlava.png` zůstává v repozitáři jako zdroj pro ikony
+      a `og-image`, web ho nenačítá. (2026-11-19)
+- [x] Zavřené mobilní menu je `inert` — jeho odkazy nejdou vybrat klávesnicí. (2026-11-19)
+- [ ] Přehrávače Bandcampu načítat později (`src/components/Album/Embed.tsx`, předstih 800 px) — 3 iframe
+      ≈ 1,6 MB a ~0,9 s hlavního vlákna. UI/UX doporučuje menší předstih / načtení po `load`.
+- [ ] Předvykreslení stránky při buildu — hlavní lék na LCP, souvisí se „statickým obsahem pro boty“ výše.
+- GitHub Pages drží cache 10 min, nastavit nejde.
 
 ## Mimo web — udělá Daniel / Jakub
 
