@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T17:57:55Z",
+  "generatedAt": "2026-11-20T12:26:24Z",
   "references": [
     {
       "source": "Rate Your Music",
@@ -59,6 +59,22 @@
       "url": "https://denikalarm.cz/2026/11/nechat-veci-jen-tak-plynout-jakub-simansky-ve-sve-hudbe-ozivuje-malomestsky-folklor/",
       "date": "2026-11-03",
       "author": "Karel Veselý, Nora Třísková",
+      "orig": "CZ"
+    },
+    {
+      "source": "SKUG Musikkultur",
+      "kind": "review",
+      "url": "https://skug.at/jakub-simansky-bez-niesnera-self-release/",
+      "date": "2026-10-22",
+      "author": "Holger Adam",
+      "orig": "GER"
+    },
+    {
+      "source": "Full Moon",
+      "kind": "review",
+      "url": "https://www.fullmoonzine.cz/simansky-bez-niesnera/",
+      "date": "2026-09-10",
+      "author": "Vikto Hanačík",
       "orig": "CZ"
     }
   ]

@@ -1,40 +1,53 @@
 {
-  "vygenerovano": "2026-11-19T17:57:55Z",
+  "vygenerovano": "2026-11-20T12:26:24Z",
   "koncerty": [
     {
       "date": "2026-11-20",
       "city": "Zlín",
-      "venue": "Cafe Gulliver"
+      "venue": "Cafe Gulliver",
+      "band": "Šimanský Kalhausová"
     },
     {
       "date": "2026-11-29",
       "city": "Hradec Králové",
-      "venue": "Nuuk Sauna"
+      "venue": "Nuuk Sauna",
+      "band": "Šimanský Kalhausová"
     },
     {
       "date": "2026-12-04",
       "city": "Kroměříž",
-      "venue": "Bongo Fury - Klub Galerie T2"
+      "venue": "Bongo Fury - Klub Galerie T2",
+      "band": "Šimanský Kalhausová"
     },
     {
       "date": "2026-12-05",
       "city": "Přerov",
-      "venue": "Kavárna Nebe Počká"
+      "venue": "Kavárna Nebe Počká",
+      "band": "Šimanský Kalhausová"
     },
     {
       "date": "2026-12-08",
       "city": "Brno",
-      "venue": "Rello Rybářská"
+      "venue": "Rello Rybářská",
+      "band": "Šimanský Kalhausová"
     },
     {
       "date": "2026-12-09",
       "city": "Praha",
-      "venue": "SubZero"
+      "venue": "SubZero",
+      "band": "Šimanský Kalhausová"
     },
     {
       "date": "2026-12-10",
       "city": "České Budějovice",
-      "venue": "Klub Hluboko"
+      "venue": "Klub Hluboko",
+      "band": "Šimanský Kalhausová"
+    },
+    {
+      "date": "2026-12-12",
+      "city": "Liberec",
+      "venue": "Klub Stamina",
+      "band": "Šimanský Niesner"
     }
   ]
 }
