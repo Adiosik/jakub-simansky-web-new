@@ -14,6 +14,7 @@ verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 - SEO: popis stránky, Open Graph a náhledový obrázek pro sdílení (`og-image.jpg`), kanonická adresa, `robots.txt`, `sitemap.xml`, `llms.txt`.
 - SEO: strukturovaná data (JSON-LD) — osoba s odkazy na profily a kapely, desky a nadcházející koncerty; generují se při buildu z dat webu.
 - `docs/seo.md` — vyhledatelnost: pravidla, úkoly mimo web, měsíční kontrola.
+- Měření návštěvnosti přes Cloudflare Web Analytics (bez cookies).
 - Koncerty: rozbalovací blok „odehrané“ pod nadcházejícími, po ročnících od nejnovějšího; každý rok se rozbaluje zvlášť (chevron), otevřený je jen nejnovější.
 - Sestava Šimanský Kalhausová a zkratky sestav (ŠN, ŠVP, ŠK) — web je ve štítku převede na plný název.
 

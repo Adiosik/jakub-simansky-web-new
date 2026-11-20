@@ -26,10 +26,11 @@
 | robots.txt | vše povoleno včetně AI botů, odkaz na sitemap | `public/robots.txt` |
 | Sitemap | jen indexovatelné adresy (teď jedna) | `public/sitemap.xml` |
 | `llms.txt` | stručný popis pro AI: kdo, desky, profily | `public/llms.txt` — **ručně**, při nové desce nebo profilu doplnit |
+| Návštěvnost | Cloudflare Web Analytics (JS snippet, bez cookies → bez lišty se souhlasem); token je veřejný. Statistiky: Cloudflare → Analytics & Logs → Web Analytics → `jakubsimansky.com` (účet jako kus.nás). Měří od 2026-11-20 — dřív web nic neměřil | `index.html` (konec `<body>`) |
 
 **Koncerty v JSON-LD** se počítají ke dni buildu funkcí `nadchazejici()` — stejná pojistka jako na stránce
 (po `MAX_STARI_DNI` bez stažení žádné koncerty). Denní build v 6:00 je drží čerstvé. Hodnoty ze Sheetu
-se escapují (`<` → `<`), aby nemohly ukončit `<script>`.
+se escapují (`<` → `\u003c`), aby nemohly ukončit `<script>`.
 
 **Obrázek pro sdílení** (`public/og-image.jpg`) je perokresba hlavy (`public/photos/hlava.png`) na růžovém
 pozadí `--zaklad`, vyrobená jednorázově přes sharp. Až bude vhodná fotka, nahradit souborem stejného
