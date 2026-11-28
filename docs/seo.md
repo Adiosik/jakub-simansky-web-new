@@ -26,7 +26,7 @@
 | robots.txt | vše povoleno včetně AI botů, odkaz na sitemap | `public/robots.txt` |
 | Sitemap | jen indexovatelné adresy (teď jedna) | `public/sitemap.xml` |
 | `llms.txt` | stručný popis pro AI: kdo, desky, profily | `public/llms.txt` — **ručně**, při nové desce nebo profilu doplnit |
-| Návštěvnost | Cloudflare Web Analytics (JS snippet, bez cookies → bez lišty se souhlasem); token je veřejný. Statistiky: Cloudflare → Analytics & Logs → Web Analytics → `jakubsimansky.com` (účet jako kus.nás). Měří od 2026-11-20 — dřív web nic neměřil | `index.html` (konec `<body>`) |
+| Návštěvnost | Cloudflare Web Analytics (JS snippet, bez cookies → bez lišty se souhlasem); token je veřejný. Statistiky: Cloudflare → Analytics & Logs → Web Analytics → `jakubsimansky.com` (účet jako kus.nás). Měří od 2026-11-20 — dřív web nic neměřil. **Týdně** (po 8:00) naplánovaná úloha Claude desktopu `simansky-navstevnost-tydne` spustí `.claude/traffic/traffic_report.py` (lokálně, mimo git), zapíše týden do `.claude/traffic/history.csv` a upozorní jen na nulu / skok / chybu. Token jen pro čtení (Account Analytics: Read, platí do 2027-11) v `~/.secrets/cloudflare-analytics.token` | `index.html` (konec `<body>`) |
 
 **Koncerty v JSON-LD** se počítají ke dni buildu funkcí `nadchazejici()` — stejná pojistka jako na stránce
 (po `MAX_STARI_DNI` bez stažení žádné koncerty). Denní build v 6:00 je drží čerstvé. Hodnoty ze Sheetu
