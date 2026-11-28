@@ -72,12 +72,16 @@ PageSpeed Insights, mobil, měřeno přes https://pagespeed.web.dev/ (API bez kl
 
 ## Mimo web — udělá Daniel / Jakub
 
+**DNS domény** spravuje Active24 (účet Daniela; jmenné servery websupport.cz) → Služby → jakubsimansky.com →
+DNS nastavení. Nové záznamy jen přes „Vytvořit nový záznam“ — **ne** „Active24 Web → Nastavit“, to by přepsalo
+A/CNAME a web na GitHub Pages by přestal fungovat.
+
 Pravidlo: všude **stejné jméno „Jakub Šimanský“, popis jednou větou a odkaz `https://jakubsimansky.com`**.
 Nový profil → doplnit do `src/data/socials.tsx` (tím i do `sameAs`) a do `public/llms.txt`.
 
 | Co | Proč | Kdo | Stav |
 |---|---|---|---|
-| **Google Search Console** — doménová vlastnost `jakubsimansky.com` (TXT v DNS), odeslat sitemap, požádat o indexaci `/` | bez toho nevíme, co Google vidí; zrychlí indexaci | Daniel | [ ] |
+| **Google Search Console** — doménová vlastnost `jakubsimansky.com` (TXT v DNS), odeslat sitemap, požádat o indexaci `/` | bez toho nevíme, co Google vidí; zrychlí indexaci | Daniel | [x] ověřeno 2026-11-28 (TXT záznam — **nemazat**) |
 | **Bing Webmaster Tools** (import z GSC) | ChatGPT hledá přes index Bingu | Daniel | [ ] |
 | Odkaz na web v bio: Instagram, Facebook, Bandcamp | konzistentní entita | Jakub | [ ] |
 | **Spotify for Artists** — ověřit profil, bio + odkaz na web | Spotify profil je silný signál | Jakub | [ ] |

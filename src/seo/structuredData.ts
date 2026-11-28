@@ -59,7 +59,12 @@ function events(now: Date) {
   return nadchazejici(now).map((gig) => ({
     "@type": "MusicEvent",
     name: `Jakub Šimanský — ${gig.venue}, ${gig.city}`,
+    // Doporučená pole pro Google (Search Console je hlásí jako chybějící).
+    // Vstupenky (offers) a pořadatel (organizer) v Sheetu nejsou — nevymýšlet.
+    description: `Koncert Jakuba Šimanského${gig.band ? ` (${gig.band})` : ""} — fingerstyle a americký primitivismus. ${gig.venue}, ${gig.city}.`,
+    image: absolute(LESSONS_PHOTO),
     startDate: gig.date,
+    endDate: gig.date, // koncert je jednodenní, čas konce neznáme
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
