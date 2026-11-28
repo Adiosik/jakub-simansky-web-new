@@ -81,8 +81,8 @@ Nový profil → doplnit do `src/data/socials.tsx` (tím i do `sameAs`) a do `pu
 
 | Co | Proč | Kdo | Stav |
 |---|---|---|---|
-| **Google Search Console** — doménová vlastnost `jakubsimansky.com` (TXT v DNS), odeslat sitemap, požádat o indexaci `/` | bez toho nevíme, co Google vidí; zrychlí indexaci | Daniel | [x] ověřeno 2026-11-28 (TXT záznam — **nemazat**) |
-| **Bing Webmaster Tools** (import z GSC) | ChatGPT hledá přes index Bingu | Daniel | [ ] |
+| **Google Search Console** — doménová vlastnost `jakubsimansky.com` (TXT v DNS), odeslat sitemap, požádat o indexaci `/` | bez toho nevíme, co Google vidí; zrychlí indexaci | Daniel | [x] ověřeno 2026-11-28 (TXT záznam — **nemazat**), sitemap odeslána; `/` indexována, 7 událostí platných |
+| **Bing Webmaster Tools** (import z GSC) | ChatGPT hledá přes index Bingu | Daniel | [x] import z GSC 2026-11-28 (stejný účet jako kus.nás), sitemap převzata; data do 48 h. Sekce **AI Performance** ukazuje citace v AI odpovědích (Copilot) |
 | Odkaz na web v bio: Instagram, Facebook, Bandcamp | konzistentní entita | Jakub | [ ] |
 | **Spotify for Artists** — ověřit profil, bio + odkaz na web | Spotify profil je silný signál | Jakub | [ ] |
 | **Apple Music for Artists** | totéž | Jakub | [ ] |

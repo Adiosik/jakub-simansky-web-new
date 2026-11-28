@@ -46,7 +46,10 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Nadpis pro boty bez JavaScriptu (Bing hlásil „H1 tag missing“). Je
+         skrytý stejně jako h1 v Hero; React obsah #root při startu nahradí
+         svým, takže na stránce je vždy jen jeden h1. -->
+    <div id="root"><h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0">Jakub Šimanský</h1></div>
     <script type="module" src="/src/main.tsx"></script>
     <!-- Návštěvnost: Cloudflare Web Analytics (bez cookies, bez lišty se
          souhlasem). Token je veřejný, statistiky v Cloudflare → Web Analytics
