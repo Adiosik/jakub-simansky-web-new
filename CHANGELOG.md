@@ -26,6 +26,7 @@ verze dle [Semantic Versioning](https://semver.org/lang/cs/).
 - Koncerty: místo 3 se ukáže až 10 nadcházejících termínů.
 
 ### Fixed
+- Fronta přehrávačů Bandcampu: když se první načítal déle než 4 s, ostatní se rozjely naráz; teď čeká každý na předchozí (nejdéle 4 s od jeho startu).
 - Skok z menu na sekci, na kterou se ještě nedojelo (např. „kapely“ po načtení stránky), dojel o 42 px dál a nadpis zajel pod hlavičku; náběhová animace už neposouvá samotnou kotvu.
 - Přístupnost: zavřené mobilní menu je `inert`, jeho odkazy už nejdou vybrat klávesnicí.
 

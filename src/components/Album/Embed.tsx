@@ -45,19 +45,33 @@ const LINKCOL = "78334a";
  * Pořadí stahování po první interakci. Tři přehrávače najednou si na pomalé
  * síti (mobil, 4G) dělí přenos a každý se objeví až po mnoha vteřinách —
  * včetně toho, ke kterému uživatel právě dojel. Proto jdou za sebou v pořadí
- * na stránce: další začne, až je předchozí načtený (nebo po STAGGER_MAX ms).
+ * na stránce: další začne, až je předchozí načtený, nejpozději STAGGER_MAX ms
+ * po tom, co se předchozí začal stahovat (ne od interakce — jinak by se při
+ * pomalém prvním přehrávači rozjely všechny ostatní naráz).
  * Přehrávač blízko výřezu frontu přeskočí (spouštěč s předstihem níž).
  */
 const STAGGER_MAX = 4000;
-const loadedSignals = new Map<number, () => void>();
-const loadedPromises = new Map<number, Promise<void>>();
-function loaded(order: number) {
-  if (!loadedPromises.has(order)) {
-    loadedPromises.set(order, new Promise<void>((resolve) => loadedSignals.set(order, resolve)));
-  }
-  return loadedPromises.get(order)!;
+
+/** Jednorázové signály po albech: „začal se stahovat“ a „načetl se“. */
+function signals() {
+  const resolvers = new Map<number, () => void>();
+  const promises = new Map<number, Promise<void>>();
+  const wait = (order: number) => {
+    if (!promises.has(order)) {
+      promises.set(order, new Promise<void>((resolve) => resolvers.set(order, resolve)));
+    }
+    return promises.get(order)!;
+  };
+  const fire = (order: number) => { wait(order); resolvers.get(order)!(); };
+  return { wait, fire };
 }
-const markLoaded = (order: number) => { loaded(order); loadedSignals.get(order)!(); };
+const started = signals();
+const loaded = signals();
+const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+/** Kdy smí album na řadu: předchozí je načtené, nebo se stahuje už STAGGER_MAX. */
+const turnOf = (order: number) =>
+  started.wait(order - 1).then(() => Promise.race([loaded.wait(order - 1), delay(STAGGER_MAX)]));
 
 const embedSrc = (id: string) =>
   `https://bandcamp.com/EmbeddedPlayer/album=${id}/size=large/bgcol=${BGCOL}/linkcol=${LINKCOL}/artwork=none/tracklist=false/`;
@@ -120,19 +134,14 @@ export default function Embed({ album, order, sx }: Props) {
     if (stahovat) return;
     const START_EVENTS = ["scroll", "wheel", "pointerdown", "touchstart", "keydown"] as const;
     let cancelled = false;
-    let timer = 0;
     const start = () => {
       START_EVENTS.forEach((ev) => window.removeEventListener(ev, start));
       if (order === 0) { setStahovat(true); return; }
-      // čeká na předchozí album ve frontě, nejdéle STAGGER_MAX
-      const go = () => { if (!cancelled) setStahovat(true); };
-      loaded(order - 1).then(go);
-      timer = window.setTimeout(go, STAGGER_MAX);
+      turnOf(order).then(() => { if (!cancelled) setStahovat(true); });
     };
     START_EVENTS.forEach((ev) => window.addEventListener(ev, start, { passive: true }));
     return () => {
       cancelled = true;
-      clearTimeout(timer);
       START_EVENTS.forEach((ev) => window.removeEventListener(ev, start));
     };
   }, [stahovat, order]);
@@ -146,8 +155,13 @@ export default function Embed({ album, order, sx }: Props) {
   // album bez přehrávače frontu nedrží; jinak ji pouští až skutečné
   // `onLoad` (pojistka 2 s jen odkrývá, frontu hlídá STAGGER_MAX)
   useEffect(() => {
-    if (!album.bandcampId) markLoaded(order);
+    if (!album.bandcampId) { started.fire(order); loaded.fire(order); }
   }, [order, album.bandcampId]);
+
+  // začátek stahování (z jakéhokoli spouštěče) odpočítává frontu dalšího alba
+  useEffect(() => {
+    if (stahovat) started.fire(order);
+  }, [stahovat, order]);
 
   useEffect(() => {
     if (!stahovat || nacteno) return;
@@ -186,7 +200,7 @@ export default function Embed({ album, order, sx }: Props) {
           title={`${album.title} — Bandcamp`}
           // bez loading="lazy": kdy stahovat, řídí spouštěče výš — prohlížeč
           // by jinak album dál od výřezu odložil a „všechna naráz“ by neplatilo
-          onLoad={() => { setNacteno(true); markLoaded(order); }}
+          onLoad={() => { setNacteno(true); loaded.fire(order); }}
           allow="autoplay; encrypted-media"
         />
       )}
